@@ -1,8 +1,7 @@
 {
-  "name": "Python on Heroku example",
-  "description": "A barebones Python app, which can easily be deployed to Heroku.",
+  "name": "Architizer Mendel",
+  "description": "Mendel is a tool for tagging keywords from sets of data.",
   "image": "heroku/python",
-  "repository": "https://github.com/heroku/python-getting-started",
-  "keywords": ["python", "django" ],
+  "repository": "https://github.com/Architizer/mendel",
   "addons": [ "heroku-postgresql" ]
 }

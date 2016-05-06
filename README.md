@@ -1,6 +1,9 @@
-# python-getting-started
+# Mendel V.1
 
-A barebones Python app, which can easily be deployed to Heroku.
+Mendel is a tool for tagging keywords from sets of data.
+
+We get keywords inputted, we read where the keyword came from and what it is, and we assign tags to it. Simple.
+
 
 This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
 

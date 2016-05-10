@@ -3,16 +3,14 @@
 
   angular
     .module('static')
-    .directive('acmeNavbar', acmeNavbar);
+    .directive('amNavbar', amNavbar);
 
   /** @ngInject */
-  function acmeNavbar() {
+  function amNavbar() {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
-      scope: {
-          creationDate: '='
-      },
+      scope: {},
       controller: NavbarController,
       controllerAs: 'vm',
       bindToController: true

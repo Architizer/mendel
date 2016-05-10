@@ -50,6 +50,6 @@ class Review(models.Model):
     keyword = models.ForeignKey(Keyword)
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User, unique=True)
-    status = models.CharField(max_length=2, choices=STATUS_TYPES)
+    status = models.CharField(max_length=20, choices=STATUS_TYPES)
 
 

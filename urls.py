@@ -12,4 +12,5 @@ import mendel.views
 urlpatterns = [
     url(r'^$', mendel.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('allauth.urls')),
 ]

@@ -1,16 +1,32 @@
 from django.contrib import admin
-
-# Register your models here.
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 from mendel.models import Keyword, Category, Document, Content, Review
 
 
-admin.site.register(Keyword)
-admin.site.register(Category)
-admin.site.register(Document)
-admin.site.register(Content)
-admin.site.register(Review)
+class KeywordAdmin(ImportExportModelAdmin):
+    pass
 
 
+class CategoryAdmin(ImportExportModelAdmin):
+    pass
 
 
+class DocumentAdmin(ImportExportModelAdmin):
+    pass
+
+
+class ContentAdmin(ImportExportModelAdmin):
+    pass
+
+
+class ReviewAdmin(ImportExportModelAdmin):
+    pass
+
+
+admin.site.register(Keyword, KeywordAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Document, DocumentAdmin)
+admin.site.register(Content, ContentAdmin)
+admin.site.register(Review, ReviewAdmin)

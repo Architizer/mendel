@@ -8,10 +8,14 @@ from django.contrib.auth.models import User
 class Keyword(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
+    def __unicode__(self):
+        return self.name
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
+    def __unicode__(self):
+        return self.name
 
 class Document(models.Model):
     
@@ -27,6 +31,8 @@ class Document(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.title
 
 class Content(models.Model):
     document = models.ForeignKey(Document)
@@ -35,6 +41,8 @@ class Content(models.Model):
     position_to = models.IntegerField()
     text = models.TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.text
 
 class Review(models.Model):
     
@@ -52,4 +60,5 @@ class Review(models.Model):
     user = models.ForeignKey(User, unique=True)
     status = models.CharField(max_length=20, choices=STATUS_TYPES)
 
-
+    def __unicode__(self):
+        return self.status

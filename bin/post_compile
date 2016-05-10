@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash 
 set -eo pipefail
 
-python manage.py syncdb --migrate --noinput 2>&1
+python manage.py migrate --noinput 2>&1

@@ -5,6 +5,7 @@ admin.autodiscover()
 
 import mendel.views
 from mendel.models import Keyword, Category, Document, Content, Review
+from django.contrib.auth.models import User
 
 from rest_framework import routers, serializers, viewsets
 
@@ -63,12 +64,24 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'is_staff')
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
 router = routers.DefaultRouter()
 router.register(r'keywords', KeyViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'documents', DocumentViewSet)
 router.register(r'content', ContentViewSet)
 router.register(r'reviews', ReviewViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^$', mendel.views.index, name='index'),

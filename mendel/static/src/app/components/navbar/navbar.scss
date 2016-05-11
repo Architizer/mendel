@@ -1,0 +1,16 @@
+#am-navbar {
+  a,
+  .menu-text {
+    color: #ccc;
+  }
+
+  a:hover {
+    color: #999;
+  }
+
+  // Color of Dropdown Caret
+  .is-dropdown-submenu-parent > a:after {
+    border-color: #ccc transparent transparent;
+  }
+
+}

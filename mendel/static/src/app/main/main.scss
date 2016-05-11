@@ -1,0 +1,12 @@
+#main {
+  .action-bar {
+    border-bottom: 1px solid #ccc;
+    min-height: 5rem;
+  }
+
+  .callout {
+    margin-top: 1.25rem;
+
+    &.without-top-margin { margin-top: 0; }
+  }
+}

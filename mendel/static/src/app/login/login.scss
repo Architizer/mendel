@@ -1,0 +1,7 @@
+#login {
+  .callout {
+    margin-top: 1.25rem;
+
+    &.without-top-margin { margin-top: 0; }
+  }
+}

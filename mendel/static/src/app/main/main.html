@@ -1,17 +1,122 @@
-<div class="container">
+<div id="main" class="container">
 
+  <!-- Navigation -->
   <div>
     <am-navbar></am-navbar>
   </div>
 
-  <div class="row">
-    <div class="large-12 large-text-center columns">
-      <div class="panel">
-        <h1>'Allo, 'Allo!</h1>
-        <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
-        <p>Always a pleasure scaffolding your apps.</p>
+  <!-- Main -->
+  <div class="row expanded">
+
+    <!-- Left Column -->
+    <div class="small-12 large-4 columns">
+
+      <!-- Left Action Bar -->
+      <div class="action-bar row">
+
+        <!-- Previous -->
+        <div class="small-3 columns">
+          <p class="text-left"><a><i class="material-icons">arrow_back</i>Prev</a></p>
+        </div>
+        <!-- Next -->
+        <div class="small-3 columns">
+          <p class="text-right"><a>Next <i class="material-icons">arrow_forward</i></a></p>
+        </div>
+      </div>
+
+      <!-- Left Column Content -->
+      <div class="row">
+        <div class="small-12 columns">
+
+          <!-- Word Panel -->
+          <div class="row">
+
+            <h4 class="subheader show-for-large">Subject</h4>
+
+            <div class="callout small-12 columns">
+              <p class="subheader">Word</p>
+              <h1>europe</h1>
+              <p class="subheader"><a ng-ng-href="#">Edit keyword <i class="material-icons">arrow_forward</i></a></p>
+            </div>
+          </div>
+
+          <!-- Metadata Panel -->
+          <div class="row show-for-large">
+
+            <h4 class="subheader">Metadata</h4>
+
+            <div class="callout small-12 columns">
+              <p class="subheader">Context</p>
+              <p>"...the westernmost part of Eurasia. <strong>Europe</strong> is bordered by the Arctic Ocean to the north, the Atlantic Ocean to ..."</p>
+              <p class="subheader"><a ng-ng-href="#">Load new context <i class="material-icons">arrow_forward</i></a></p>
+            </div>
+          </div>
+
+          <!-- Definition Panel -->
+          <div class="row show-for-large">
+            <div class="callout small-12 columns">
+              <p class="subheader">Definition</p>
+              <p>"a continent that comprises the westernmost part of Eurasia.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
 
+    <!-- Right Column -->
+    <div class="large-8 columns">
+
+      <!-- Right Action Bar -->
+      <div class="action-bar row">
+
+        <!-- Category Filter -->
+        <div class="small-12 large-8 columns">
+          <input type="text" placeholder="start typing to select a category">
+        </div>
+
+        <!-- Help Area -->
+        <div class="large-4 columns">
+          <div class="callout without-top-margin show-for-large">
+            <p>Start typing to select a category.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column Content -->
+      <div class="row">
+        <div class="small-12 columns">
+
+          <!-- Category Tiles -->
+
+          <h4 class="subheader">Categories</h4>
+
+          <div class="row small-up-2 medium-up-4">
+
+            <!-- Stop Word -->
+            <div class="column">
+              <a class="large expanded hollow secondary button" ng-href="#">Stop word</a>
+            </div>
+
+            <!-- Undefined -->
+            <div class="column">
+              <a class="large expanded hollow secondary button" ng-href="#">Undefined</a>
+            </div>
+            
+            <!-- Main Categories -->
+            <div class="column" ng-repeat="category in main.categories">
+              <a class="large expanded button" ng-href="#">{{category}}</a>
+            </div>
+
+            <!-- New Category -->
+            <div class="column">
+              <a class="large expanded hollow button" ng-href="#">New Category</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 </div>

@@ -34,7 +34,7 @@ class Document(models.Model):
     def __unicode__(self):
         return self.title
 
-class Content(models.Model):
+class Context(models.Model):
     document = models.ForeignKey(Document)
     keyword = models.ForeignKey(Keyword)
     position_from = models.IntegerField()
@@ -54,7 +54,7 @@ class Review(models.Model):
         ("approved", APPROVED),
     )
 
-    context = models.ForeignKey(Content)
+    context = models.ForeignKey(Context)
     keyword = models.ForeignKey(Keyword)
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User, unique=True)

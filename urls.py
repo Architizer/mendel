@@ -4,7 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 import mendel.views
-from mendel.models import Keyword, Category, Document, Content, Review
+from mendel.models import Keyword, Category, Document, Context, Review
 from django.contrib.auth.models import User
 
 from rest_framework import routers, serializers, viewsets
@@ -32,15 +32,15 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
 
 
-class ContentSerializer(serializers.HyperlinkedModelSerializer):
+class ContextSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Content
+        model = Context
         fields = ('__all__')
         
 
-class ContentViewSet(viewsets.ModelViewSet):
-    queryset = Content.objects.all()
-    serializer_class = ContentSerializer
+class ContextViewSet(viewsets.ModelViewSet):
+    queryset = Context.objects.all()
+    serializer_class = ContextSerializer
 
 
 class DocumentSerializer(serializers.HyperlinkedModelSerializer):
@@ -79,7 +79,7 @@ router = routers.DefaultRouter()
 router.register(r'keywords', KeyViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'documents', DocumentViewSet)
-router.register(r'content', ContentViewSet)
+router.register(r'context', ContextViewSet)
 router.register(r'reviews', ReviewViewSet)
 router.register(r'users', UserViewSet)
 

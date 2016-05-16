@@ -16,55 +16,45 @@ class KeywordSerializer(serializers.HyperlinkedModelSerializer):
         model = Keyword
         fields = ('__all__')
 
-
 class KeyViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer
-
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
         fields = ('__all__')
 
-
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
 
 class ContextSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Context
         fields = ('__all__')
-        
 
 class ContextViewSet(viewsets.ModelViewSet):
     queryset = Context.objects.all()
     serializer_class = ContextSerializer
 
-
 class DocumentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Document
         fields = ('__all__')
-        
 
 class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
 
-
 class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Review
         fields = ('__all__')
-        
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

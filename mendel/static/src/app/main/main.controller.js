@@ -9,6 +9,15 @@
   function MainController() {
     var vm = this;
 
+    vm.keyword = 'Europe';
+
+    vm.context = {};
+
+    vm.context.front = '"...the westernmost part of Eurasia.';
+    vm.context.back = 'is bordered by the Arctic Ocean to the north, the Atlantic Ocean to ..."';
+
+    vm.definition = '"a continent that comprises the westernmost part of Eurasia."';
+
     vm.categories = [
       'Aesthetic Concepts',
       'Architect Name',

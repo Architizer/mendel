@@ -1,6 +1,6 @@
 <div id="main" class="container">
   <!-- Main -->
-  <div class="row expanded">
+  <div class="row">
 
     <!-- Left Column -->
     <div class="small-12 large-4 columns">
@@ -29,8 +29,8 @@
 
             <div class="callout small-12 columns">
               <p class="subheader">Word</p>
-              <h1>europe</h1>
-              <p class="subheader"><a ng-ng-href="#">Edit keyword <i class="material-icons">arrow_forward</i></a></p>
+              <h1>{{ main.keyword }}</h1>
+              <p class="subheader"><a ng-href="#">Edit keyword <i class="material-icons">arrow_forward</i></a></p>
             </div>
           </div>
 
@@ -41,8 +41,8 @@
 
             <div class="callout small-12 columns">
               <p class="subheader">Context</p>
-              <p>"...the westernmost part of Eurasia. <strong>Europe</strong> is bordered by the Arctic Ocean to the north, the Atlantic Ocean to ..."</p>
-              <p class="subheader"><a ng-ng-href="#">Load new context <i class="material-icons">arrow_forward</i></a></p>
+              <p>{{ main.context.front }}  <strong>{{ main.keyword }}</strong> {{ main.context.back }}</p>
+              <p class="subheader"><a ng-href="#">Load new context <i class="material-icons">arrow_forward</i></a></p>
             </div>
           </div>
 
@@ -50,7 +50,7 @@
           <div class="row show-for-large">
             <div class="callout small-12 columns">
               <p class="subheader">Definition</p>
-              <p>"a continent that comprises the westernmost part of Eurasia.</p>
+              <p>{{ main.definition }}</p>
             </div>
           </div>
 
@@ -89,22 +89,22 @@
 
             <!-- Stop Word -->
             <div class="column">
-              <a class="large expanded hollow secondary button" ng-href="#">Stop word</a>
+              <a class="medium expanded hollow secondary button" ng-href="#">Stop word <kbd class="float-right">,</kbd></a>
             </div>
 
             <!-- Undefined -->
             <div class="column">
-              <a class="large expanded hollow secondary button" ng-href="#">Undefined</a>
+              <a class="medium expanded hollow secondary button" ng-href="#">Undefined <kbd class="float-right">.</kbd></a>
             </div>
             
             <!-- Main Categories -->
             <div class="column" ng-repeat="category in main.categories">
-              <a class="large expanded button" ng-href="#">{{category}}</a>
+              <a class="medium expanded button" ng-href="#">{{category}}</a>
             </div>
 
             <!-- New Category -->
             <div class="column">
-              <a class="large expanded hollow button" ng-href="#">New Category</a>
+              <a class="medium expanded hollow button" ng-href="#">New Category</a>
             </div>
 
           </div>

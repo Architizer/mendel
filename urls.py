@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.views.generic import RedirectView
 
 from django.contrib import admin
 admin.autodiscover()
@@ -87,6 +88,7 @@ urlpatterns = [
     url(r'^$', mendel.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/v1/', include(router.urls)),
+    url(r'^api/', RedirectView.as_view(url='/api/v1/')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

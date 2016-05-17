@@ -14,6 +14,7 @@ Make sure you have Python [installed properly](http://install.python-guide.org).
 ```sh
 $ git clone git@github.com:Architizer/mendel.git
 $ cd mendel
+$ cp .env.example .env
 
 $ pip install -r requirements.txt
 

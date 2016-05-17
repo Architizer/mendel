@@ -14,6 +14,9 @@ class Keyword(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
+    class Meta:
+        verbose_name_plural = "categories"
+
     def __unicode__(self):
         return self.name
 

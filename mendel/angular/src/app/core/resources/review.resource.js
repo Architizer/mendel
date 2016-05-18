@@ -4,6 +4,6 @@
   angular
     .module('static')
     .factory('Review', function($resource) {
-      return $resource('//localhost:8000/api/reviews/:id');
+      return $resource('//localhost:5000/api/reviews/:id');
   });
 })();

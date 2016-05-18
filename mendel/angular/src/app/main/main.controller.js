@@ -6,10 +6,10 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController() {
+  function MainController(Category, Keyword) {
     var vm = this;
 
-    vm.keyword = 'Europe';
+    vm.keyword = Keyword.get({id: 1});
 
     vm.context = {};
 
@@ -18,26 +18,7 @@
 
     vm.definition = '"a continent that comprises the westernmost part of Eurasia."';
 
-    vm.categories = [
-      'Aesthetic Concepts',
-      'Architect Name',
-      'Architectural Element',
-      'Architectural Style',
-      'Building Type',
-      'City',
-      'Color',
-      'Continent',
-      'Country',
-      'Finish',
-      'Firm Name',
-      'Manufacturer Name',
-      'Material',
-      'Performance Concepts',
-      'Price Concepts',
-      'Product Type',
-      'Room/Space Type',
-      'State',
-      'Unit'
-    ];
+    vm.categories = Category.query();
+
   }
 })();

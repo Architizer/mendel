@@ -33,6 +33,7 @@ class ContextSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Context
         fields = ('__all__')
+        depth = 1
 
 class ContextViewSet(viewsets.ModelViewSet):
     queryset = Context.objects.all()
@@ -51,6 +52,7 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Review
         fields = ('__all__')
+        depth = 1
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()

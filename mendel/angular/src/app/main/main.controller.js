@@ -6,19 +6,23 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(Category, Keyword) {
+  function MainController(Category, Context) {
     var vm = this;
 
-    vm.keyword = Keyword.get({id: 1});
+    // Get Context
+    Context.get({id: 1}, function (context) {
 
-    vm.context = {};
+      vm.context = context;
+      vm.context.front = '"...' + vm.context.text.substring(0, vm.context.position_from);
+      vm.context.back = vm.context.text.substring(vm.context.position_to, vm.context.text.length) + '..."';
+      vm.keyword = context.keyword;
+    });
 
-    vm.context.front = '"...the westernmost part of Eurasia.';
-    vm.context.back = 'is bordered by the Arctic Ocean to the north, the Atlantic Ocean to ..."';
+    // Get Categories
+    Category.query(function (categories) {
 
-    vm.definition = '"a continent that comprises the westernmost part of Eurasia."';
-
-    vm.categories = Category.query();
+      vm.categories = categories;
+    });
 
   }
 })();

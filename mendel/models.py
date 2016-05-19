@@ -61,7 +61,7 @@ class Review(models.Model):
     keyword = models.ForeignKey(Keyword)
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)
-    status = models.CharField(max_length=20, choices=STATUS_TYPES)
+    status = models.CharField(max_length=20, choices=STATUS_TYPES, default=PENDING)
 
     class Meta:
         unique_together = ('context', 'keyword', 'category', 'user', 'status')

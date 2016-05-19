@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(Category, Context) {
+  function MainController(Category, Context, Review, toastr) {
     var vm = this;
 
     // Get Context
@@ -23,6 +23,21 @@
 
       vm.categories = categories;
     });
+
+    // Create Review
+    vm.saveReview = function saveReview(category, context) {
+
+      Review.save({
+        category: category.id,
+        context: context.id,
+        keyword: context.keyword.id,
+        user: 1,
+      }, function (review) {
+        toastr.success('Category <strong>' + category.name + '</strong> added to Keyword <strong>' + context.keyword.name + '</strong>');
+      }, function (error) {
+        toastr.error('There was an error: ' + JSON.stringify(error), {timeOut: 5000});
+      });
+    };
 
   }
 })();

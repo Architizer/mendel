@@ -101,17 +101,17 @@
 
             <!-- Stop Word -->
             <div class="column">
-              <a class="medium expanded hollow secondary button" ng-href="#">Stop word <kbd class="float-right">,</kbd></a>
+              <a class="medium expanded hollow secondary button">Stop word <kbd class="float-right">,</kbd></a>
             </div>
 
             <!-- Undefined -->
             <div class="column">
-              <a class="medium expanded hollow secondary button" ng-href="#">Undefined <kbd class="float-right">.</kbd></a>
+              <a class="medium expanded hollow secondary button">Undefined <kbd class="float-right">.</kbd></a>
             </div>
             
             <!-- Main Categories -->
             <div class="column" ng-repeat="category in main.categories">
-              <a class="medium expanded button" ng-href="#">{{ category.name }}</a>
+              <a class="medium expanded button" ng-click="main.saveReview(category, main.context)">{{ category.name }}</a>
             </div>
 
             <!-- New Category -->

@@ -3,7 +3,7 @@
 
   angular
     .module('static')
-    .factory('Context', function($resource) {
-      return $resource('//localhost:5000/api/context/:id');
+    .factory('Context', function($resource, apiHost) {
+      return $resource(apiHost + '/api/context/:id');
   });
 })();

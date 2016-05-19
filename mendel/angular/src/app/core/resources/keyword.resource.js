@@ -3,7 +3,7 @@
 
   angular
     .module('static')
-    .factory('Keyword', function($resource) {
-      return $resource('//localhost:5000/api/keywords/:id');
+    .factory('Keyword', function($resource, apiHost) {
+      return $resource(apiHost + '/api/keywords/:id');
   });
 })();

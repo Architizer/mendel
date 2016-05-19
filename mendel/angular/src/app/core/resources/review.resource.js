@@ -3,7 +3,7 @@
 
   angular
     .module('static')
-    .factory('Review', function($resource) {
-      return $resource('//localhost:5000/api/reviews/:id');
+    .factory('Review', function($resource, apiHost) {
+      return $resource(apiHost + '/api/reviews/:id');
   });
 })();

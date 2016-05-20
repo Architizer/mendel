@@ -10,6 +10,7 @@
     var vm = this;
 
     vm.selected = {};
+    vm.selected = [];
 
     // Get Context
     Context.get({
@@ -29,9 +30,24 @@
       vm.categories = categories;
     });
 
-    vm.toggleCategory = function toggleCategory(category, context) {
+    // Toggle Category
+    vm.toggleCategory = function toggleCategory(event, category) {
 
-      vm.selected[category.id] = (!vm.selected[category.id] ? true : false);
+      var element = angular.element(event.target);
+
+      // Get index of category in selected array
+      var index = vm.selected.indexOf(category);
+
+      if (index !== -1) {
+
+        vm.selected.splice(index, 1);
+        element.addClass('hollow');
+      }
+      else {
+
+        vm.selected.push(category);
+        element.removeClass('hollow');
+      }
     };
 
     // Create Review

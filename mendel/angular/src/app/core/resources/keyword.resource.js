@@ -4,6 +4,6 @@
   angular
     .module('static')
     .factory('Keyword', function($resource, apiHost) {
-      return $resource(apiHost + '/api/keywords/:id');
+      return $resource(apiHost + '/keywords/:id/');
   });
 })();

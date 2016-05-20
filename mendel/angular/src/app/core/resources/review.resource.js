@@ -4,6 +4,6 @@
   angular
     .module('static')
     .factory('Review', function($resource, apiHost) {
-      return $resource(apiHost + '/api/reviews/:id');
+      return $resource(apiHost + '/reviews/:id/');
   });
 })();

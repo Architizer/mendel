@@ -4,6 +4,6 @@
   angular
     .module('static')
     .factory('Category', function($resource, apiHost) {
-      return $resource(apiHost + '/api/categories/:id');
+      return $resource(apiHost + '/categories/:id/');
   });
 })();

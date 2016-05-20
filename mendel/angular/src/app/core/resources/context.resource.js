@@ -4,6 +4,6 @@
   angular
     .module('static')
     .factory('Context', function($resource, apiHost) {
-      return $resource(apiHost + '/api/context/:id');
+      return $resource(apiHost + '/context/:id/');
   });
 })();

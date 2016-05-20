@@ -9,4 +9,9 @@
 
     &.without-top-margin { margin-top: 0; }
   }
+  .button {
+    &.category {
+      text-align: left;
+    }
+  }
 }

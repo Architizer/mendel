@@ -14,7 +14,7 @@
         </div>
         <!-- Next -->
         <div class="small-3 columns">
-          <p class="text-right"><a>Next <i class="material-icons">arrow_forward</i></a></p>
+          <p class="text-right"><a ng-click="main.getNextContext(main.context)">Next <i class="material-icons">arrow_forward</i></a></p>
         </div>
       </div>
 
@@ -111,6 +111,12 @@
             
             <!-- Main Categories -->
             <div class="column" ng-repeat="category in main.categories">
+              <div class="switch">
+                <input class="switch-input" ng-model="category.selected" id="category-switch-{{ category.id }}" type="checkbox" name="category-switch-{{ category.id }}">
+                <label class="switch-paddle" for="category-switch-{{ category.id }}">
+                  <span class="show-for-sr">{{ category.name }}</span>
+                </label>
+              </div>
               <a class="medium expanded category hollow button" ng-click="main.toggleCategory($event, category)">{{ category.name }}</a>
             </div>
 

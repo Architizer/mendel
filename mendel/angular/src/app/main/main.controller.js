@@ -9,9 +9,6 @@
   function MainController(Category, Context, Review, toastr) {
     var vm = this;
 
-    vm.selected = {};
-    vm.selected = [];
-
     // Get Context
     Context.get({
       id: 1
@@ -30,40 +27,29 @@
       vm.categories = categories;
     });
 
-    // Toggle Category
-    vm.toggleCategory = function toggleCategory(event, category) {
+    // Submit Reviews
+    vm.getNextContext = function getNextContext (context) {
 
-      var element = angular.element(event.target);
+      angular.forEach(vm.categories, function(category) {
 
-      // Get index of category in selected array
-      var index = vm.selected.indexOf(category);
+        if (category.selected) {
 
-      if (index !== -1) {
-
-        vm.selected.splice(index, 1);
-        element.addClass('hollow');
-      }
-      else {
-
-        vm.selected.push(category);
-        element.removeClass('hollow');
-      }
-    };
-
-    // Create Review
-    vm.saveReview = function saveReview(category, context) {
-
-      Review.save({
-        category: category.id,
-        context: context.id,
-        keyword: context.keyword.id,
-        user: 1,
-      }, function (review) {
-        toastr.success('Category <strong>' + category.name + '</strong> added to Keyword <strong>' + context.keyword.name + '</strong>');
-      }, function (error) {
-        toastr.error('There was an error: ' + JSON.stringify(error), {timeOut: 5000});
+          Review.save({
+            category: category.id,
+            context: context.id,
+            keyword: context.keyword.id,
+            user: 1
+          }, function saveReviewSuccess (review) {
+            // Show Toastr Success
+            toastr.success('Category <strong>' + review.category + '</strong> added to Keyword <strong>' + review.keyword + '</strong>');
+            // Unselect the category
+            category.selected = false;
+          }, function saveReviewError (error) {
+            // Show Toastr Error
+            toastr.error('There was an error: ' + JSON.stringify(error), {timeOut: 5000});
+          });
+        }
       });
     };
-
   }
 })();

@@ -71,14 +71,36 @@
       }
       & .button {
         width: 100%;
-        padding: 0.5rem 0.5rem;
+        padding: 0.6rem 1rem;
         text-align: left;
         height: 100%;
-
+        font-size: 1rem;
+        opacity: 0.9;
+        font-weight: normal;
+        color: #464646;
+        transition: background 0.1s, border 0.1s, box-shadow 0.1s;
         &.delete {
-          background: #FFECEC url('../../assets/images/sidebar-bg-full.jpg') left repeat-y;
-          border: 1px solid #EEC3AE;
-          border-left: 0px;
+          background: lighten(#FFECEC, 1%);
+          color: #E77F7F;
+          border-bottom: 1px solid lighten(#EEC3AE, 6%);
+          &:hover {
+            background: darken(#FFECEC, 0.04%);
+          }
+          &:active {
+            background: darken(#FFECEC, 1.5%);
+          }
+        }
+        &.idk {
+          background: #E9F7FF;
+          border: 1px solid lighten(#BCD9E8, 5%);
+          color: #62A8D0;
+          border-top: 0px;
+          &:hover {
+            background: darken(#E9F7FF, 1.5%);
+          }
+          &:active {
+            background: darken(#E9F7FF, 5%);
+          }
         }
       }
     }
@@ -90,9 +112,16 @@
     &.with-bottom-margin {
       margin-bottom: 1.5rem;
     }
+    & a {
+      color: $light-gray;
+      text-decoration: underline;
+    }
   }
-  div.categories, div.subjects {
-    margin-top: 0.625rem;
+  .categories {
+    margin-top: 2rem;
+  }
+  .subjects {
+    margin-top: 2.5rem;
   }
   div.category {
     padding: 0 0 1rem;
@@ -121,7 +150,7 @@
       font-weight: bold;
       color: #464646;
       text-align: left;
-      transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+      transition: background 0.1s, border 0.1s, box-shadow 0.1s;
       &:hover {
         background: #FFF8D0;
         border: 1px solid #E0D286;

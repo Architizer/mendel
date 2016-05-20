@@ -111,7 +111,7 @@
             
             <!-- Main Categories -->
             <div class="column" ng-repeat="category in main.categories">
-              <a class="medium expanded category button" ng-click="main.saveReview(category, main.context)">{{ category.name }}</a>
+              <a class="medium expanded category button" ng-class="{ 'hollow': !main.selected[category.id] }" ng-click="main.toggleCategory(category, main.context)">{{ category.name }}</a>
             </div>
 
             <!-- New Category -->

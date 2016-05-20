@@ -9,6 +9,8 @@
   function MainController(Category, Context, Review, toastr) {
     var vm = this;
 
+    vm.selected = {};
+
     // Get Context
     Context.get({
       id: 1
@@ -26,6 +28,11 @@
 
       vm.categories = categories;
     });
+
+    vm.toggleCategory = function toggleCategory(category, context) {
+
+      vm.selected[category.id] = (!vm.selected[category.id] ? true : false);
+    };
 
     // Create Review
     vm.saveReview = function saveReview(category, context) {

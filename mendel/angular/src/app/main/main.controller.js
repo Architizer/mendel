@@ -6,38 +6,41 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController() {
+  function MainController(Category, Context, Review, toastr) {
     var vm = this;
 
-    vm.keyword = 'Europe';
+    // Get Context
+    Context.get({
+      id: 1
+    }, function (context) {
+        vm.context = context;
+        vm.context.front = '"...' + vm.context.text.substring(0, vm.context.position_from);
+        vm.context.back = vm.context.text.substring(vm.context.position_to, vm.context.text.length) + '..."';
+        vm.keyword = context.keyword;
+    }, function (error) {
+        toastr.error('There was an error:' + JSON.stringify(error), {timeOut: 5000});
+    });
 
-    vm.context = {};
+    // Get Categories
+    Category.query(function (categories) {
 
-    vm.context.front = '"...the westernmost part of Eurasia.';
-    vm.context.back = 'is bordered by the Arctic Ocean to the north, the Atlantic Ocean to ..."';
+      vm.categories = categories;
+    });
 
-    vm.definition = '"a continent that comprises the westernmost part of Eurasia."';
+    // Create Review
+    vm.saveReview = function saveReview(category, context) {
 
-    vm.categories = [
-      'Aesthetic Concepts',
-      'Architect Name',
-      'Architectural Element',
-      'Architectural Style',
-      'Building Type',
-      'City',
-      'Color',
-      'Continent',
-      'Country',
-      'Finish',
-      'Firm Name',
-      'Manufacturer Name',
-      'Material',
-      'Performance Concepts',
-      'Price Concepts',
-      'Product Type',
-      'Room/Space Type',
-      'State',
-      'Unit'
-    ];
+      Review.save({
+        category: category.id,
+        context: context.id,
+        keyword: context.keyword.id,
+        user: 1,
+      }, function (review) {
+        toastr.success('Category <strong>' + category.name + '</strong> added to Keyword <strong>' + context.keyword.name + '</strong>');
+      }, function (error) {
+        toastr.error('There was an error: ' + JSON.stringify(error), {timeOut: 5000});
+      });
+    };
+
   }
 })();

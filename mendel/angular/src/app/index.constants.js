@@ -4,6 +4,7 @@
 
   angular
     .module('static')
-    .constant('moment', moment);
+    .constant('moment', moment)
+    .constant('apiHost', '//localhost:5000/api/v1');
 
 })();

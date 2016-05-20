@@ -29,8 +29,9 @@
 
             <div class="callout small-12 columns">
               <p class="subheader">Word</p>
-              <h1>{{ main.keyword }}</h1>
-              <p class="subheader"><a ng-href="#">Edit keyword <i class="material-icons">arrow_forward</i></a></p>
+              <h1>{{ main.keyword.name }}</h1>
+              <!-- TODO: Re-enable Edit Keyword -->
+              <!-- <p class="subheader"><a ng-href="#">Edit keyword <i class="material-icons">arrow_forward</i></a></p> -->
             </div>
           </div>
 
@@ -41,8 +42,9 @@
 
             <div class="callout small-12 columns">
               <p class="subheader">Context</p>
-              <p>{{ main.context.front }}  <strong>{{ main.keyword }}</strong> {{ main.context.back }}</p>
-              <p class="subheader"><a ng-href="#">Load new context <i class="material-icons">arrow_forward</i></a></p>
+              <p>{{ main.context.front }}  <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
+              <!-- TODO: Re-enable Load New Context -->
+              <!-- <p class="subheader"><a ng-href="#">Load new context <i class="material-icons">arrow_forward</i></a></p> -->
             </div>
           </div>
 
@@ -50,7 +52,8 @@
           <div class="row show-for-large">
             <div class="callout small-12 columns">
               <p class="subheader">Definition</p>
-              <p>{{ main.definition }}</p>
+              <!-- TODO: Re-enable Definition -->
+              <p>(This is where the definition will go)</p>
             </div>
           </div>
 
@@ -63,18 +66,27 @@
 
       <!-- Right Action Bar -->
       <div class="action-bar row">
+        <!-- TODO: Re-enable Category Filter -->
 
         <!-- Category Filter -->
+        <!--
+
         <div class="small-12 large-8 columns">
           <input type="text" placeholder="start typing to select a category">
         </div>
 
+        -->
+
         <!-- Help Area -->
+        <!--
+
         <div class="large-4 columns">
           <div class="callout without-top-margin show-for-large">
             <p>Start typing to select a category.</p>
           </div>
         </div>
+
+        -->
       </div>
 
       <!-- Right Column Content -->
@@ -89,23 +101,26 @@
 
             <!-- Stop Word -->
             <div class="column">
-              <a class="medium expanded hollow secondary button" ng-href="#">Stop word <kbd class="float-right">,</kbd></a>
+              <a class="medium expanded hollow secondary button">Stop word <kbd class="float-right">,</kbd></a>
             </div>
 
             <!-- Undefined -->
             <div class="column">
-              <a class="medium expanded hollow secondary button" ng-href="#">Undefined <kbd class="float-right">.</kbd></a>
+              <a class="medium expanded hollow secondary button">Undefined <kbd class="float-right">.</kbd></a>
             </div>
             
             <!-- Main Categories -->
             <div class="column" ng-repeat="category in main.categories">
-              <a class="medium expanded button" ng-href="#">{{category}}</a>
+              <a class="medium expanded button" ng-click="main.saveReview(category, main.context)">{{ category.name }}</a>
             </div>
 
             <!-- New Category -->
+            <!-- TODO: Re-enable "New Category" Function -->
+            <!--
             <div class="column">
               <a class="medium expanded hollow button" ng-href="#">New Category</a>
             </div>
+            -->
 
           </div>
         </div>

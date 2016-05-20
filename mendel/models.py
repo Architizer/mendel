@@ -60,8 +60,11 @@ class Review(models.Model):
     context = models.ForeignKey(Context)
     keyword = models.ForeignKey(Keyword)
     category = models.ForeignKey(Category)
-    user = models.ForeignKey(User, unique=True)
-    status = models.CharField(max_length=20, choices=STATUS_TYPES)
+    user = models.ForeignKey(User)
+    status = models.CharField(max_length=20, choices=STATUS_TYPES, default=PENDING)
+
+    class Meta:
+        unique_together = ('context', 'keyword', 'category', 'user', 'status')
 
     def __unicode__(self):
         return self.status

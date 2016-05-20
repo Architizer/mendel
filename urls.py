@@ -11,34 +11,37 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
 
-class KeywordSerializer(serializers.HyperlinkedModelSerializer):
+class KeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Keyword
-        fields = ('__all__')
+        fields = ('id', 'name')
 
 class KeyViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('__all__')
+        fields = ('id', 'name')
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-class ContextSerializer(serializers.HyperlinkedModelSerializer):
+class ContextSerializer(serializers.ModelSerializer):
+    keyword = KeywordSerializer()
+
     class Meta:
         model = Context
-        fields = ('__all__')
+        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword')
+        depth = 1
 
 class ContextViewSet(viewsets.ModelViewSet):
     queryset = Context.objects.all()
     serializer_class = ContextSerializer
 
-class DocumentSerializer(serializers.HyperlinkedModelSerializer):
+class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         fields = ('__all__')
@@ -47,7 +50,7 @@ class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
 
-class ReviewSerializer(serializers.HyperlinkedModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('__all__')
@@ -56,10 +59,10 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'is_staff')
+        fields = ('username', 'is_staff')
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

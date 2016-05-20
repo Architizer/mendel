@@ -3,19 +3,24 @@
   <!-- Action Bar -->
   <div class="action-bar">
     <div class="row large-collapse">
-      <!-- Previous -->
       <div class="small-12 large-4 columns subject-navigation">
+
+        <!-- Previous -->
         <div class="small-6 columns">
           <p class="text-left"><a>&larr; Prev</a></p>
         </div>
+
         <!-- Next -->
         <div class="small-6 columns">
-          <p class="text-right"><a>Next &rarr;</a></p>
+          <p class="text-right"><a ng-click="main.getNextContext(main.context)">Next &rarr;</a></p>
         </div>
+
       </div>
+
       <div class="large-8 show-for-large columns categories-search">
         <input type="text" placeholder="start typing to select a category">
       </div>
+
     </div>
   </div>
 
@@ -34,7 +39,7 @@
 
           <div class="callout small-12 columns with-bottom-margin">
             <h3>Word</h3>
-            <h1>{{ main.keyword }}</h1>
+            <h1>{{ main.keyword.name }}</h1>
             <p class="subheader"><a ng-href="#">Edit keyword &rarr;</a></p>
           </div>
 
@@ -44,7 +49,7 @@
 
           <div class="callout small-12 columns">
             <h3>Context</h3>
-            <p>{{ main.context.front }} <strong>{{ main.keyword }}</strong> {{ main.context.back }}</p>
+            <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
             <p class="subheader"><a ng-href="#">Load new context &rarr;</a></p>
           </div>
 
@@ -53,6 +58,7 @@
             <h3>Definition</h3>
             <p>{{ main.definition }}</p>
           </div>
+
         </div>
       </div>
     </div>
@@ -64,36 +70,37 @@
           <div class="small-6 columns system-action">
             <a class="expanded button delete" ng-href="#">Delete <kbd>,</kbd></a>
           </div>
+
           <!-- Next -->
           <div class="small-6 columns system-action">
             <a class="expanded button idk" ng-href="#">I don't know <kbd>.</kbd></a>
           </div>
         </div>
       </div>
+
       <!-- Right Column Content -->
       <div class="row">
         <div class="small-12 columns categories">
 
           <!-- Category Tiles -->
-
           <h2 class="subheader">Categories</h2>
 
           <div class="row collapse small-up-2 medium-up-4">
 
             <!-- Main Categories -->
-            <div class="column category" ng-repeat="category in main.categories">
-              <a class="medium expanded button" ng-href="#">{{category}}</a>
+            <div class="column" ng-repeat="category in main.categories">
+              <div class="switch">
+                <input class="switch-input" ng-model="category.selected" id="category-switch-{{ category.id }}" type="checkbox" name="category-switch-{{ category.id }}">
+                <label class="switch-paddle" for="category-switch-{{ category.id }}">
+                  <span class="show-for-sr">{{ category.name }}</span>
+                </label>
+              </div>
+              <a class="medium expanded category hollow button" ng-click="main.toggleCategory($event, category)">{{ category.name }}</a>
             </div>
-
-            <!-- New Category -->
-            <!-- <div class="column">
-              <a class="medium expanded hollow button" ng-href="#">New Category</a>
-            </div> -->
 
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>

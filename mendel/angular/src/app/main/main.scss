@@ -1,16 +1,19 @@
 #main {
   $action-bar-height: 3.5rem;
   $action-bar-system-height: 2.5rem;
+
   h2 {
     font-size: 1.1rem;
     font-weight: 700;
   }
+
   h3 {
     text-transform: uppercase;
     font-weight: 800;
     color: darken($gunmetal, 10%);
     font-size: 0.8rem;
   }
+
   .action-bar {
     border-bottom: 1px solid #dfdfdf;
     & .row {
@@ -32,9 +35,11 @@
       margin: 0;
     }
   }
+
   .subject-column {
     border-right: 1px solid #dfdfdf;
   }
+
   .categories-column {
     & .categories-system-actions {
       padding: 0;
@@ -78,6 +83,7 @@
       }
     }
   }
+
   .callout {
     border: 1px solid $gunmetal;
     box-shadow: 0 2px 4px 0 lighten($gunmetal, 15%);
@@ -90,9 +96,11 @@
       text-decoration: underline;
     }
   }
+
   .categories {
     margin-top: 2rem;
   }
+
   .subjects {
     margin-top: 2.5rem;
   }
@@ -127,6 +135,7 @@
         padding-left: 0.75rem;
       }
     }
+
     & a {
       font-size: 0.85rem;
       margin: 0;
@@ -169,6 +178,7 @@
       }
     }
   }
+
   .button {
     &.category {
       text-align: left;

@@ -33,20 +33,20 @@
       <div class="row">
         <div class="small-12 columns subjects">
 
-          <!-- Word Panel -->
-
+          <!-- Subject Header -->
           <h2 class="subheader">Subject</h2>
 
+          <!-- Word Panel -->
           <div class="callout small-12 columns with-bottom-margin">
             <h3>Word</h3>
             <h1>{{ main.keyword.name }}</h1>
             <p class="subheader"><a ng-href="#">Edit keyword &rarr;</a></p>
           </div>
 
-          <!-- Metadata Panel -->
-
+          <!-- Metadata Header -->
           <h2 class="subheader show-for-large">Metadata</h2>
 
+          <!-- Context Panel -->
           <div class="callout small-12 columns">
             <h3>Context</h3>
             <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
@@ -54,7 +54,7 @@
           </div>
 
           <!-- Definition Panel -->
-          <div class="callout small-12 columns">
+          <div class="callout small-12 show-for-large columns">
             <h3>Definition</h3>
             <p>{{ main.definition }}</p>
           </div>
@@ -66,15 +66,19 @@
     <!-- Right Column -->
     <div class="large-8 columns categories-column">
       <div class="row">
+
         <div class="large-12 columns categories-system-actions">
+
+          <!-- Delete -->
           <div class="small-6 columns system-action">
             <a class="expanded button delete" ng-href="#">Delete <kbd>,</kbd></a>
           </div>
 
-          <!-- Next -->
+          <!-- I don't know -->
           <div class="small-6 columns system-action">
             <a class="expanded button idk" ng-href="#">I don't know <kbd>.</kbd></a>
           </div>
+
         </div>
       </div>
 

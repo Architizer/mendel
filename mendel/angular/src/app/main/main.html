@@ -88,7 +88,7 @@
           <div class="row collapse small-up-2 medium-up-4">
 
             <!-- Main Categories -->
-            <div class="column" ng-repeat="category in main.categories">
+            <div class="category-selector column" ng-repeat="category in main.categories">
               <div class="switch">
                 <input class="switch-input" ng-model="category.selected" id="category-switch-{{ category.id }}" type="checkbox" name="category-switch-{{ category.id }}">
                 <label class="switch-paddle" for="category-switch-{{ category.id }}">

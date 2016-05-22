@@ -95,22 +95,36 @@
   .subjects {
     margin-top: 2.5rem;
   }
-  div.category {
-    padding: 0 0 1rem;
-    &:nth-child(4n+5),
-    &:first-child {
-      padding-right: 0.75rem;
+
+  div.category-selector {
+
+    @include breakpoint(small) {
+      &:nth-child(2n+3),
+      &:first-child {
+        padding-right: 0.25rem;
+      }
+      &:nth-child(2n) {
+        padding-left: 0.25rem;
+      }
     }
-    &:nth-child(4n+2) {
-      padding-left: 0.25rem;
-      padding-right: 0.5rem;
-    }
-    &:nth-child(4n+3) {
-      padding-right: 0.25rem;
-      padding-left: 0.5rem;
-    }
-    &:nth-child(4n) {
-      padding-left: 0.75rem;
+
+    @include breakpoint(medium up) {
+      padding: 0 0 1rem;
+      &:nth-child(4n+5),
+      &:first-child {
+        padding-right: 0.75rem;
+      }
+      &:nth-child(4n+2) {
+        padding-left: 0.25rem;
+        padding-right: 0.5rem;
+      }
+      &:nth-child(4n+3) {
+        padding-right: 0.25rem;
+        padding-left: 0.5rem;
+      }
+      &:nth-child(4n) {
+        padding-left: 0.75rem;
+      }
     }
     & a {
       font-size: 0.85rem;

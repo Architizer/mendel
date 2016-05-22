@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="row full-height collapse">
+  <div class="row">
 
     <!-- Left Column -->
     <div class="small-12 large-4 columns subject-column">
@@ -33,20 +33,20 @@
       <div class="row">
         <div class="small-12 columns subjects">
 
-          <!-- Word Panel -->
-
+          <!-- Subject Header -->
           <h2 class="subheader">Subject</h2>
 
+          <!-- Word Panel -->
           <div class="callout small-12 columns with-bottom-margin">
             <h3>Word</h3>
             <h1>{{ main.keyword.name }}</h1>
             <p class="subheader"><a ng-href="#">Edit keyword &rarr;</a></p>
           </div>
 
-          <!-- Metadata Panel -->
-
+          <!-- Metadata Header -->
           <h2 class="subheader show-for-large">Metadata</h2>
 
+          <!-- Context Panel -->
           <div class="callout small-12 columns">
             <h3>Context</h3>
             <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
@@ -54,7 +54,7 @@
           </div>
 
           <!-- Definition Panel -->
-          <div class="callout small-12 columns">
+          <div class="callout small-12 show-for-large columns">
             <h3>Definition</h3>
             <p>{{ main.definition }}</p>
           </div>
@@ -65,16 +65,20 @@
 
     <!-- Right Column -->
     <div class="large-8 columns categories-column">
-      <div class="row collapse">
+      <div class="row">
+
         <div class="large-12 columns categories-system-actions">
+
+          <!-- Delete -->
           <div class="small-6 columns system-action">
             <a class="expanded button delete" ng-href="#">Delete <kbd>,</kbd></a>
           </div>
 
-          <!-- Next -->
+          <!-- I don't know -->
           <div class="small-6 columns system-action">
             <a class="expanded button idk" ng-href="#">I don't know <kbd>.</kbd></a>
           </div>
+
         </div>
       </div>
 
@@ -88,14 +92,14 @@
           <div class="row collapse small-up-2 medium-up-4">
 
             <!-- Main Categories -->
-            <div class="column" ng-repeat="category in main.categories">
+            <div class="category-selector column" ng-repeat="category in main.categories">
               <div class="switch">
                 <input class="switch-input" ng-model="category.selected" id="category-switch-{{ category.id }}" type="checkbox" name="category-switch-{{ category.id }}">
                 <label class="switch-paddle" for="category-switch-{{ category.id }}">
                   <span class="show-for-sr">{{ category.name }}</span>
                 </label>
               </div>
-              <a class="medium expanded category hollow button" ng-click="main.toggleCategory($event, category)">{{ category.name }}</a>
+              <a class="medium expanded category hollow button" ng-click="main.toggleCategory($event, category)" title="{{ category.name }}">{{ category.name }}</a>
             </div>
 
           </div>

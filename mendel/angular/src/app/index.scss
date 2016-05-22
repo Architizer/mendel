@@ -4,13 +4,19 @@
  */
 $topbar-background: #555555;
 $grid-column-gutter: (
-  small: 0.25rem,
-  medium: 0.5rem,
+  small: 1rem,
+  medium: 2rem,
+  large: 2rem
 );
 $body-font-family: -apple-system, BlinkMacSystemFont,
   "Segoe UI", "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans",
   "Droid Sans", "Helvetica Neue", sans-serif;
+$callout-margin: 0.2rem 0 1.1rem 0;
+$body-font-color: lighten(#000,  16%);
+$light-gray: lighten(#000, 66%);
+$gunmetal: #bdc7cd;
+
 
 /**
  *  The import of foundation is made manually because there is still no links of the

@@ -27,20 +27,29 @@
       vm.categories = categories;
     });
 
-    // Create Review
-    vm.saveReview = function saveReview(category, context) {
+    // Submit Reviews
+    vm.getNextContext = function getNextContext (context) {
 
-      Review.save({
-        category: category.id,
-        context: context.id,
-        keyword: context.keyword.id,
-        user: 1,
-      }, function (review) {
-        toastr.success('Category <strong>' + category.name + '</strong> added to Keyword <strong>' + context.keyword.name + '</strong>');
-      }, function (error) {
-        toastr.error('There was an error: ' + JSON.stringify(error), {timeOut: 5000});
+      angular.forEach(vm.categories, function(category) {
+
+        if (category.selected) {
+
+          Review.save({
+            category: category.id,
+            context: context.id,
+            keyword: context.keyword.id,
+            user: 1
+          }, function saveReviewSuccess (review) {
+            // Show Toastr Success
+            toastr.success('Category <strong>' + review.category + '</strong> added to Keyword <strong>' + review.keyword + '</strong>');
+            // Unselect the category
+            category.selected = false;
+          }, function saveReviewError (error) {
+            // Show Toastr Error
+            toastr.error('There was an error: ' + JSON.stringify(error), {timeOut: 5000});
+          });
+        }
       });
     };
-
   }
 })();

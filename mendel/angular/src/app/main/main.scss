@@ -1,12 +1,199 @@
 #main {
+  $action-bar-height: 3.5rem;
+  $action-bar-system-height: 2.5rem;
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    text-transform: uppercase;
+    font-weight: 800;
+    color: darken($gunmetal, 10%);
+    font-size: 0.8rem;
+  }
+
   .action-bar {
-    border-bottom: 1px solid #ccc;
-    min-height: 5rem;
+    border-bottom: 1px solid #dfdfdf;
+    & .row {
+      padding: 0;
+      height: $action-bar-height;
+      & .subject-navigation {
+        height: inherit;
+        padding-top: 1rem;
+      }
+      & .categories-search {
+        float: left;
+      }
+    }
+    input {
+      height: $action-bar-height;
+      border: 0;
+      padding: 0px 1rem;
+      outline: none;
+      box-shadow: none;
+      margin: 0;
+    }
+  }
+
+  .subject-column {
+    border-right: 1px solid #dfdfdf;
+  }
+
+  .categories-column {
+    & .categories-system-actions {
+      padding: 0;
+      & .system-action {
+        height: $action-bar-system-height;
+        padding: 0;
+      }
+      & .button {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        text-align: left;
+        height: 100%;
+        font-size: 1rem;
+        opacity: 0.9;
+        font-weight: normal;
+        color: #464646;
+        transition: background 0.1s, border 0.1s, box-shadow 0.1s;
+        &.delete {
+          background: lighten(#FFECEC, 1%);
+          color: #E77F7F;
+          border-bottom: 1px solid lighten(#EEC3AE, 6%);
+          &:hover {
+            background: darken(#FFECEC, 0.04%);
+          }
+          &:active {
+            background: darken(#FFECEC, 1.5%);
+          }
+        }
+        &.idk {
+          background: #E9F7FF;
+          border: 1px solid lighten(#BCD9E8, 5%);
+          color: #62A8D0;
+          border-top: 0px;
+          &:hover {
+            background: darken(#E9F7FF, 1.5%);
+          }
+          &:active {
+            background: darken(#E9F7FF, 5%);
+          }
+        }
+      }
+    }
   }
 
   .callout {
-    margin-top: 1.25rem;
+    border: 1px solid $gunmetal;
+    box-shadow: 0 2px 4px 0 lighten($gunmetal, 15%);
+    border-radius: 2px;
+    &.with-bottom-margin {
+      margin-bottom: 1.5rem;
+    }
+    & a {
+      color: $light-gray;
+      text-decoration: underline;
+    }
+  }
 
-    &.without-top-margin { margin-top: 0; }
+  .categories {
+    margin-top: 2rem;
+  }
+
+  .subjects {
+    margin-top: 2.5rem;
+  }
+
+  div.category-selector {
+
+    @include breakpoint(small) {
+      &:nth-child(2n+3),
+      &:first-child {
+        padding-right: 0.25rem;
+      }
+      &:nth-child(2n) {
+        padding-left: 0.25rem;
+      }
+    }
+
+    @include breakpoint(medium up) {
+      padding: 0 0 1rem;
+      &:nth-child(4n+5),
+      &:first-child {
+        padding-right: 0.75rem;
+      }
+      &:nth-child(4n+2) {
+        padding-left: 0.25rem;
+        padding-right: 0.5rem;
+      }
+      &:nth-child(4n+3) {
+        padding-right: 0.25rem;
+        padding-left: 0.5rem;
+      }
+      &:nth-child(4n) {
+        padding-left: 0.75rem;
+      }
+    }
+
+    & .tile {
+      input {
+        display: none;
+      }
+      label {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        font-size: 0.85rem;
+        margin: 0;
+
+        background: #F5F8FA;
+        border: 1px solid lighten($gunmetal, 14%);
+        border-radius: 0.25rem;
+        padding: 0.75rem;
+        font-weight: bold;
+        color: #464646;
+        text-align: left;
+        transition: background 0.1s, border 0.1s, box-shadow 0.1s;
+        max-height: 3rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &:hover {
+          background: #FFF8D0;
+          border: 1px solid #E0D286;
+          box-shadow: 0 2px 3px 0 rgba(0,0,0,0.04);
+        }
+        &:active {
+          background: #FCF0A9;
+          border: 1px solid #C8C3A5;
+          box-shadow: 0 0 3px 0 rgba(0,0,0,0.13);
+        }
+      }
+
+      input:checked ~ label {
+        background: #E2F7C7;
+        border: 1px solid #B2D35F;
+        box-shadow: 0 2px 3px 0 rgba(121,140,78,0.13);
+        &:hover {
+          background: #C6ED95;
+          border: 1px solid #86A43C;
+        }
+        &:active {
+          background: #FCF0A9;
+          border: 1px solid #C8C3A5;
+          box-shadow: 0 0 3px 0 rgba(0,0,0,0.13);
+        }
+      }
+    }
+  }
+
+  .button {
+    &.category {
+      text-align: left;
+    }
   }
 }

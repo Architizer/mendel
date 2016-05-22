@@ -1,60 +1,62 @@
 <div id="main" class="container">
   <!-- Main -->
+  <!-- Action Bar -->
+  <div class="action-bar">
+    <div class="row large-collapse">
+      <div class="small-12 large-4 columns subject-navigation">
+
+        <!-- Previous -->
+        <div class="small-6 columns">
+          <p class="text-left"><a>&larr; Prev</a></p>
+        </div>
+
+        <!-- Next -->
+        <div class="small-6 columns">
+          <p class="text-right"><a ng-click="main.getNextContext(main.context)">Next &rarr;</a></p>
+        </div>
+
+      </div>
+
+      <div class="large-8 show-for-large columns categories-search">
+        <input type="text" placeholder="start typing to select a category">
+      </div>
+
+    </div>
+  </div>
+
   <div class="row">
 
     <!-- Left Column -->
-    <div class="small-12 large-4 columns">
-
-      <!-- Left Action Bar -->
-      <div class="action-bar row">
-
-        <!-- Previous -->
-        <div class="small-3 columns">
-          <p class="text-left"><a><i class="material-icons">arrow_back</i>Prev</a></p>
-        </div>
-        <!-- Next -->
-        <div class="small-3 columns">
-          <p class="text-right"><a>Next <i class="material-icons">arrow_forward</i></a></p>
-        </div>
-      </div>
+    <div class="small-12 large-4 columns subject-column">
 
       <!-- Left Column Content -->
       <div class="row">
-        <div class="small-12 columns">
+        <div class="small-12 columns subjects">
+
+          <!-- Subject Header -->
+          <h2 class="subheader">Subject</h2>
 
           <!-- Word Panel -->
-          <div class="row">
-
-            <h4 class="subheader show-for-large">Subject</h4>
-
-            <div class="callout small-12 columns">
-              <p class="subheader">Word</p>
-              <h1>{{ main.keyword.name }}</h1>
-              <!-- TODO: Re-enable Edit Keyword -->
-              <!-- <p class="subheader"><a ng-href="#">Edit keyword <i class="material-icons">arrow_forward</i></a></p> -->
-            </div>
+          <div class="callout small-12 columns with-bottom-margin">
+            <h3>Word</h3>
+            <h1>{{ main.keyword.name }}</h1>
+            <p class="subheader"><a ng-href="#">Edit keyword &rarr;</a></p>
           </div>
 
-          <!-- Metadata Panel -->
-          <div class="row show-for-large">
+          <!-- Metadata Header -->
+          <h2 class="subheader show-for-large">Metadata</h2>
 
-            <h4 class="subheader">Metadata</h4>
-
-            <div class="callout small-12 columns">
-              <p class="subheader">Context</p>
-              <p>{{ main.context.front }}  <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
-              <!-- TODO: Re-enable Load New Context -->
-              <!-- <p class="subheader"><a ng-href="#">Load new context <i class="material-icons">arrow_forward</i></a></p> -->
-            </div>
+          <!-- Context Panel -->
+          <div class="callout small-12 columns">
+            <h3>Context</h3>
+            <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
+            <p class="subheader"><a ng-href="#">Load new context &rarr;</a></p>
           </div>
 
           <!-- Definition Panel -->
-          <div class="row show-for-large">
-            <div class="callout small-12 columns">
-              <p class="subheader">Definition</p>
-              <!-- TODO: Re-enable Definition -->
-              <p>(This is where the definition will go)</p>
-            </div>
+          <div class="callout small-12 show-for-large columns">
+            <h3>Definition</h3>
+            <p>{{ main.definition }}</p>
           </div>
 
         </div>
@@ -62,70 +64,43 @@
     </div>
 
     <!-- Right Column -->
-    <div class="large-8 columns">
+    <div class="large-8 columns categories-column">
+      <div class="row">
 
-      <!-- Right Action Bar -->
-      <div class="action-bar row">
-        <!-- TODO: Re-enable Category Filter -->
+        <div class="large-12 columns categories-system-actions">
 
-        <!-- Category Filter -->
-        <!--
-
-        <div class="small-12 large-8 columns">
-          <input type="text" placeholder="start typing to select a category">
-        </div>
-
-        -->
-
-        <!-- Help Area -->
-        <!--
-
-        <div class="large-4 columns">
-          <div class="callout without-top-margin show-for-large">
-            <p>Start typing to select a category.</p>
+          <!-- Delete -->
+          <div class="small-6 columns system-action">
+            <a class="expanded button delete" ng-href="#">Delete <kbd>,</kbd></a>
           </div>
-        </div>
 
-        -->
+          <!-- I don't know -->
+          <div class="small-6 columns system-action">
+            <a class="expanded button idk" ng-href="#">I don't know <kbd>.</kbd></a>
+          </div>
+
+        </div>
       </div>
 
       <!-- Right Column Content -->
       <div class="row">
-        <div class="small-12 columns">
+        <div class="small-12 columns categories">
 
           <!-- Category Tiles -->
+          <h2 class="subheader">Categories</h2>
 
-          <h4 class="subheader">Categories</h4>
+          <div class="row collapse small-up-2 medium-up-4">
 
-          <div class="row small-up-2 medium-up-4">
-
-            <!-- Stop Word -->
-            <div class="column">
-              <a class="medium expanded hollow secondary button">Stop word <kbd class="float-right">,</kbd></a>
-            </div>
-
-            <!-- Undefined -->
-            <div class="column">
-              <a class="medium expanded hollow secondary button">Undefined <kbd class="float-right">.</kbd></a>
-            </div>
-            
             <!-- Main Categories -->
-            <div class="column" ng-repeat="category in main.categories">
-              <a class="medium expanded button" ng-click="main.saveReview(category, main.context)">{{ category.name }}</a>
+            <div class="category-selector column" ng-repeat="category in main.categories">
+              <div class="tile">
+                <input ng-model="category.selected" id="category-tile-{{ category.id }}" type="checkbox" name="category-tile-{{ category.id }}">
+                <label for="category-tile-{{ category.id }}">{{ category.name }}</label>
+              </div>
             </div>
-
-            <!-- New Category -->
-            <!-- TODO: Re-enable "New Category" Function -->
-            <!--
-            <div class="column">
-              <a class="medium expanded hollow button" ng-href="#">New Category</a>
-            </div>
-            -->
-
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </div>

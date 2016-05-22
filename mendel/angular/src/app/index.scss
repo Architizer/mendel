@@ -16,9 +16,6 @@ $callout-margin: 0.2rem 0 1.1rem 0;
 $body-font-color: lighten(#000,  16%);
 $light-gray: lighten(#000, 66%);
 $gunmetal: #bdc7cd;
-html, body {
-  overflow: hidden;
-}
 /**
  *  The import of foundation is made manually because there is still no links of the
  *  sass version in their bower.json...

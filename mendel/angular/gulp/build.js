@@ -58,9 +58,11 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(htmlFilter)
     .pipe($.htmlmin({
       removeEmptyAttributes: true,
-      removeAttributeQuotes: true,
+      removeAttributeQuotes: false,
       collapseBooleanAttributes: true,
-      collapseWhitespace: true
+      collapseWhitespace: false,
+      removeComments: false,
+      preserveLineBreaks: true,
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))

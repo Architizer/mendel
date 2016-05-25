@@ -2,61 +2,81 @@
 
 Mendel is a tool for tagging keywords from sets of data.
 
-We get keywords inputted, we read where the keyword came from and what it is, and we assign tags to it. Simple.
-
-
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
-
 ## Running Locally
 
-Make sure you have Python [installed properly](http://install.python-guide.org).  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+### Prerequisites
+
+Install the following:
+
+- [Python](http://install.python-guide.org)
+- [NodeJS](https://nodejs.org/en/download/)
+- [Heroku Toolbelt](https://toolbelt.heroku.com/)
+- [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup) ([Postgres.app](http://postgresapp.com) recommended, don't forget to set up the [command line tools](http://postgresapp.com/documentation/cli-tools.html))
+
+### API
+
+First, clone the repository:
 
 ```sh
 $ git clone git@github.com:Architizer/mendel.git
 $ cd mendel
-$ cp .env.example .env
+```
 
-$ pip install -r requirements.txt
+Next, run our setup script and create a super user:
 
-$ createdb mendel
-
-$ python manage.py migrate
-$ python manage.py collectstatic
+```sh
+$ ./bin/setup_local
 $ python manage.py createsuperuser
+```
 
+Finally, start the development API server:
+
+```sh
 $ heroku local
 ```
 
-Mendel should now be running on [localhost:5000](http://localhost:5000/).
+The Mendel API should now be running on [http://localhost:5000/api/](http://localhost:5000/api/).
 
 ### Front End
 
+The front end is generated from the [gulp-angular](https://github.com/Swiip/generator-gulp-angular) generator for [Yeoman](http://yeoman.io/).
+
+To work on the front end in development, run the following:
+
 ```sh
-$ cd mendel/mendel/static/
-- `$ gulp` to build an optimized version of your application in folder dist
-- `$ gulp serve` to start BrowserSync server on your source files with live reload
-- `$ gulp serve:dist` to start BrowserSync server on your optimized application without live reload
-- `$ gulp test` to run your unit tests with Karma
-- `$ gulp test:auto` to run your unit tests with Karma in watch mode
-- `$ gulp protractor` to launch your e2e tests with Protractor
-- `$ gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
+$ cd mendel/angular
+$ gulp serve
 ```
+
+This will open the front end app in a browser using [BrowserSync](https://www.browsersync.io/), which will live-reload when changes are made inside the `mendel/angular` directory. 
+
+**Note:** you will need the API running locally to serve data to the front end. Keep `heroku local` running in a separate terminal window.
+
 
 ## Deploying to Heroku
 
-```sh
-$ heroku create
-$ git push heroku master
+To deploy to a new Heroku instance, run the following:
 
-$ heroku run python manage.py migrate
+```sh
+$ ./bin/heroku_create
+$ git push heroku master
+```
+
+To create an initial admin user, run the following:
+
+```sh
+$ heroku run python manage.py createsuperuser
+```
+
+Finally, to open your new Heroku app in a browser, run the following:
+
+```sh
 $ heroku open
 ```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ## References
 
 - [Python on Heroku](https://devcenter.heroku.com/categories/python)
+- [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python)
 - [Postgres.app](http://postgresapp.com/)
 - [Using Command Line Tools with Postgres.app](http://postgresapp.com/documentation/cli-tools.html)

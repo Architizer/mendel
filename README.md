@@ -35,6 +35,12 @@ Finally, start the development API server:
 $ heroku local
 ```
 
+On Windows:
+
+```sh
+$ heroku local -f Procfile.windows
+```
+
 The Mendel API should now be running on [http://localhost:5000/api/](http://localhost:5000/api/).
 
 ### Front End

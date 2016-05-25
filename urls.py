@@ -78,7 +78,7 @@ router.register(r'reviews', ReviewViewSet)
 router.register(r'users', UserViewSet)
 
 urlpatterns = [
-    url(r'^$', mendel.views.index, name='index'),
+    url(r'^.*$', mendel.views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^api/v1/', include(router.urls)),

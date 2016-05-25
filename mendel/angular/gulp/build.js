@@ -45,22 +45,24 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
-    .pipe($.rev())
+    // .pipe($.rev())
     .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
     // .pipe($.sourcemaps.init())
     .pipe($.cssnano())
-    .pipe($.rev())
+    // .pipe($.rev())
     // .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
-    .pipe($.revReplace())
+    // .pipe($.revReplace())
     .pipe(htmlFilter)
     .pipe($.htmlmin({
       removeEmptyAttributes: true,
-      removeAttributeQuotes: true,
+      removeAttributeQuotes: false,
       collapseBooleanAttributes: true,
-      collapseWhitespace: true
+      collapseWhitespace: false,
+      removeComments: false,
+      preserveLineBreaks: true,
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
@@ -90,7 +92,30 @@ gulp.task('other', function () {
 });
 
 gulp.task('clean', function () {
-  return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
+  return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/'), path.join(conf.paths.djangoTemplates, '/')], {force: true});
 });
 
 gulp.task('build', ['html', 'fonts', 'other']);
+
+
+/*
+`gulp django`
+
+Copies built index.html file to Django's /templates directory
+and replaces .js and .css files with {% static 'filename' %} tags 
+for use with Django staticfiles
+*/
+
+gulp.task('django', ['build'], function () {
+
+  var djangoEnv = "<script>var DEBUG = '{{DEBUG}}'; DEBUG = (DEBUG === 'False' ? false : true); window.djangoEnv = {'DEBUG': DEBUG }</script>";
+
+  return gulp.src(path.join(conf.paths.dist, '/index.html'))
+    .pipe($.replace('<!-- replace:load staticfiles -->', "{% load staticfiles %}"))
+    .pipe($.replace('<!-- replace:expose Django environment variables -->', djangoEnv))
+    .pipe($.replace('styles/app.css', "{% static 'styles/app.css' %}"))
+    .pipe($.replace('styles/vendor.css', "{% static 'styles/vendor.css' %}"))
+    .pipe($.replace('scripts/app.js', "{% static 'scripts/app.js' %}"))
+    .pipe($.replace('scripts/vendor.js', "{% static 'scripts/vendor.js' %}"))
+    .pipe(gulp.dest(path.join(conf.paths.djangoTemplates, '/')));
+});

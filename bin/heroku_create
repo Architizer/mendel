@@ -1,0 +1,6 @@
+#!/usr/bin/env bash 
+heroku create
+heroku addons:create heroku-postgresql:hobby-dev
+heroku buildpacks:add heroku/nodejs
+heroku buildpacks:add heroku/python
+heroku config:set DISABLE_COLLECTSTATIC=1

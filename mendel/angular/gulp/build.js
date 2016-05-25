@@ -107,8 +107,12 @@ for use with Django staticfiles
 */
 
 gulp.task('django', ['build'], function () {
+
+  var djangoEnv = "<script>var DEBUG = '{{DEBUG}}'; DEBUG = (DEBUG === 'True' ? true : false); window.mendelConfig = {'DEBUG': DEBUG }</script>";
+
   return gulp.src(path.join(conf.paths.dist, '/index.html'))
-    .pipe($.replace('<!-- replace:load staticfiles --> ', "{% load staticfiles %}"))
+    .pipe($.replace('<!-- replace:load staticfiles -->', "{% load staticfiles %}"))
+    .pipe($.replace('<!-- replace:expose Django environment variables -->', djangoEnv))
     .pipe($.replace('styles/app.css', "{% static 'styles/app.css' %}"))
     .pipe($.replace('styles/vendor.css', "{% static 'styles/vendor.css' %}"))
     .pipe($.replace('scripts/app.js', "{% static 'scripts/app.js' %}"))

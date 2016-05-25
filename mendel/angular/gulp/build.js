@@ -96,3 +96,22 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', ['html', 'fonts', 'other']);
+
+
+/*
+`gulp django`
+
+Copies built index.html file to Django's /templates directory
+and replaces .js and .css files with {% static 'filename' %} tags 
+for use with Django staticfiles
+*/
+
+gulp.task('django', ['build'], function () {
+  return gulp.src(path.join(conf.paths.dist, '/index.html'))
+    .pipe($.replace('<!-- replace:load staticfiles --> ', "{% load staticfiles %}"))
+    .pipe($.replace('styles/app.css', "{% static 'styles/app.css' %}"))
+    .pipe($.replace('styles/vendor.css', "{% static 'styles/vendor.css' %}"))
+    .pipe($.replace('scripts/app.js', "{% static 'scripts/app.js' %}"))
+    .pipe($.replace('scripts/vendor.js', "{% static 'scripts/vendor.js' %}"))
+    .pipe(gulp.dest(path.join(conf.paths.djangoTemplates, '/')));
+});

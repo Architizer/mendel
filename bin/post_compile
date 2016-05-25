@@ -2,3 +2,8 @@
 set -eo pipefail
 
 python manage.py migrate --noinput 2>&1
+cd mendel/angular/ 
+gulp clean
+gulp django
+cd ../../ 
+python manage.py collectstatic --no-input --clear;

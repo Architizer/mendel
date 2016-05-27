@@ -6,27 +6,27 @@ from mendel.models import Keyword, Category, Document, Context, Review
 
 
 class KeywordAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'created', 'modified')
     pass
 
 
 class CategoryAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'created', 'modified')
     pass
 
 
 class DocumentAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'title', 'description')
+    list_display = ('id', 'title', 'description', 'created', 'modified')
     pass
 
 
 class ContextAdmin(ImportExportModelAdmin):
-    list_display = ('keyword', 'text', 'document')
+    list_display = ('keyword', 'text', 'document', 'created', 'modified')
     pass
 
 
 class ReviewAdmin(ImportExportModelAdmin):
-    list_display = ('keyword', 'category', 'user', 'status')
+    list_display = ('keyword', 'category', 'user', 'status', 'created', 'modified')
     pass
 
 

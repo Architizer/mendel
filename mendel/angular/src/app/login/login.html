@@ -11,25 +11,26 @@
       <!-- Login Form -->
       <fieldset class="fieldset">
         <legend>Login</legend>
-        <form>
+        <form ng-submit="login.submit(login.credentials)">
 
           <!-- Email Address -->
           <div class="row">
             <div class="small-12 columns">
-              <input type="text" placeholder="you@email.com">
+              <input type="text" ng-model="login.credentials.username" placeholder="you@email.com" ng-required="true">
             </div>
           </div>
 
           <!-- Password -->
           <div class="row">
             <div class="small-12 columns">
-              <input type="password" placeholder="••••••••">
+              <input type="password" ng-model="login.credentials.password" placeholder="••••••••" ng-required="true">
             </div>
           </div>
 
           <!-- Submit / Enter -->
           <div class="row">
-            <p>Press <a ng-href="/"><kbd>return</kbd></a> to log in.</p>
+            <p>Press <a ng-click="login.submit(login.credentials)"><kbd>return</kbd></a> to log in.</p>
+            <button class="hide"></button>
           </div>
         </form>
       </fieldset>

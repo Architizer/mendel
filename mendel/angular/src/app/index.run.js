@@ -6,9 +6,10 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log) {
+  function runBlock(AuthService) {
 
-    $log.debug('runBlock end');
+    // Get Current User
+    AuthService.getCurrentUser();
   }
 
 })();

@@ -7,7 +7,7 @@ admin.autodiscover()
 import mendel.views
 from mendel.models import Keyword, Category, Document, Context, Review
 from django.contrib.auth.models import User
-
+from rest_auth.models import TokenModel
 from rest_framework import permissions, routers, serializers, viewsets
 
 
@@ -67,13 +67,21 @@ class ReviewViewSet(viewsets.ModelViewSet):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'is_staff')
+        fields = ('id', 'username', 'is_staff',)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAdminUser,)
 
+# Django Rest Auth Token Serializer
+class TokenSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = TokenModel
+        fields = ('key','user',)
+        depth = 1
 
 router = routers.DefaultRouter()
 router.register(r'keywords', KeyViewSet)

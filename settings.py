@@ -160,3 +160,9 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
 }
+
+# REST Auth
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'urls.TokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'urls.UserSerializer',
+}

@@ -7,12 +7,16 @@ from django.contrib.auth.models import User
 
 class Keyword(models.Model):
     name = models.CharField(max_length=200, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.name
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = "categories"
@@ -33,6 +37,8 @@ class Document(models.Model):
     of_type = models.CharField(max_length=10, choices=DOCUMENT_TYPES)
     title = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.title
@@ -43,6 +49,8 @@ class Context(models.Model):
     position_from = models.IntegerField()
     position_to = models.IntegerField()
     text = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.text
@@ -62,6 +70,8 @@ class Review(models.Model):
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)
     status = models.CharField(max_length=20, choices=STATUS_TYPES, default=PENDING)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ('context', 'keyword', 'category', 'user', 'status')

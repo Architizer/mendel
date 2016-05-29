@@ -12,7 +12,13 @@
         login: login,
         logout: logout,
         getCurrentUser: getCurrentUser,
+        isAuthenticated: isAuthenticated,
       };
+
+      function isAuthenticated () {
+
+        return !!Session.user;
+      }
 
       function login (credentials) {
 

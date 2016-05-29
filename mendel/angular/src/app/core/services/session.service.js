@@ -11,7 +11,7 @@
         $localStorage._mendelToken = token;
 
         // Update HTTP Authorization Header
-        $http.defaults.headers.common['Authorization'] = 'Token ' + token;
+        $http.defaults.headers.common['Authorization'] = (!!token) ? 'Token ' + token : undefined;
       };
 
       // Create Session

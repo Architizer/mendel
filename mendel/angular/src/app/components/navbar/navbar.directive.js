@@ -19,16 +19,25 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($scope, AuthService, $state, toastr) {
+    function NavbarController ($scope, AuthService) {
       var vm = this;
 
-      vm.logout = function navbarLogout () {
-        AuthService.logout();
-      };
+      vm.user = {};
+      vm.logout = navbarLogout;
+
+      // Update navbar when user changes
+      $scope.$watch(AuthService.isAuthenticated, updateNavbarUser);
 
       // Initialize Foundation on navbar
       angular.element('nav').foundation();
+
+      function navbarLogout () {
+        AuthService.logout();
+      }
+
+      function updateNavbarUser () {
+        vm.user = AuthService.getCurrentUser();
+      }
     }
   }
-
 })();

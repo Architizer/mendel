@@ -23,6 +23,8 @@
       loginSuccess: 'auth-login-success',
       loginFailed: 'auth-login-failed',
       logoutSuccess: 'auth-logout-success',
+      getCurrentUserSuccess: 'auth-get-current-user-success',
+      getCurrentUserFailed: 'auth-get-current-user-failed',
       sessionTimeout: 'auth-session-timeout',
       notAuthenticated: 'auth-not-authenticated',
       notAuthorized: 'auth-not-authorized'

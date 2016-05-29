@@ -22,13 +22,21 @@
           // Create Session
           Session.create(key, user);
 
+          // Emit event
+          $rootScope.$emit(AUTH_EVENTS.loginSuccess);
+
           // Show Success Toast and Redirect
           toastr.success('Logged In');
           $state.go('main');
 
         }, function loginError (error) {
 
+          // Emit event
+          $rootScope.$emit(AUTH_EVENTS.loginFailure);
+
+          // Show Error Toast
           toastr.error(JSON.stringify(error));
+
         });
       };
 
@@ -49,6 +57,9 @@
           // Destroy Session
           Session.destroy();
 
+          // Emit Event
+          $rootScope.$emit(AUTH_EVENTS.logoutSuccess);
+
           // Show Toast and Redirect
           toastr.info('Logged Out');
           $state.go('login');
@@ -63,6 +74,9 @@
 
         // First, check if there's an existing Session
         if (!!Session.user) {
+
+          // Emit Event
+          $rootScope.$emit(AUTH_EVENTS.getCurrentUserSuccess);
 
           // Yes? Return this user
           return Session.user;
@@ -89,13 +103,23 @@
             // Create Session
             Session.create(key, user);
 
+            // Emit Event
+            $rootScope.$emit(AUTH_EVENTS.getCurrentUserSuccess);
+
           }, function getCurrentUserError (error) {
 
+            // Emit Event
+            $rootScope.$emit(AUTH_EVENTS.getCurrentUserFailed);
+
+            // Show Error Toast
             toastr.error(JSON.stringify(error));
           });
         }
 
         else {
+
+          // Emit Event
+          $rootScope.$emit(AUTH_EVENTS.notAuthenticated);
 
           return null;
         }

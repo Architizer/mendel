@@ -85,19 +85,6 @@
     }
   }
 
-  .callout {
-    border: 1px solid $gunmetal;
-    box-shadow: 0 2px 4px 0 lighten($gunmetal, 15%);
-    border-radius: 2px;
-    &.with-bottom-margin {
-      margin-bottom: 1.5rem;
-    }
-    & a {
-      color: $light-gray;
-      text-decoration: underline;
-    }
-  }
-
   .categories {
     margin-top: 2rem;
   }

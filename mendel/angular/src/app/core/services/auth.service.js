@@ -41,8 +41,8 @@
           // Create Session
           Session.create(key, user);
 
-          // Emit event
-          $rootScope.$emit(AUTH_EVENTS.loginSuccess);
+          // Broadcast event
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 
           // Show Success Toast and Redirect
           toastr.success('Logged In');
@@ -53,8 +53,8 @@
 
         function loginError (error) {
 
-          // Emit event
-          $rootScope.$emit(AUTH_EVENTS.loginFailure);
+          // Broadcast event
+          $rootScope.$broadcast(AUTH_EVENTS.loginFailure);
 
           // Show Error Toast
           toastr.error(JSON.stringify(error));
@@ -82,8 +82,8 @@
           // Destroy Session
           Session.destroy();
 
-          // Emit Event
-          $rootScope.$emit(AUTH_EVENTS.logoutSuccess);
+          // Broadcast Event
+          $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
 
           // Show Toast and Redirect
           toastr.info('Logged Out');
@@ -102,8 +102,8 @@
         // First, check if there's an existing Session
         if (!!Session.user) {
 
-          // Emit Event
-          $rootScope.$emit(AUTH_EVENTS.getCurrentUserSuccess);
+          // Broadcast Event
+          $rootScope.$broadcast(AUTH_EVENTS.getCurrentUserSuccess);
 
           // Yes? Return this user
           return Session.user;
@@ -127,8 +127,8 @@
         // Otherwise, we're not authenticated
         else {
 
-          // Emit Event
-          $rootScope.$emit(AUTH_EVENTS.notAuthenticated);
+          // Broadcast Event
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
 
           return null;
         }
@@ -144,8 +144,8 @@
           // Create Session
           Session.create(key, user);
 
-          // Emit Event
-          $rootScope.$emit(AUTH_EVENTS.getCurrentUserSuccess);
+          // Broadcast Event
+          $rootScope.$broadcast(AUTH_EVENTS.getCurrentUserSuccess);
 
           return user;
         }
@@ -156,8 +156,9 @@
           Session.destroy();
           // (Clears any invalid tokens from localStorage)
 
-          // Emit Event
-          $rootScope.$emit(AUTH_EVENTS.getCurrentUserFailed);
+          // Broadcast Event
+          $rootScope.$broadcast(AUTH_EVENTS.getCurrentUserFailed);
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
 
           // Show Error Toast
           toastr.error(JSON.stringify(error));

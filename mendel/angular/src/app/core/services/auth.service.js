@@ -3,17 +3,30 @@
 
   angular
     .module('static')
-    .factory('AuthService', function ($rootScope, $http, $httpParamSerializerJQLike, $state, $localStorage, AUTH_EVENTS, apiHost, Session, toastr) {
-      var authService = {};
-     
-      authService.login = function login(credentials) {
+    .factory('AuthService', AuthService);
+
+    /** @ngInject */
+    function AuthService ($rootScope, $http, $httpParamSerializerJQLike, $state, $localStorage, AUTH_EVENTS, apiHost, Session, toastr) {
+
+      return {
+        login: login,
+        logout: logout,
+        getCurrentUser: getCurrentUser,
+      };
+
+      function login (credentials) {
 
         return $http({
           method: 'POST',
           url: apiHost + '/login/',
           data: $httpParamSerializerJQLike(credentials),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function loginSuccess (data) {
+        })
+        .then(loginSuccess)
+        .catch(loginError);
+
+
+        function loginSuccess (data) {
 
           // Deserialize the return:
           var key = data.data.key;
@@ -28,19 +41,19 @@
           // Show Success Toast and Redirect
           toastr.success('Logged In');
           $state.go('main');
+        }
 
-        }, function loginError (error) {
+        function loginError (error) {
 
           // Emit event
           $rootScope.$emit(AUTH_EVENTS.loginFailure);
 
           // Show Error Toast
           toastr.error(JSON.stringify(error));
+        }
+      }
 
-        });
-      };
-
-      authService.logout = function logout() {
+      function logout () {
 
         // Construct payload for sending token back with logout
         var payload = {
@@ -52,7 +65,11 @@
           url: apiHost + '/logout/',
           data: $httpParamSerializerJQLike(payload),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function logoutSuccess (data) {
+        })
+        .then(logoutSuccess)
+        .catch(logoutError);
+
+        function logoutSuccess (data) {
 
           // Destroy Session
           Session.destroy();
@@ -63,14 +80,16 @@
           // Show Toast and Redirect
           toastr.info('Logged Out');
           $state.go('login');
+        }
 
-        }, function logoutError (error) {
+        function logoutError (error) {
 
+          // Show Error Toast
           toastr.error(JSON.stringify(error));
-        });
-      };
+        }
+      }
 
-      authService.getCurrentUser = function getCurrentUser() {
+      function getCurrentUser () {
 
         // First, check if there's an existing Session
         if (!!Session.user) {
@@ -92,30 +111,12 @@
           $http({
             method: 'GET',
             url: apiHost + '/user/'
-          }).then(function getCurrentUserSuccess (data) {
-
-            // Deserialize the return:
-            var user = data.data;
-
-            // (Creating a Session also requires the token):
-            var key = $localStorage._mendelToken;
-
-            // Create Session
-            Session.create(key, user);
-
-            // Emit Event
-            $rootScope.$emit(AUTH_EVENTS.getCurrentUserSuccess);
-
-          }, function getCurrentUserError (error) {
-
-            // Emit Event
-            $rootScope.$emit(AUTH_EVENTS.getCurrentUserFailed);
-
-            // Show Error Toast
-            toastr.error(JSON.stringify(error));
-          });
+          })
+          .then(getCurrentUserSuccess)
+          .catch(getCurrentUserError);
         }
 
+        // Otherwise, we're not authenticated
         else {
 
           // Emit Event
@@ -123,13 +124,30 @@
 
           return null;
         }
-      };
 
-      authService.isAuthenticated = function isAuthenticated() {
+        function getCurrentUserSuccess (data) {
 
-        return !!Session.user;
-      };
+          // Deserialize the return:
+          var user = data.data;
 
-      return authService;
-    });
+          // (Creating a Session also requires the token):
+          var key = $localStorage._mendelToken;
+
+          // Create Session
+          Session.create(key, user);
+
+          // Emit Event
+          $rootScope.$emit(AUTH_EVENTS.getCurrentUserSuccess);
+        }
+
+        function getCurrentUserError (error) {
+
+          // Emit Event
+          $rootScope.$emit(AUTH_EVENTS.getCurrentUserFailed);
+
+          // Show Error Toast
+          toastr.error(JSON.stringify(error));
+        }
+      }
+    }
   })();

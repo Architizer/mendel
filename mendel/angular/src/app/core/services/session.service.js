@@ -3,19 +3,13 @@
 
   angular
     .module('static')
-    .service('Session', function ($http, $localStorage) {
+    .service('Session', Session);
 
-      // Update Local Storage and Authorization Header with Token
-      var updateLocalStorage = function updateLocalStorage (token) {
-
-        $localStorage._mendelToken = token;
-
-        // Update HTTP Authorization Header
-        $http.defaults.headers.common['Authorization'] = (!!token) ? 'Token ' + token : undefined;
-      };
+    /** @ngInject */
+    function Session ($http, $localStorage) {
 
       // Create Session
-      this.create = function (key, user) {
+      this.create = function createSession (key, user) {
 
         this.user = user;
         this.token = key;
@@ -26,7 +20,7 @@
       };
 
       // Destroy Session
-      this.destroy = function () {
+      this.destroy = function destroySession () {
 
         this.user = null;
         this.token = null;
@@ -36,5 +30,13 @@
         return this;
       };
 
-    });
+      // Update Local Storage and Authorization Header with Token
+      function updateLocalStorage (token) {
+
+        $localStorage._mendelToken = token;
+
+        // Update HTTP Authorization Header
+        $http.defaults.headers.common['Authorization'] = (!!token) ? 'Token ' + token : undefined;
+      }
+    }
   })();

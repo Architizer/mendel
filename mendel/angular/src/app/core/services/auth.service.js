@@ -142,6 +142,10 @@
 
         function getCurrentUserError (error) {
 
+          // Destroy Session
+          Session.destroy();
+          // (Clears any invalid tokens from localStorage)
+
           // Emit Event
           $rootScope.$emit(AUTH_EVENTS.getCurrentUserFailed);
 

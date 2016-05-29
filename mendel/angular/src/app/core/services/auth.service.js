@@ -3,7 +3,7 @@
 
   angular
     .module('static')
-    .factory('AuthService', function ($http, $httpParamSerializerJQLike, $state, $localStorage, apiHost, Session, toastr) {
+    .factory('AuthService', function ($rootScope, $http, $httpParamSerializerJQLike, $state, $localStorage, AUTH_EVENTS, apiHost, Session, toastr) {
       var authService = {};
      
       authService.login = function login(credentials) {
@@ -32,17 +32,26 @@
         });
       };
 
-      authService.logout = function logout(session) {
+      authService.logout = function logout() {
+
+        // Construct payload for sending token back with logout
+        var payload = {
+          token: Session.token
+        };
 
         return $http({
           method: 'POST',
           url: apiHost + '/logout/',
-          data: $httpParamSerializerJQLike(session),
+          data: $httpParamSerializerJQLike(payload),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function logoutSuccess (data) {
 
           // Destroy Session
           Session.destroy();
+
+          // Show Toast and Redirect
+          toastr.info('Logged Out');
+          $state.go('login');
 
         }, function logoutError (error) {
 

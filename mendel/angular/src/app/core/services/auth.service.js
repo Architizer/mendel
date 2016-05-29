@@ -41,6 +41,8 @@
           // Show Success Toast and Redirect
           toastr.success('Logged In');
           $state.go('main');
+
+          return user;
         }
 
         function loginError (error) {
@@ -138,6 +140,8 @@
 
           // Emit Event
           $rootScope.$emit(AUTH_EVENTS.getCurrentUserSuccess);
+
+          return user;
         }
 
         function getCurrentUserError (error) {
@@ -151,6 +155,8 @@
 
           // Show Error Toast
           toastr.error(JSON.stringify(error));
+
+          return null;
         }
       }
     }

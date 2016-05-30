@@ -17,7 +17,7 @@
   var csrfToken = mendelConfig.csrf_token || '';
 
   angular
-    .module('static')
+    .module('mendel')
     .constant('moment', moment)
     .constant('AUTH_EVENTS', {
       loginSuccess: 'auth-login-success',

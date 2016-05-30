@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('static')
+    .module('mendel')
     .service('apiInterceptor', apiInterceptor);
 
     /** @ngInject */

@@ -1,5 +1,5 @@
 {
-  "name": "static",
+  "name": "mendel",
   "version": "0.0.0",
   "scripts": {
     "test": "gulp test",

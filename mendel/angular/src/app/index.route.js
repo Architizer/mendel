@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('static')
+    .module('mendel')
     .config(routerConfig);
 
   /** @ngInject */

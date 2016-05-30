@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('static')
+    .module('mendel')
     .factory('Keyword', function($resource, apiHost) {
       return $resource(apiHost + '/keywords/:id/');
   });

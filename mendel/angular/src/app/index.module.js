@@ -2,6 +2,17 @@
   'use strict';
 
   angular
-    .module('static', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'toastr']);
+    .module('static', [
+      'ngAnimate',
+      'ngAria',
+      'ngCookies',
+      'ngTouch',
+      'ngMessages',
+      'ngResource',
+      'ngSanitize',
+      'ngStorage',
+      'toastr',
+      'ui.router',
+    ]);
 
 })();

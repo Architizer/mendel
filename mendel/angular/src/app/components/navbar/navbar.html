@@ -14,12 +14,13 @@
       <ul class="dropdown menu" data-dropdown-menu data-disable-hover="true" data-click-open="true">
         <li><a ng-href="#">Help</a></li>
         <li><a ng-href="#">About</a></li>
-        <li>
-          <a ng-href="#">User</a>
+        <li ng-show="navbar.user">
+          <a>{{ navbar.user.username || 'User' }} </a>
           <ul class="menu vertical">
-            <li><a ng-href="#">Name</a></li>
-            <li><a ng-href="#">Email</a></li>
-            <li><a ng-href="#">Password</a></li>
+            <!-- <li><a ng-href="#">Name</a></li> -->
+            <!-- <li><a ng-href="#">Email</a></li> -->
+            <!-- <li><a ng-href="#">Password</a></li> -->
+            <li><a ng-click="navbar.logout()">Log Out</a></li>
           </ul>
         </li>
       </ul>

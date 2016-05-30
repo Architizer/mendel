@@ -7,8 +7,8 @@ admin.autodiscover()
 import mendel.views
 from mendel.models import Keyword, Category, Document, Context, Review
 from django.contrib.auth.models import User
-
-from rest_framework import routers, serializers, viewsets
+from rest_auth.models import TokenModel
+from rest_framework import permissions, routers, serializers, viewsets
 
 
 class KeywordSerializer(serializers.ModelSerializer):
@@ -19,6 +19,7 @@ class KeywordSerializer(serializers.ModelSerializer):
 class KeyViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,6 +29,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class ContextSerializer(serializers.ModelSerializer):
     keyword = KeywordSerializer()
@@ -40,6 +42,7 @@ class ContextSerializer(serializers.ModelSerializer):
 class ContextViewSet(viewsets.ModelViewSet):
     queryset = Context.objects.all()
     serializer_class = ContextSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,6 +52,7 @@ class DocumentSerializer(serializers.ModelSerializer):
 class DocumentViewSet(viewsets.ModelViewSet):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -58,16 +62,26 @@ class ReviewSerializer(serializers.ModelSerializer):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'is_staff')
+        fields = ('id', 'username', 'is_staff',)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.IsAdminUser,)
 
+# Django Rest Auth Token Serializer
+class TokenSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = TokenModel
+        fields = ('key','user',)
+        depth = 1
 
 router = routers.DefaultRouter()
 router.register(r'keywords', KeyViewSet)
@@ -82,8 +96,7 @@ urlpatterns = [
     url(r'^admin', RedirectView.as_view(url='/admin/')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^api/v1/', include(router.urls)),
-    url(r'^api/', RedirectView.as_view(url='/api/v1/')),
-    url(r'^api', RedirectView.as_view(url='/api/v1/')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api$', RedirectView.as_view(url='/api/v1/')),
+    url(r'^api/v1/', include('rest_auth.urls')),
     url(r'^.*$', mendel.views.index, name='index'),
 ]

@@ -44,6 +44,8 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
     'import_export',
 )
 
@@ -59,7 +61,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True if DEBUG else False
 
 ROOT_URLCONF = 'urls'
 
@@ -153,7 +155,14 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # REST framework
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+}
+
+# REST Auth
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'urls.TokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'urls.UserSerializer',
 }

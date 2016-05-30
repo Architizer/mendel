@@ -61,6 +61,8 @@ This will open the front end app in a browser using [BrowserSync](https://www.br
 
 ## Deploying to Heroku
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 To deploy to a new Heroku instance, run the following:
 
 ```sh

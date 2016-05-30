@@ -6,11 +6,20 @@
     .service('apiInterceptor', apiInterceptor);
 
     /** @ngInject */
-    function apiInterceptor ($q, $rootScope, AUTH_EVENTS) {
+    function apiInterceptor ($localStorage, $q, $rootScope, AUTH_EVENTS) {
 
       return {
+        request: request,
         responseError: responseError
       };
+
+      function request (config) {
+
+        // Set Authorization Header with Token from Local Storage
+        config.headers['Authorization'] = ($localStorage._mendelToken) ? 'Token ' + $localStorage._mendelToken : undefined;
+
+        return config;
+      }
 
       function responseError (response) {
 

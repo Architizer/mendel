@@ -6,7 +6,7 @@
     .service('Session', Session);
 
     /** @ngInject */
-    function Session ($http, $localStorage) {
+    function Session ($localStorage) {
 
       // Create Session
       this.create = function createSession (key, user) {
@@ -14,7 +14,8 @@
         this.user = user;
         this.token = key;
 
-        updateLocalStorage(this.token);
+        // Update Local Storage with Token
+        $localStorage._mendelToken = this.token;
 
         return this;
       };
@@ -25,18 +26,10 @@
         this.user = null;
         this.token = null;
 
-        updateLocalStorage(this.token);
+        // Update Local Storage with Token
+        $localStorage._mendelToken = this.token;
 
         return this;
       };
-
-      // Update Local Storage and Authorization Header with Token
-      function updateLocalStorage (token) {
-
-        $localStorage._mendelToken = token;
-
-        // Update HTTP Authorization Header
-        $http.defaults.headers.common['Authorization'] = (!!token) ? 'Token ' + token : undefined;
-      }
     }
   })();

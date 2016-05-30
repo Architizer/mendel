@@ -3,10 +3,10 @@
 
   angular
     .module('mendel')
-    .controller('IndexController', IndexController);
+    .controller('AppController', AppController);
 
   /** @ngInject */
-  function IndexController($scope, $state, AUTH_EVENTS) {
+  function AppController($scope, $state, AUTH_EVENTS) {
     var vm = this;
 
     // Set up watchers for authentication issues

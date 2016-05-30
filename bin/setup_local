@@ -1,12 +1,18 @@
 #!/usr/bin/env bash 
+
+# Make initial .env file from .env.example
 cp .env.example .env
+
+# Install packages
 npm install
 pip install -r requirements.txt
+
+# Create Database
 createdb mendel
-cd mendel/angular/ 
-gulp clean
-gulp django
-cd ../../ 
-python manage.py migrate
-python manage.py collectstatic --no-input --clear
-./create_super_user
+# Migrate database (from within Heroku environment(!) - this will use DATABASE_URL from .env)
+heroku local:run python manage.py migrate
+# Create Admin User (username: admin, password: architizer)
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '', 'architizer')" | heroku local:run python manage.py shell
+
+# Load fixtures
+heroku local:run python manage.py loaddata fixtures.json

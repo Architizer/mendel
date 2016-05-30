@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Create Admin User (username: admin, password: architizer)
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '', 'architizer')" | python manage.py shell
+
+# Load fixtures
+python manage.py loaddata fixtures.json

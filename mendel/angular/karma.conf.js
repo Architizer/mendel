@@ -50,7 +50,7 @@ module.exports = function(config) {
 
     ngHtml2JsPreprocessor: {
       stripPrefix: conf.paths.src + '/',
-      moduleName: 'static'
+      moduleName: 'mendel'
     },
 
     logLevel: 'WARN',

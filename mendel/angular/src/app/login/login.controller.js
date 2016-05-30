@@ -47,7 +47,9 @@
         $rootScope.$broadcast(AUTH_EVENTS.loginFailure);
 
         // Show Error Toast
-        return toastr.error(JSON.stringify(error));
+        for (var i in error.data) {
+          toastr.error(error.data[i][0], 'Login Error');
+        }
       }
     }
 

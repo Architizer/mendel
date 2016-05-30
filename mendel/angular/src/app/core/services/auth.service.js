@@ -6,7 +6,7 @@
     .factory('AuthService', AuthService);
 
     /** @ngInject */
-    function AuthService ($rootScope, $http, $httpParamSerializerJQLike, $localStorage, AUTH_EVENTS, apiHost, Session) {
+    function AuthService ($rootScope, $http, $httpParamSerializerJQLike, $localStorage, AUTH_EVENTS, apiHost, Session, toastr) {
 
       return {
         login: login,
@@ -107,6 +107,11 @@
           // Broadcast Event
           $rootScope.$broadcast(AUTH_EVENTS.getCurrentUserFailed);
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+
+          // Show Error Toast
+          for (var i in error.data) {
+            toastr.error(error.data[i][0], 'Login Error');
+          }
 
           return null;
         }

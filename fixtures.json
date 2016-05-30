@@ -1,0 +1,366 @@
+[
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "auth",
+      "model": "user"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "sites",
+      "model": "site"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "mendel",
+      "model": "keyword"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "mendel",
+      "model": "category"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "mendel",
+      "model": "document"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+      "app_label": "mendel",
+      "model": "context"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+      "app_label": "mendel",
+      "model": "review"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+      "app_label": "account",
+      "model": "emailaddress"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+      "app_label": "account",
+      "model": "emailconfirmation"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+      "app_label": "socialaccount",
+      "model": "socialapp"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 16,
+    "fields": {
+      "app_label": "socialaccount",
+      "model": "socialaccount"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 17,
+    "fields": {
+      "app_label": "socialaccount",
+      "model": "socialtoken"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 18,
+    "fields": {
+      "app_label": "corsheaders",
+      "model": "corsmodel"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 19,
+    "fields": {
+      "app_label": "authtoken",
+      "model": "token"
+    }
+  },
+  {
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+      "domain": "example.com",
+      "name": "example.com"
+    }
+  },
+  {
+    "model": "mendel.keyword",
+    "pk": 1,
+    "fields": {
+      "name": "Europe",
+      "created": "2016-05-30T13:45:14.472Z",
+      "modified": "2016-05-30T13:45:14.472Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 1,
+    "fields": {
+      "name": "Aesthetic Concepts",
+      "created": "2016-05-30T13:43:38.494Z",
+      "modified": "2016-05-30T13:43:38.494Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 2,
+    "fields": {
+      "name": "Architect Name",
+      "created": "2016-05-30T13:43:45.235Z",
+      "modified": "2016-05-30T13:43:45.235Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 3,
+    "fields": {
+      "name": "Architectural Element",
+      "created": "2016-05-30T13:43:50.404Z",
+      "modified": "2016-05-30T13:43:50.404Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 4,
+    "fields": {
+      "name": "Architectural Style",
+      "created": "2016-05-30T13:43:58.134Z",
+      "modified": "2016-05-30T13:43:58.134Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 5,
+    "fields": {
+      "name": "Building Type",
+      "created": "2016-05-30T13:44:03.741Z",
+      "modified": "2016-05-30T13:44:03.742Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 6,
+    "fields": {
+      "name": "City",
+      "created": "2016-05-30T13:44:07.366Z",
+      "modified": "2016-05-30T13:44:07.366Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 7,
+    "fields": {
+      "name": "Color",
+      "created": "2016-05-30T13:44:10.741Z",
+      "modified": "2016-05-30T13:44:10.741Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 8,
+    "fields": {
+      "name": "Continent",
+      "created": "2016-05-30T13:44:14.591Z",
+      "modified": "2016-05-30T13:44:14.591Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 9,
+    "fields": {
+      "name": "Country",
+      "created": "2016-05-30T13:44:18.069Z",
+      "modified": "2016-05-30T13:44:18.069Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 10,
+    "fields": {
+      "name": "Finish",
+      "created": "2016-05-30T13:44:22.782Z",
+      "modified": "2016-05-30T13:44:22.782Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 11,
+    "fields": {
+      "name": "Firm Name",
+      "created": "2016-05-30T13:44:26.197Z",
+      "modified": "2016-05-30T13:44:26.197Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 12,
+    "fields": {
+      "name": "Manufacturer Name",
+      "created": "2016-05-30T13:44:31.911Z",
+      "modified": "2016-05-30T13:44:31.911Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 13,
+    "fields": {
+      "name": "Material",
+      "created": "2016-05-30T13:44:35.693Z",
+      "modified": "2016-05-30T13:44:35.694Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 14,
+    "fields": {
+      "name": "Performance Concepts",
+      "created": "2016-05-30T13:44:41.180Z",
+      "modified": "2016-05-30T13:44:41.180Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 15,
+    "fields": {
+      "name": "Price Concepts",
+      "created": "2016-05-30T13:44:44.981Z",
+      "modified": "2016-05-30T13:44:44.981Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 16,
+    "fields": {
+      "name": "Product Type",
+      "created": "2016-05-30T13:44:48.758Z",
+      "modified": "2016-05-30T13:44:48.758Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 17,
+    "fields": {
+      "name": "Room\/Space Type",
+      "created": "2016-05-30T13:44:52.608Z",
+      "modified": "2016-05-30T13:44:52.608Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 18,
+    "fields": {
+      "name": "State",
+      "created": "2016-05-30T13:44:56.151Z",
+      "modified": "2016-05-30T13:44:56.151Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 19,
+    "fields": {
+      "name": "Unit",
+      "created": "2016-05-30T13:44:59.423Z",
+      "modified": "2016-05-30T13:44:59.423Z"
+    }
+  },
+  {
+    "model": "mendel.document",
+    "pk": 1,
+    "fields": {
+      "of_type": "TXT",
+      "title": "Sample Document",
+      "description": "This is a sample document,",
+      "created": "2016-05-30T13:45:48.494Z",
+      "modified": "2016-05-30T13:45:48.494Z"
+    }
+  },
+  {
+    "model": "mendel.context",
+    "pk": 1,
+    "fields": {
+      "document": 1,
+      "keyword": 1,
+      "position_from": 33,
+      "position_to": 39,
+      "text": "the westernmost part of Eurasia. Europe is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the",
+      "created": "2016-05-30T13:48:06.391Z",
+      "modified": "2016-05-30T13:48:06.391Z"
+    }
+  }
+]

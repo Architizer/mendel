@@ -22,12 +22,12 @@ $ git clone git@github.com:Architizer/mendel.git
 $ cd mendel
 ```
 
-Next, run our setup script and create a super user:
+Next, run our setup script:
 
 ```sh
 $ ./bin/setup_local
-$ python manage.py createsuperuser
 ```
+(A super user is automatically created with the username **admin** and the password **architizer**)
 
 Finally, start the development API server:
 
@@ -41,7 +41,7 @@ On Windows:
 $ heroku local -f Procfile.windows
 ```
 
-The Mendel API should now be running on [http://localhost:5000/api/](http://localhost:5000/api/).
+The Mendel API should now be running on <http://localhost:5000/api/>.
 
 ### Front End
 
@@ -61,22 +61,23 @@ This will open the front end app in a browser using [BrowserSync](https://www.br
 
 ## Deploying to Heroku
 
-To deploy to a new Heroku instance, run the following:
+**Use the Deploy button:**
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+Or, run the commands by hand:
 
 ```sh
+# 1. Run our Heroku setup script
 $ ./bin/heroku_create
+
+# 2. Push repo to Heroku
 $ git push heroku master
-```
 
-To create an initial admin user, run the following:
-
-```sh
+# 3. Create an initial admin user
 $ heroku run python manage.py createsuperuser
-```
 
-Finally, to open your new Heroku app in a browser, run the following:
-
-```sh
+# 4. Open the app in a browser
 $ heroku open
 ```
 

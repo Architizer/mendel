@@ -1,7 +1,27 @@
 {
   "name": "Architizer Mendel",
-  "description": "Mendel is a tool for tagging keywords from sets of data.",
-  "image": "heroku/python",
+  "description": "A tool for tagging keywords from sets of data.",
   "repository": "https://github.com/Architizer/mendel",
-  "addons": [ "heroku-postgresql" ]
+  "scripts": {
+      "postdeploy": "./bin/heroku_post_deploy"
+  },
+  "addons": [ "heroku-postgresql" ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "DISABLE_COLLECTSTATIC": {
+      "description": "Disable Django's `collectstatic` from running automatically in post-deploy.",
+      "value": "1"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python"
+    }
+  ]
 }

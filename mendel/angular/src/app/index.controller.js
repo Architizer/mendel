@@ -6,21 +6,15 @@
     .controller('IndexController', IndexController);
 
   /** @ngInject */
-  function IndexController($rootScope, AuthService) {
+  function IndexController($scope, $state, AUTH_EVENTS) {
     var vm = this;
 
-    /*
-    IndexController is used for keeping track of authentication 
-    state and other app-wide information.
-    */
+    // Set up watchers for authentication issues
+    $scope.$on(AUTH_EVENTS.notAuthenticated, redirectToLogin);
 
-    vm.currentUser = null;
+    function redirectToLogin () {
 
-    vm.isAuthenticated = AuthService.isAuthenticated;
-
-    vm.currentUserWatch = $rootScope.$on('AUTH_EVENTS.loginSuccess', function setCurrentUser (user) {
-      vm.currentUser = user;
-      console.info('current user:', user);
-    });
+      $state.go('login');
+    }
   }
 })();

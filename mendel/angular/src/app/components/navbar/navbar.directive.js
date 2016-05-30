@@ -19,7 +19,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController ($scope, AuthService) {
+    function NavbarController ($rootScope, $scope, $state, AuthService, AUTH_EVENTS, Session, toastr) {
       var vm = this;
 
       vm.user = {};
@@ -32,7 +32,28 @@
       angular.element('nav').foundation();
 
       function navbarLogout () {
-        AuthService.logout();
+        AuthService.logout()
+        .then(logoutSuccess)
+        .catch(logoutError);
+
+        function logoutSuccess (data) {
+
+          // Destroy Session
+          Session.destroy();
+
+          // Broadcast Event
+          $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+
+          // Show Toast and Redirect
+          toastr.info('Logged Out');
+          $state.go('login');
+        }
+
+        function logoutError (error) {
+
+          // Show Error Toast
+          toastr.error(JSON.stringify(error));
+        }
       }
 
       function updateNavbarUser () {

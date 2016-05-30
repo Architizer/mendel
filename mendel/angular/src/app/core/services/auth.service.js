@@ -6,7 +6,7 @@
     .factory('AuthService', AuthService);
 
     /** @ngInject */
-    function AuthService ($rootScope, $http, $httpParamSerializerJQLike, $state, $localStorage, AUTH_EVENTS, apiHost, Session, toastr) {
+    function AuthService ($rootScope, $http, $httpParamSerializerJQLike, $localStorage, AUTH_EVENTS, apiHost, Session) {
 
       return {
         login: login,
@@ -27,38 +27,7 @@
           url: apiHost + '/login/',
           data: $httpParamSerializerJQLike(credentials),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
-        .then(loginSuccess)
-        .catch(loginError);
-
-
-        function loginSuccess (data) {
-
-          // Deserialize the return:
-          var key = data.data.key;
-          var user = data.data.user;
-
-          // Create Session
-          Session.create(key, user);
-
-          // Broadcast event
-          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-
-          // Show Success Toast and Redirect
-          toastr.success('Logged In');
-          $state.go('main');
-
-          return user;
-        }
-
-        function loginError (error) {
-
-          // Broadcast event
-          $rootScope.$broadcast(AUTH_EVENTS.loginFailure);
-
-          // Show Error Toast
-          toastr.error(JSON.stringify(error));
-        }
+        });
       }
 
       function logout () {
@@ -73,28 +42,7 @@
           url: apiHost + '/logout/',
           data: $httpParamSerializerJQLike(payload),
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
-        .then(logoutSuccess)
-        .catch(logoutError);
-
-        function logoutSuccess (data) {
-
-          // Destroy Session
-          Session.destroy();
-
-          // Broadcast Event
-          $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-
-          // Show Toast and Redirect
-          toastr.info('Logged Out');
-          $state.go('login');
-        }
-
-        function logoutError (error) {
-
-          // Show Error Toast
-          toastr.error(JSON.stringify(error));
-        }
+        });
       }
 
       function getCurrentUser () {
@@ -159,9 +107,6 @@
           // Broadcast Event
           $rootScope.$broadcast(AUTH_EVENTS.getCurrentUserFailed);
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-
-          // Show Error Toast
-          toastr.error(JSON.stringify(error));
 
           return null;
         }

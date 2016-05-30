@@ -108,11 +108,13 @@ for use with Django staticfiles
 
 gulp.task('django', ['build'], function () {
 
-  var djangoDebug = "<script>var DEBUG = '{{DEBUG}}'; DEBUG = (DEBUG === 'False' ? false : true); window.djangoEnv = { 'DEBUG': DEBUG };</script>";
-  var djangoCsrf = "<script>var csrf_token = '{{ csrf_token }}'; window.djangoEnv = { 'csrf_token': csrf_token };</script>";
+  var djangoEnv = "<script>window.djangoEnv = {};</script>";
+  var djangoDebug = "<script>var DEBUG = '{{DEBUG}}'; DEBUG = (DEBUG === 'False' ? false : true); window.djangoEnv['DEBUG'] = DEBUG;</script>";
+  var djangoCsrf = "<script>var csrf_token = '{{ csrf_token }}'; window.djangoEnv['csrf_token'] = csrf_token;</script>";
 
   return gulp.src(path.join(conf.paths.dist, '/index.html'))
     .pipe($.replace('<!-- replace:load staticfiles -->', "{% load staticfiles %}"))
+    .pipe($.replace('<!-- replace:set up window.djangoEnv -->', djangoEnv))
     .pipe($.replace('<!-- replace:expose Django environment variables -->', djangoDebug))
     .pipe($.replace('<!-- replace:expose Django CSRF token -->', djangoCsrf))
     .pipe($.replace('styles/app.css', "{% static 'styles/app.css' %}"))

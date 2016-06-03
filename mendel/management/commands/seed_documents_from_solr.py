@@ -7,7 +7,7 @@ from mendel.models import Document
 
 
 class Command(BaseCommand):
-    help = 'seed Document model from SOLR'
+    help = 'seed Document table from SOLR'
 
     def handle(self, *args, **options):
         solr = pysolr.Solr(SOLR_DOCUMENTS_URL, timeout=10)

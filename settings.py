@@ -39,11 +39,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # models
     'mendel',
+    # 3rd party apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'corsheaders',
+    'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',

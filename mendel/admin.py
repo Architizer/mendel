@@ -6,6 +6,7 @@ from mendel.models import Keyword, Category, Document, Context, Review
 
 
 class KeywordAdmin(ImportExportModelAdmin):
+    search_fields = ['name']
     list_display = ('id', 'name', 'created', 'modified')
     pass
 

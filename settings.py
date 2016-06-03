@@ -27,6 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') or 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') or False
 
+SOLR_DOCUMENTS_URL = os.environ.get('SOLR_DOCUMENTS_URL')
 
 # Application definition
 

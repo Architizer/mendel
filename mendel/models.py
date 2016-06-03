@@ -25,16 +25,17 @@ class Category(models.Model):
         return self.name
 
 class Document(models.Model):
-    
-    CSV = "csv"
-    TXT = "txt"
-    
+
+    PRODUCT_SEARCH = "S"
+    PRODUCT_RESPONSE = "R"
+
     DOCUMENT_TYPES = (
-        ("CSV", CSV),
-        ("TXT", TXT),
+        (PRODUCT_SEARCH, "Product Search"),
+        (PRODUCT_RESPONSE, "Product Response"),
     )
 
     of_type = models.CharField(max_length=10, choices=DOCUMENT_TYPES)
+    architizer_id = models.IntegerField(null=True)
     title = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -56,10 +57,10 @@ class Context(models.Model):
         return self.text
 
 class Review(models.Model):
-    
+
     PENDING = "pending"
     APPROVED = "approved"
-    
+
     STATUS_TYPES = (
         ("pending", PENDING),
         ("approved", APPROVED),

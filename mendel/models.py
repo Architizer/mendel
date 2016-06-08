@@ -55,6 +55,19 @@ class Context(models.Model):
     def __unicode__(self):
         return self.text
 
+    def next_context_id(self):
+        try:
+            return(Context.objects.get(id=self.id+1).id)
+        except:
+            return ""
+
+    def prev_context_id(self):
+        try:
+            return(Context.objects.get(id=self.id-1).id)
+        except:
+            return ""
+
+
 class Review(models.Model):
     
     PENDING = "pending"

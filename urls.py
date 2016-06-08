@@ -36,7 +36,7 @@ class ContextSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Context
-        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword', 'next_context_id', 'prev_context_id')
+        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword', 'next_context_id', 'prev_context_id', 'review')
         depth = 1
 
 class ContextViewSet(viewsets.ModelViewSet):

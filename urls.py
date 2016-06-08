@@ -36,7 +36,7 @@ class ContextSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Context
-        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword', 'next_context_id', 'prev_context_id')
+        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword', 'next_context_id', 'prev_context_id', 'reviews')
         depth = 1
 
 class ContextViewSet(viewsets.ModelViewSet):
@@ -72,6 +72,7 @@ class UserSerializer(serializers.ModelSerializer):
             return Review.objects.filter(user=user.id).latest('created').context.id
         except:
             return Context.objects.first().id
+
 
     class Meta:
         model = User

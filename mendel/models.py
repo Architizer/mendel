@@ -59,13 +59,13 @@ class Context(models.Model):
         try:
             return(Context.objects.get(id=self.id+1).id)
         except:
-            return ""
+            return None
 
     def prev_context_id(self):
         try:
             return(Context.objects.get(id=self.id-1).id)
         except:
-            return ""
+            return None
 
 
 class Review(models.Model):
@@ -78,7 +78,7 @@ class Review(models.Model):
         ("approved", APPROVED),
     )
 
-    context = models.ForeignKey(Context)
+    context = models.ForeignKey(Context, related_name="reviews")
     keyword = models.ForeignKey(Keyword)
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)

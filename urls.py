@@ -36,7 +36,7 @@ class ContextSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Context
-        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword', 'next_context_id', 'prev_context_id', 'review')
+        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword', 'next_context_id', 'prev_context_id', 'reviews')
         depth = 1
 
 class ContextViewSet(viewsets.ModelViewSet):
@@ -65,17 +65,17 @@ class ReviewViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
 class UserSerializer(serializers.ModelSerializer):
-    last_review_id = serializers.SerializerMethodField('return_last_review_id')
+    last_context_id = serializers.SerializerMethodField('return_last_context_id')
 
-    def return_last_review_id(self, user):
+    def return_last_context_id(self, user):
         try:
-            return Review.objects.filter(user=user.id).latest('created').id
+            return Review.objects.filter(user=user.id).latest('created').context.id
         except:
             return ""
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'is_staff', 'last_review_id')
+        fields = ('id', 'username', 'is_staff', 'last_context_id')
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

@@ -78,7 +78,7 @@ class Review(models.Model):
         ("approved", APPROVED),
     )
 
-    context = models.ForeignKey(Context, related_name="review")
+    context = models.ForeignKey(Context, related_name="reviews")
     keyword = models.ForeignKey(Keyword)
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)

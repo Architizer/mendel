@@ -71,7 +71,7 @@ class UserSerializer(serializers.ModelSerializer):
         try:
             return Review.objects.filter(user=user.id).latest('created').context.id
         except:
-            return ""
+            return None
 
     class Meta:
         model = User

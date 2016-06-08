@@ -59,13 +59,13 @@ class Context(models.Model):
         try:
             return(Context.objects.get(id=self.id+1).id)
         except:
-            return ""
+            return None
 
     def prev_context_id(self):
         try:
             return(Context.objects.get(id=self.id-1).id)
         except:
-            return ""
+            return None
 
 
 class Review(models.Model):

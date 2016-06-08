@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, AuthService, Category, Context, Review, Session, toastr) {
+  function MainController($q, $scope, AuthService, Category, Context, Review, Session, toastr) {
     var vm = this;
 
     vm.getContext = getContext;
@@ -93,12 +93,25 @@
 
       var _nextContextId = vm.context.next_context_id;
 
-      if (_nextContextId) {
+      submitReviews()
+      .then(submitReviewsSuccess)
+      .catch(submitReviewsError);
 
-        vm.getContext(_nextContextId);
+      function submitReviewsSuccess (data) {
+
+        // Show Success Toast
+        toastr.success('Submitted reviews for categories: ' + data, 'Success');
+
+        if (_nextContextId) {
+
+          vm.getContext(_nextContextId);
+        }
       }
 
-      // submitReviews();
+      function submitReviewsError (error) {
+
+        toastr.error('Could not submit reviews for categories: ' + error, 'Error');
+      }
     }
 
     // Get Previous Context
@@ -106,16 +119,34 @@
 
       var _prevContextId = vm.context.prev_context_id;
 
+      // Deselect all categories
+      deselectAllCategories();
+
       if (_prevContextId) {
 
         vm.getContext(_prevContextId);
       }
     }
 
+    function deselectAllCategories () {
+
+      angular.forEach(vm.categories, function (category) {
+        category.selected = false;
+      });
+    }
+
     // Submit Reviews
+
     function submitReviews () {
 
-      angular.forEach(vm.categories, function(category) {
+      // Set up deferred object to return
+      var deferred = $q.defer();
+
+      // Set up promise array
+      var promises = [];
+
+      // Queue a promise for each selected category
+      angular.forEach(vm.categories, function (category) {
 
         if (category.selected) {
 
@@ -126,31 +157,84 @@
             user: Session.user.id
           };
 
-          Review.save(r)
+          var promise = Review.save(r)
           .$promise
-          .then(submitReviewSuccess)
-          .catch(submitReviewError);
+          .then(saveReviewSuccess)
+          .catch(saveReviewError);
 
-        }
-
-        function submitReviewSuccess (review) {
-
-          var successMessage = 'Category <strong>' + review.category + '</strong> added to Keyword <strong>' + review.keyword + '</strong>';
-
-          // Show Toastr Success
-          toastr.success(successMessage, 'Category Added');
-          // Unselect the category
+          // Deselect the category
           category.selected = false;
+
+          // Push promise into an array
+          promises.push(promise);
         }
 
-        function submitReviewError (error) {
-
-          // Show Error Toast
-          for (var i in error.data) {
-            toastr.error(error.data[i][0], 'Error', {timeOut: 5000});
-          }
-        }
       });
+
+      function saveReviewSuccess (data) {
+        return data;
+      }
+
+      function saveReviewError (error) {
+        return error;
+      }
+
+      // Run the queue of promises
+      $q.all(promises)
+      .then(promiseQueueSuccess)
+      .catch(promiseQueueError);
+
+      function promiseQueueSuccess (items) {
+
+        var successItems = [];
+        var errorItems = [];
+
+        angular.forEach(items, function (item) {
+
+          if (item instanceof Review) {
+            successItems.push(item);
+          }
+          else {
+            errorItems.push(item);
+          }
+        });
+
+        if (errorItems.length) {
+          var errorCategoryIds = [];
+
+          // Get Category IDs for each success:
+          angular.forEach(errorItems, function (errorItem) {
+            errorCategoryIds.push(errorItem.config.data.category);
+          });
+
+          errorCategoryIds = errorCategoryIds.join(', ');
+
+          deferred.reject(errorCategoryIds);
+        }
+        else {
+          var successCategoryIds = [];
+
+          // Get Category IDs for each success:
+          angular.forEach(successItems, function (successItem) {
+            successCategoryIds.push(successItem.category);
+          });
+
+          successCategoryIds = successCategoryIds.join(', ');
+
+          deferred.resolve(successCategoryIds);
+        }
+
+      }
+
+      function promiseQueueError (error) {
+        console.error('promiseQueueError:', error);
+
+        deferred.reject('Error Submitting Reviews');
+      }
+
+      return deferred.promise;
     }
+
+
   }
 })();

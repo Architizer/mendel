@@ -12,6 +12,7 @@
     vm.getContext = getContext;
     vm.getCategories = getCategories;
     vm.getNextContext = getNextContext;
+    vm.getPrevContext = getPrevContext;
 
     // Initialize
     init();
@@ -90,7 +91,25 @@
     // Get Next Context
     function getNextContext () {
 
-      submitReviews();
+      var _nextContextId = vm.context.next_context_id;
+
+      if (_nextContextId) {
+
+        vm.getContext(_nextContextId);
+      }
+
+      // submitReviews();
+    }
+
+    // Get Previous Context
+    function getPrevContext () {
+
+      var _prevContextId = vm.context.prev_context_id;
+
+      if (_prevContextId) {
+
+        vm.getContext(_prevContextId);
+      }
     }
 
     // Submit Reviews

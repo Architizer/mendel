@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(Category, Context, Review, Session, toastr) {
+  function MainController($scope, AuthService, Category, Context, Review, Session, toastr) {
     var vm = this;
 
     vm.getContext = getContext;
@@ -14,15 +14,34 @@
     vm.getNextContext = getNextContext;
 
     // Initialize
-    vm.getContext();
-    vm.getCategories();
+    init();
+
+    function init () {
+
+      // Wait for Session to be created
+      var killSessionWatcher = $scope.$watch(AuthService.isAuthenticated, function () {
+
+        if (Session.user) {
+
+          // Get the last Context the user reviewed
+          vm.getContext(Session.user.last_context_id);
+
+          // Get Categories
+          vm.getCategories();
+
+          // Kill this watch when we have a Session
+          killSessionWatcher();
+        }
+      });
+    }
 
 
+    // Controller Functions
 
     // Get Context
-    function getContext () {
+    function getContext (id) {
 
-      Context.get({id: 1})
+      Context.get({id: id})
       .$promise
       .then(getContextSuccess)
       .catch(getContextError);

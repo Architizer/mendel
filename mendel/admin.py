@@ -17,6 +17,7 @@ class CategoryAdmin(ImportExportModelAdmin):
 
 
 class DocumentAdmin(ImportExportModelAdmin):
+    search_fields = ['title', 'description']
     list_display = ('id', 'title', 'description', 'created', 'modified')
     pass
 

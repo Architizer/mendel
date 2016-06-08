@@ -56,6 +56,19 @@ class Context(models.Model):
     def __unicode__(self):
         return self.text
 
+    def next_context_id(self):
+        try:
+            return(Context.objects.get(id=self.id+1).id)
+        except:
+            return None
+
+    def prev_context_id(self):
+        try:
+            return(Context.objects.get(id=self.id-1).id)
+        except:
+            return None
+
+
 class Review(models.Model):
 
     PENDING = "pending"
@@ -66,7 +79,7 @@ class Review(models.Model):
         ("approved", APPROVED),
     )
 
-    context = models.ForeignKey(Context)
+    context = models.ForeignKey(Context, related_name="reviews")
     keyword = models.ForeignKey(Keyword)
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)

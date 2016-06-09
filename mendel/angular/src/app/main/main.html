@@ -95,7 +95,7 @@
             <div class="category-selector column" ng-repeat="category in main.categories">
               <div class="tile">
                 <input ng-model="category.selected" id="category-tile-{{ category.id }}" type="checkbox" name="category-tile-{{ category.id }}">
-                <label for="category-tile-{{ category.id }}">{{ category.name }}</label>
+                <label title="{{category.name}}" for="category-tile-{{ category.id }}">{{ category.name }}</label>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-<!-- replace:load staticfiles --> 
+<!-- replace:load staticfiles -->
 
 <!doctype html>
 <html ng-app="mendel">
@@ -29,17 +29,19 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
+
   <body ng-controller="AppController">
     <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
 
     <!-- Navigation -->
-    <div>
-      <am-navbar></am-navbar>
+    <div class="grid-frame vertical">
+      <div class="grid-block shrink">
+        <am-navbar class="grid-content collapse noscroll"></am-navbar>
+      </div>
+      <div class="grid-block vertical align-center" ui-view></div>
     </div>
-
-    <div ui-view></div>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
@@ -58,4 +60,6 @@
     <!-- endbuild -->
 
   </body>
+
 </html>
+<!--  -->

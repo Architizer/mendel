@@ -49,9 +49,9 @@
       </div>
 
       <!-- Definition Panel -->
-      <div class="callout small-12 show-for-large columns">
+      <div ng-if="main.context.keyword.definition" class="callout small-12 show-for-large columns">
         <h3>Definition</h3>
-        <p>{{ main.definition }}</p>
+        <p>{{ main.context.keyword.definition}}</p>
       </div>
 
     </div>

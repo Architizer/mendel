@@ -15,9 +15,12 @@ class Keyword(models.Model):
         return self.name
 
     def definition(self):
-        client = swagger.ApiClient(settings.WORDNIK_API_KEY, settings.WORDNIK_API_URL)
-        wordApi = WordApi.WordApi(client)
-        return wordApi.getDefinitions(self.name)[0].text
+        try:
+            client = swagger.ApiClient(settings.WORDNIK_API_KEY, settings.WORDNIK_API_URL)
+            wordApi = WordApi.WordApi(client)
+            return wordApi.getDefinitions(self.name)[0].text
+        except:
+            return ""
 
 
 class Category(models.Model):

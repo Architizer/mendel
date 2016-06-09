@@ -171,5 +171,6 @@ REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'urls.UserSerializer',
 }
 
-WORDNIK_API_KEY = os.environ.get('WORDNIK_API_KEY')
-WORDNIK_API_URL = os.environ.get('WORDNIK_API_URL')
+# you'll need to register for a Wordnik api key for definitions to work on the keyword
+WORDNIK_API_KEY = os.environ.get('WORDNIK_API_KEY','')
+WORDNIK_API_URL = 'http://api.wordnik.com/v4'

@@ -88,7 +88,7 @@
             <div class="category-selector column" ng-repeat="category in main.categories">
               <div class="tile">
                 <input ng-model="category.selected" id="category-tile-{{ category.id }}" type="checkbox" name="category-tile-{{ category.id }}">
-                <label for="category-tile-{{ category.id }}">{{ category.name }}</label>
+                <label ng-init="main.helpText='Hover a category to see its definition.'" ng-mouseover="main.helpText=category.description" ng-mouseout="main.helpText='Hover a category to see its definition.'" for="category-tile-{{ category.id }}">{{ category.name }}</label>
               </div>
             </div>
           </div>
@@ -106,30 +106,24 @@
         </div>
       </div>
       <div class="row expanded">
-        <div class="columns medium-6 align-left">
+        <div class="columns medium-12 align-left">
           <h3>Category</h3>
-          <p>Hover a category to see its definition &amp; some examples.</p>
+          <p>{{ main.helpText }}</p>
+          <!-- <p>Hover a category to see its definition &amp; some examples.</p> -->
           <!-- IF CATEGORY HOVER'D -->
           <!-- <p>A continent is one of several very large landmasses on Earth. They are generally identified by convention rather than any strict criteria.</p> -->
         </div>
-        <div class="columns medium-6">
-          <h3>Examples</h3>
+        <!-- Examples -->
+        <!-- <div class="columns medium-6">
+          <h3>Examples</h3> -->
           <!-- IF CATEGORY HOVER'D -->
           <!-- <div class="row medium-up-3">
+          Repeat these:
             <div class="column">
               <p class="no-margin">north america</p>
             </div>
-            <div class="column">
-              <p class="no-margin">north america</p>
-            </div>
-            <div class="column">
-              <p class="no-margin">north america</p>
-            </div>
-            <div class="column">
-              <p class="no-margin">north america</p>
-            </div>
-          </div> -->
-        </div>
+          </div>
+        </div>-->
       </div>
     </div>
   </div>

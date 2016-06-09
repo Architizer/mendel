@@ -24,7 +24,7 @@ class KeyViewSet(viewsets.ModelViewSet):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'description')
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

@@ -14,7 +14,7 @@ from rest_framework import permissions, routers, serializers, viewsets
 class KeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Keyword
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'definition')
 
 class KeyViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()

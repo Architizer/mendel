@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'rest_auth',
     'import_export',
+    'wordnik',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -169,3 +170,6 @@ REST_AUTH_SERIALIZERS = {
     'TOKEN_SERIALIZER': 'urls.TokenSerializer',
     'USER_DETAILS_SERIALIZER': 'urls.UserSerializer',
 }
+
+WORDNIK_API_KEY = os.environ.get('WORDNIK_API_KEY')
+WORDNIK_API_URL = os.environ.get('WORDNIK_API_URL')

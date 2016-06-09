@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-
+from wordnik import *
+import settings
 
 
 class Keyword(models.Model):
@@ -12,6 +13,12 @@ class Keyword(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def definition(self):
+        client = swagger.ApiClient(settings.WORDNIK_API_KEY, settings.WORDNIK_API_URL)
+        wordApi = WordApi.WordApi(client)
+        return wordApi.getDefinitions(self.name)[0].text
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200, unique=True)

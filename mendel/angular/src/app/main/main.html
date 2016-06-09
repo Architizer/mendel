@@ -31,7 +31,16 @@
 
       <!-- Left Column Content -->
       <div class="row">
-        <div class="small-12 columns subjects">
+
+      <!-- Empty State -->
+        <div class="small-12 columns empty-state" ng-show="!main.context.keyword">
+          <div class="callout">
+            <p class="text-center">No Context</p>
+          </div>
+        </div>
+
+        <!-- With Context -->
+        <div class="small-12 columns subjects" ng-show="main.context.keyword">
 
           <!-- Subject Header -->
           <h2 class="subheader">Subject</h2>
@@ -64,7 +73,16 @@
     </div>
 
     <!-- Right Column -->
-    <div class="large-8 columns categories-column">
+
+    <!-- Empty State -->
+    <div class="large-8 columns categories-column empty-state show-for-large" ng-show="!main.context.keyword">
+      <div class="callout">
+        <p class="text-center">No Context</p>
+      </div>
+    </div>
+
+    <!-- With Context -->
+    <div class="large-8 columns categories-column" ng-show="main.context.keyword">
       <div class="row">
 
         <div class="large-12 columns categories-system-actions">

@@ -93,6 +93,10 @@
     margin-top: 2.5rem;
   }
 
+  .empty-state {
+    margin-top: 2.5rem;
+  }
+
   div.category-selector {
 
     @include breakpoint(small) {

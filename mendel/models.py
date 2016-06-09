@@ -20,7 +20,7 @@ class Keyword(models.Model):
             wordApi = WordApi.WordApi(client)
             return wordApi.getDefinitions(self.name)[0].text
         except:
-            return ""
+            return None
 
 
 class Category(models.Model):

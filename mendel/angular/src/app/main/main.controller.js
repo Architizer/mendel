@@ -110,9 +110,12 @@
 
       var _nextContextId = vm.context.next_context_id;
 
-      submitReviews()
-      .then(submitReviewsSuccess)
-      .catch(submitReviewsError);
+      if (vm.context.keyword) {
+
+        submitReviews()
+        .then(submitReviewsSuccess)
+        .catch(submitReviewsError);
+      }
 
       function submitReviewsSuccess (successCategoryIds) {
 
@@ -133,6 +136,15 @@
           deselectAllCategories();
 
           getContext(_nextContextId);
+        }
+        else {
+
+          var _prevContextId = angular.copy(vm.context.id);
+
+          // Empty Context
+          vm.context = {};
+          vm.keyword = null
+          vm.context.prev_context_id = _prevContextId;
         }
       }
 

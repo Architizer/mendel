@@ -100,19 +100,26 @@
     <div class="grid-block shrink help-area wrap">
       <div class="row small-12">
         <div class="columns text-center hide-help-area">
-          <a class="no-margin"><i class="material-icons">keyboard_arrow_down</i>  Hide Help</a>
-          <!-- IF CATEGORY HOVER'D -->
-          <!-- <a class="no-margin"><i class="material-icons">keyboard_arrow_up</i>  Show Help</a> -->
+          <!-- If Help Area is visible, show "Hide Help" label -->
+          <a class="no-margin" ng-show="!main.helpAreaHidden" ng-click="main.helpAreaHidden = true"><i class="material-icons">keyboard_arrow_down</i>  Hide Help</a>
+          <!-- If Help Area is hidden, show "Show Help" label -->
+          <a class="no-margin" ng-show="main.helpAreaHidden" ng-click="main.helpAreaHidden = false"><i class="material-icons">keyboard_arrow_up</i>  Show Help</a>
         </div>
       </div>
-      <div class="row expanded">
+      <div ng-hide="main.helpAreaHidden" class="row expanded">
+
+        <!-- Description -->
         <div class="columns medium-12 align-left">
           <h3>Category</h3>
-          <p>{{ main.helpText ? main.helpText : "No help text for " + main.categoryName + " yet!" }}</p>
-          <!-- <p>Hover a category to see its definition &amp; some examples.</p> -->
-          <!-- IF CATEGORY HOVER'D -->
-          <!-- <p>A continent is one of several very large landmasses on Earth. They are generally identified by convention rather than any strict criteria.</p> -->
+          <!-- Heading: currently-hovered category name -->
+          <h2 class="subheader">{{ main.categoryName }}</h2>
+          <!-- If Category has a description, show it -->
+          <p ng-if="main.helpText">{{ main.helpText }}</p>
+          <!-- If Category has no description, show placeholder -->
+          <p ng-if="!main.helpText" class="subheader">No description for {{ main.categoryName }}</p>
+          <p></p>
         </div>
+
         <!-- Examples -->
         <!-- <div class="columns medium-6">
           <h3>Examples</h3> -->

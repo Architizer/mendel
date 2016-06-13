@@ -2,7 +2,7 @@ import pysolr
 
 from django.core.management.base import BaseCommand, CommandError
 
-from settings import SOLR_DOCUMENTS_URL
+from settings import WEBSOLR_URL
 from mendel.models import Document
 
 
@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = 'seed Document table from SOLR'
 
     def handle(self, *args, **options):
-        solr = pysolr.Solr(SOLR_DOCUMENTS_URL, timeout=10)
+        solr = pysolr.Solr(WEBSOLR_URL, timeout=10)
         doc_count = solr.search('*:*').hits
         docs = solr.search(q='*:*', rows=doc_count)
 

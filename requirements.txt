@@ -3,14 +3,17 @@ dj-database-url==0.4.0
 Django==1.9.2
 django-allauth==0.25.2
 django-cors-headers==1.1.0
+django-extensions==1.6.1
 django-filter==0.13.0
 django-import-export==0.4.5
 django-rest-auth==0.7.0
 djangorestframework==3.3.3
 gunicorn==19.4.5
+ipython==4.2.0
 Markdown==2.6.6
 oauthlib==1.1.1
 psycopg2==2.6.1
+pysolr==3.5.0
 python-openid==2.2.5
 requests==2.9.1
 requests-oauthlib==0.6.1

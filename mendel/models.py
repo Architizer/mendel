@@ -45,8 +45,8 @@ class Document(models.Model):
         (PRODUCT_RESPONSE, "Product Response"),
     )
 
-    of_type = models.CharField(max_length=10, choices=DOCUMENT_TYPES)
-    architizer_id = models.IntegerField(null=True)
+    of_type = models.CharField(max_length=10, choices=DOCUMENT_TYPES, verbose_name="Type")
+    architizer_id = models.IntegerField(null=True, verbose_name="Architizer ID")
     title = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -81,6 +81,16 @@ $ heroku run python manage.py createsuperuser
 $ heroku open
 ```
 
+### Connecting to SOLR
+
+At Architizer, we connect Mendel to an internal Apache Solr instance which indexes data from our application and other sources. 
+
+You can configure Mendel to import contexts and documents from your own Solr instance by specifying the path to your Solr instance as the `WEBSOLR_URL` environment variable on Heroku.
+
+Heroku supports an add-on called [Websolr](https://devcenter.heroku.com/articles/websolr) for creating your own Solr instance.
+
+We have set up two (somewhat proprietary) management commands to import contexts and documents into Mendel. These commands are available in the `mendel/management/commands` folder for your reference if you wish to set up your own.
+
 ## References
 
 - [Python on Heroku](https://devcenter.heroku.com/categories/python)

@@ -16,7 +16,6 @@ test:
  post:
    - echo "No tests yet"
 
-
 deployment:
   elasticbeanstalk:
     branch: master

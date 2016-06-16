@@ -16,6 +16,10 @@ class KeywordSerializer(serializers.ModelSerializer):
         model = Keyword
         fields = ('id', 'name', 'definition')
 
+    def create(self, validated_data):
+        instance, _ = Keyword.objects.get_or_create(**validated_data)
+        return instance
+
 class KeyViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer

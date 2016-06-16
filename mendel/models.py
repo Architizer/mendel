@@ -14,6 +14,13 @@ class Keyword(models.Model):
     def __unicode__(self):
         return self.name
 
+    def clean(self):
+        self.name = self.name.capitalize()
+
+    def save(self, *args, **kwargs):
+            self.full_clean()
+            return super(Keyword, self).save(*args, **kwargs)
+
     def definition(self):
         try:
             client = swagger.ApiClient(settings.WORDNIK_API_KEY, settings.WORDNIK_API_URL)

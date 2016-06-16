@@ -18,8 +18,3 @@ test:
  post:
    - echo "No tests yet"
 
-deployment:
-  elasticbeanstalk:
-    branch: master
-    commands:
-      #- bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel

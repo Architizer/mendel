@@ -3,8 +3,9 @@ import os
 import sys
 
 if __name__ == "__main__":
-	
-	os.chdir('..')  # added so CircleCI can find the tests
+
+    if os.path.dirname(__file__) == "/home/ubuntu/mendel":
+        os.chdir('..')  # added so CircleCI can find the tests
     
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 

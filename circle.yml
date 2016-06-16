@@ -13,6 +13,8 @@ dependencies:
     - pip install awscli
 
 test:
+ override:
+   - echo "No tests yet"
  post:
    - echo "No tests yet"
 

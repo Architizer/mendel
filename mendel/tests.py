@@ -1,10 +1,9 @@
 from django.test import TestCase
-import os
-
-print os.path.dirname(__file__)
+import sys
+print(sys.path)
 
 class NoModelTests(TestCase):
-    print os.path.dirname(__file__)
+    print sys.path
     """ A placeholder test case.  """
     pass
 

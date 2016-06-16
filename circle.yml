@@ -11,6 +11,7 @@ general:
 dependencies:
   pre:
     - pip install awscli
+    - pip install awsebcli
 
 test:
  override:
@@ -18,3 +19,10 @@ test:
  post:
    - echo "No tests yet"
 
+
+deployment:
+  elasticbeanstalk:
+    branch: master
+    commands:
+      - bash -x deploy.sh
+      - eb deploy

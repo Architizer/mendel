@@ -1,0 +1,11 @@
+branch-defaults:
+  master:
+    environment: django-env
+    group_suffix: null
+global:
+  application_name: mendel
+  default_ec2_keyname: null
+  default_platform: python2.7
+  default_region: us-west-2
+  profile: null
+  sc: git

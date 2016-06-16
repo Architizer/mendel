@@ -22,4 +22,4 @@ deployment:
   elasticbeanstalk:
     branch: master
     commands:
-      - bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel
+      #- bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel

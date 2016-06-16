@@ -1,9 +1,9 @@
 branch-defaults:
   master:
-    environment: architizer-mendel-prod
+    environment: django-env
     group_suffix: null
 global:
-  application_name: architizer-mendel
+  application_name: architizer-mendel-prod
   default_ec2_keyname: null
   default_platform: python2.7
   default_region: us-west-2

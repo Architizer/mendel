@@ -54,7 +54,7 @@
         vm.context.previouslySelectedCategories = preselect();
 
         function preselect () {
-          var _prevCategories = []
+          var _prevCategories = [];
 
           // Load previously-selected categories
           angular.forEach(context.reviews, function(review){
@@ -143,7 +143,7 @@
 
           // Empty Context
           vm.context = {};
-          vm.keyword = null
+          vm.keyword = null;
           vm.context.prev_context_id = _prevContextId;
         }
       }

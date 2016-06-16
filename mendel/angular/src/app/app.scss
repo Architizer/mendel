@@ -40,6 +40,22 @@ $border-color: #f2f2f2;
   padding: 0.2em 0;
 }
 
+.callout,
+fieldset {
+  border: 1px solid $gunmetal;
+  box-shadow: 0 2px 4px 0 lighten($gunmetal, 15%);
+  border-radius: 2px;
+
+  &.with-bottom-margin {
+    margin-bottom: 1.5rem;
+  }
+
+  & a {
+    color: $light-gray;
+    text-decoration: underline;
+  }
+}
+
 .panel {
   margin-top: 50px;
 }

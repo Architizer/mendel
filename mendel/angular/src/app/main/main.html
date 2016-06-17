@@ -1,24 +1,27 @@
+<!-- Control Bar -->
 <div id="controlbar" class="grid-block shrink">
   <div class="row expanded">
-      <div class="column align-left shrink">
-        <a ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
-      </div>
-      <div class="column align-right expand text-right">
-        <a ng-href="#" class="not-universal"><i class="material-icons">delete</i>  Delete</a>
-        <a ng-href="#" class="not-universal"><i class="material-icons">help</i>  I don't know</a>
-        <a ng-click="main.getNextContext()">Next <i class="material-icons">arrow_forward</i></a>
+
+    <!-- Left Side -->
+    <div class="column align-left shrink">
+      <a ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
     </div>
+
+    <!-- Right Side -->
+    <div class="column align-right expand text-right">
+      <a ng-href="#" class="not-universal"><i class="material-icons">delete</i>  Delete</a>
+      <a ng-href="#" class="not-universal"><i class="material-icons">help</i>  I don't know</a>
+      <a ng-click="main.getNextContext()">Next <i class="material-icons">arrow_forward</i></a>
+    </div>
+
   </div>
 </div>
 
+<!-- Main -->
 <div id="main" class="grid-block expand">
-  <!-- Main -->
 
   <!-- Left Column -->
-
   <div class="grid-block large-4 medium-5 small-12">
-
-    <!-- Left Column Content -->
 
     <!-- Empty State -->
     <div class="grid-content subject-column empty-state align-center" ng-show="!main.context.keyword">
@@ -27,9 +30,9 @@
       </div>
     </div>
 
+    <!-- Nonempty -->
     <div class="grid-content subject-column" ng-show="main.context.keyword">
 
-    <!-- With Context -->
       <!-- Subject Header -->
       <h2 class="subheader">Subject</h2>
 
@@ -57,12 +60,12 @@
     </div>
   </div>
 
+
+
   <!-- Right Column -->
-
-  <!-- Empty State -->
-
   <div class="grid-block vertical expand" ng-show="!main.context.keyword">
 
+    <!-- Empty State -->
     <div class="grid-block">
       <div class="grid-content collapse categories-column empty-state">
       </div>
@@ -71,27 +74,26 @@
   </div>
 
   <!-- Nonempty -->
-
   <div class="grid-block vertical expand" ng-show="main.context.keyword">
 
     <!-- Categories -->
-
     <div class="grid-block">
       <div class="grid-content collapse categories-column">
         <div class="small-12 columns categories">
 
           <!-- Category Tiles -->
-
           <div class="row collapse small-up-2 medium-up-2 large-up-4">
+            <div ng-repeat="category in main.categories" class="category-selector column">
 
-            <!-- Main Categories -->
-            <div class="category-selector column" ng-repeat="category in main.categories">
+              <!-- Category Tile -->
               <div class="tile">
                 <input ng-model="category.selected" id="category-tile-{{ category.id }}" type="checkbox" name="category-tile-{{ category.id }}">
                 <label ng-init="main.helpText='Hover a category to see its definition.'" ng-mouseover="main.helpText=category.description; main.categoryName=category.name" for="category-tile-{{ category.id }}">{{ category.name }}</label>
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -100,12 +102,17 @@
     <div class="grid-block shrink help-area wrap">
       <div class="row small-12">
         <div class="columns text-center hide-help-area">
+
           <!-- If Help Area is visible, show "Hide Help" label -->
-          <a class="no-margin" ng-show="!main.helpAreaHidden" ng-click="main.helpAreaHidden = true"><i class="material-icons">keyboard_arrow_down</i>  Hide Help</a>
+          <a ng-show="!main.helpAreaHidden" ng-click="main.helpAreaHidden = true"><i class="material-icons">keyboard_arrow_down</i>  Hide Help</a>
+
           <!-- If Help Area is hidden, show "Show Help" label -->
-          <a class="no-margin" ng-show="main.helpAreaHidden" ng-click="main.helpAreaHidden = false"><i class="material-icons">keyboard_arrow_up</i>  Show Help</a>
+          <a ng-show="main.helpAreaHidden" ng-click="main.helpAreaHidden = false"><i class="material-icons">keyboard_arrow_up</i>  Show Help</a>
         </div>
+
       </div>
+
+      <!-- Help Area Panel -->
       <div ng-hide="main.helpAreaHidden" class="row expanded">
 
         <!-- Description -->
@@ -131,7 +138,9 @@
             </div>
           </div>
         </div>-->
+
       </div>
+
     </div>
   </div>
 </div>

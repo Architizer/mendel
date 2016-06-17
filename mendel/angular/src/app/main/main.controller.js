@@ -94,6 +94,25 @@
       function getCategoriesSuccess (categories) {
 
         vm.categories = categories;
+
+        // Set up special categories
+        vm.deleteCategory = null;
+        vm.idkCategory = null;
+
+        // Find special categories
+        angular.forEach(categories, function (category) {
+
+          // Find the "Delete" category
+          if (category.name === 'Delete') {
+            vm.deleteCategory = category;
+          }
+
+          // Find the "I don't know" category
+          if (category.name === 'I don\'t know') {
+            vm.idkCategory = category;
+          }
+
+        });
       }
 
       function getCategoriesError (error) {

@@ -99,45 +99,39 @@
     </div>
 
     <!-- Help Area -->
-    <div class="grid-block shrink help-area wrap">
+    <div class="grid-block shrink help-area wrap hide-for-small-only">
       <div class="row small-12">
-        <div class="columns text-center hide-help-area">
+        <div class="columns text-center hide-help-area" ng-click="main.helpAreaHidden = main.helpAreaHidden ? false : true">
 
           <!-- If Help Area is visible, show "Hide Help" label -->
-          <a ng-show="!main.helpAreaHidden" ng-click="main.helpAreaHidden = true"><i class="material-icons">keyboard_arrow_down</i>  Hide Help</a>
+          <a ng-show="!main.helpAreaHidden"><i class="material-icons">keyboard_arrow_down</i>  Hide Help</a>
 
           <!-- If Help Area is hidden, show "Show Help" label -->
-          <a ng-show="main.helpAreaHidden" ng-click="main.helpAreaHidden = false"><i class="material-icons">keyboard_arrow_up</i>  Show Help</a>
+          <a ng-show="main.helpAreaHidden"><i class="material-icons">keyboard_arrow_up</i>  Show Help</a>
         </div>
 
       </div>
 
       <!-- Help Area Panel -->
-      <div ng-hide="main.helpAreaHidden" class="row expanded">
+      <div ng-hide="main.helpAreaHidden" class="row expanded help-area-panel">
 
         <!-- Description -->
-        <div class="columns medium-12 align-left">
-          <h3>Category</h3>
+        <div class="columns medium-6 align-left">
           <!-- Heading: currently-hovered category name -->
-          <h2 class="subheader">{{ main.categoryName }}</h2>
           <!-- If Category has a description, show it -->
-          <p ng-if="main.helpText">{{ main.helpText }}</p>
+          <p><strong ng-if="main.categoryName">{{ main.categoryName }}<br /></strong>{{ main.helpText }}</p>
           <!-- If Category has no description, show placeholder -->
           <p ng-if="!main.helpText" class="subheader">No description for {{ main.categoryName }}</p>
           <p></p>
         </div>
 
         <!-- Examples -->
-        <!-- <div class="columns medium-6">
-          <h3>Examples</h3> -->
-          <!-- IF CATEGORY HOVER'D -->
-          <!-- <div class="row medium-up-3">
-          Repeat these:
-            <div class="column">
-              <p class="no-margin">north america</p>
-            </div>
+        <div class="columns medium-6">
+          <h3>Examples</h3>
+          <div class="row medium-up-2 large-up-3 examples">
+              <p ng-repeat="i in [1,2,3,4,5,6]" class="column">Example {{ i }}</p>
           </div>
-        </div>-->
+        </div>
 
       </div>
 

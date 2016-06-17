@@ -116,7 +116,9 @@
       <div ng-hide="main.helpAreaHidden" class="row expanded help-area-panel">
 
         <!-- Description -->
-        <div class="columns medium-6 align-left">
+        <!-- Line 120 when examples are ready -->
+        <!-- <div class="columns medium-6 align-left"> -->
+        <div class="columns medium-12 align-left">
           <!-- Heading: currently-hovered category name -->
           <!-- If Category has a description, show it -->
           <p><strong ng-if="main.categoryName">{{ main.categoryName }}<br /></strong>{{ main.helpText }}</p>
@@ -126,12 +128,12 @@
         </div>
 
         <!-- Examples -->
-        <div class="columns medium-6">
+        <!-- <div class="columns medium-6">
           <h3>Examples</h3>
           <div class="row medium-up-2 large-up-3 examples">
-              <p ng-repeat="i in [1,2,3,4,5,6]" class="column">Example {{ i }}</p>
+              <p ng-repeat="i in [1,2,3,4,5,6]" class="column">{{ i }}</p>
           </div>
-        </div>
+        </div> -->
 
       </div>
 

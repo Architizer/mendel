@@ -9,8 +9,8 @@
 
     <!-- Right Side -->
     <div class="column align-right expand text-right">
-      <a ng-href="#" class="not-universal"><i class="material-icons">delete</i>  Delete</a>
-      <a ng-href="#" class="not-universal"><i class="material-icons">help</i>  I don't know</a>
+      <a ng-if="main.deleteCategory" class="not-universal"><i class="material-icons">delete</i>  Delete</a>
+      <a ng-if="main.idkCategory" class="not-universal"><i class="material-icons">help</i>  I don't know</a>
       <a ng-click="main.getNextContext()">Next <i class="material-icons">arrow_forward</i></a>
     </div>
 

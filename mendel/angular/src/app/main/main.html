@@ -54,10 +54,23 @@
       <!-- Subject Header -->
       <h2 class="subheader">Subject</h2>
 
-      <!-- Word Panel -->
+      <!-- Keyword Panel -->
       <div class="callout small-12 columns with-bottom-margin">
-        <h1>{{ main.keyword.name }}</h1>
-        <p class="subheader"><a ng-href="#">Edit keyword</a></p>
+
+        <!-- Keyword -->
+        <h1 ng-hide="main.editingKeyword">{{ main.keyword.name }}</h1>
+
+        <!-- Edit Keyword -->
+        <form ng-show="main.editingKeyword" ng-submit="main.saveKeyword()">
+          <input class="edit-keyword" focus-if="main.editingKeyword" ng-model="main.newKeyword.name"></input>
+        </form>
+
+        <!-- Edit Keyword Link -->
+        <p class="subheader">
+          <a ng-hide="main.editingKeyword" ng-click="main.editKeyword()">Edit keyword</a>
+          <a ng-show="main.editingKeyword" ng-click="main.saveKeyword()">Save keyword</a>
+        </p>
+
       </div>
 
       <!-- Metadata Header -->
@@ -66,7 +79,7 @@
       <!-- Context Panel -->
       <div class="callout small-12 columns">
         <h3>Context</h3>
-        <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
+        <p>{{ main.context.text }}</p>
       </div>
 
       <!-- Definition Panel -->

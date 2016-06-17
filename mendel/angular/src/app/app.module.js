@@ -13,6 +13,7 @@
       'ngResource',
       'ngSanitize',
       'ngStorage',
+      'focus-if',
       'toastr',
       'ui.router',
     ]);

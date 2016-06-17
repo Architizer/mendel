@@ -97,6 +97,24 @@
     border-right: 2px solid $border-color;
     padding-top: 0.5rem;
 
+    h1 {
+      margin-bottom: 0;
+    }
+
+    // Input field when editing keyword
+    input.edit-keyword {
+      border: 0;
+      border-width: 0;
+      font-size: 3rem;
+      width: 100%;
+      padding: 0;
+      line-height: 1.4;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
     &.empty-state {
       .material-icons {
         margin-top: 3rem;

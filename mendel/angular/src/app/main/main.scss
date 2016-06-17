@@ -35,6 +35,15 @@
 }
 
 #main {
+
+  @include breakpoint(small only) {
+    flex-flow: column nowrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    -ms-grid-row-align: stretch;
+    align-items: stretch;
+  }
+
   $action-bar-height: 3.5rem;
   $action-bar-system-height: 2.5rem;
 
@@ -75,8 +84,8 @@
     }
 
     div.category-selector {
-      // Medium Screen Styles
-      @include breakpoint(medium) {
+      // Medium & Small Screen Styles
+      @include breakpoint(medium down) {
         &:nth-child(2n+3),
         &:first-child {
           padding-right: 0.25rem;
@@ -118,12 +127,12 @@
           width: 100%;
           margin-left: 0;
           margin-right: 0;
-          font-size: 0.85rem;
+          font-size: 0.9rem;
           margin: 0;
           background: #F5F8FA;
           border: 1px solid lighten($gunmetal, 14%);
           border-radius: 0.25rem;
-          padding: 0.75rem;
+          padding: 0.5rem 0.75rem;
           font-weight: bold;
           color: #464646;
           text-align: left;
@@ -143,16 +152,16 @@
         }
 
         input:checked ~ label {
-          background: #E2F7C7;
-          border: 1px solid #B2D35F;
-          &:hover {
-            background: darken(#E2F7C7, 5%);
-            border: 1px solid darken(#B2D35F, 10%);
-          }
-          &:active {
-            background: darken(#F5F8FA, 4%);
-            border: 1px solid darken(#F5F8FA, 15%);
-          }
+          background: #D4F1FC;
+         border: 1px solid #A9D6EA;
+         &:hover {
+           background: darken(#D4F1FC, 5%);
+           border: 1px solid darken(#A9D6EA, 10%);
+         }
+         &:active {
+           background: darken(#F5F8FA, 4%);
+           border: 1px solid darken(#F5F8FA, 15%);
+         }
         }
 
       }
@@ -163,12 +172,26 @@
   .help-area {
     background: #FAFAFA;
 
+    .examples {
+      padding-top: 0;
+      .column {
+        padding-bottom: 0;
+        text-overflow: ellipsis;
+      }
+    }
+
     .hide-help-area {
       border-top: 1px solid darken($border-color, 5%);
       border-bottom: 1px solid darken($border-color, 5%);
       background-color: #F8F8F8;
       padding: 0.5rem 0;
       font-size: 0.875rem;
+      cursor: pointer;
+      outline: 0;
+
+      &:hover {
+        background: darken(#f8f8f8, 1.5%);
+      }
 
       .material-icons {
         font-size: 0.75rem;
@@ -179,10 +202,10 @@
       }
     }
 
-    .row:nth-child(2) {
-      min-height: 10rem;
+    .help-area-panel {
       width: 100%;
       padding-top: 1rem;
+      padding-bottom: 0.3rem;
     }
 
   }

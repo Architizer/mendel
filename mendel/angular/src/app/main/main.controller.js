@@ -93,14 +93,24 @@
 
       function getCategoriesSuccess (categories) {
 
-        vm.categories = categories;
-
         // Set up special categories
         vm.deleteCategory = null;
         vm.idkCategory = null;
 
         // Find special categories
         angular.forEach(categories, function (category) {
+
+          /*
+            TODO: 
+            Find another way to select the special categories.
+
+            Currently, we're just searching for the categories
+            with the names "Delete" and "I don't know" 
+
+            Additionally, it'd be nice if the special categories 
+            were protected from accidental (or intentional) deletion 
+            in the database/back end.
+          */
 
           // Find the "Delete" category
           if (category.name === 'Delete') {
@@ -113,6 +123,14 @@
           }
 
         });
+
+        // Take special categories out of the mix of regular categories
+        categories.splice(categories.indexOf(vm.deleteCategory), 1);
+        categories.splice(categories.indexOf(vm.idkCategory), 1);
+
+        // Put regular categories in view
+        vm.categories = categories;
+
       }
 
       function getCategoriesError (error) {

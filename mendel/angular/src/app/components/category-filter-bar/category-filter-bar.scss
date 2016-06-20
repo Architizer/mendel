@@ -1,0 +1,35 @@
+#am-category-filter-bar {
+  position: relative;
+  z-index: 100;
+
+  input {
+    height: 3rem;
+    border-radius: 0.25rem;
+
+    background-image: url(/assets/images/search.svg);
+    background-repeat: no-repeat;
+    background-position: 0.5rem 0.75rem;
+    text-indent: 2rem;
+  }
+
+  .matches {
+    position: absolute;
+
+    left: 2rem;
+    top: 3.5rem;
+
+    @include breakpoint(medium down) {
+      width: 50%;
+    }
+    @include breakpoint(large) {
+      width: 25%;
+    }
+
+    .tile {
+      label {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+}

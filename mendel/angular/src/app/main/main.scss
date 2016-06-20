@@ -4,6 +4,14 @@
   font-size: 1rem;
   padding: 0.8rem 0;
 
+  .special-categories {
+    display: inline;
+
+    a:last-child {
+      margin-right: 1.5rem;
+    }
+  }
+
   a {
     color: $primary-color;
 
@@ -11,15 +19,40 @@
       color: darken($primary-color, 10%);
     }
 
-    &.not-universal {
+    // Special Category links
+    &.special-category {
+      padding: .5rem;
+      border-radius: 6px;
       color: darken($gunmetal, 15%);
-      padding-right: 1.5rem;
 
       &:hover {
         color: darken($gunmetal, 25%);
       }
 
+
+      // "Delete" is selected
+      &.delete.selected {
+        color: $white;
+        background-color: $delete-color;
+
+        &:hover {
+          background-color: darken($delete-color, 5%);
+          color: $white;
+        }
+      }
+
+      // "I don't know" is selected
+      &.idk.selected {
+        color: $white;
+        background-color: $idk-color;
+
+        &:hover {
+          background-color: darken($idk-color, 5%);
+          color: $white;
+        }
+      }
     }
+
   }
 
   // For whatever reason, .expanded isn't working. I'll troubleshoot later.
@@ -81,6 +114,16 @@
 
     .categories {
       margin-top: 2.7rem;
+    }
+
+    .overlay-mask {
+      background: rgba(255,255,255,0.5);
+      position: absolute;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
     }
 
     div.category-selector {

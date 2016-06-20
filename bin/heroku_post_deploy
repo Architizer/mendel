@@ -4,4 +4,4 @@
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '', 'architizer')" | python manage.py shell
 
 # Load fixtures
-python manage.py loaddata fixtures.json
+python manage.py loaddata fixtures-demo.json

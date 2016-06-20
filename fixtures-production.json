@@ -160,17 +160,26 @@
     }
   },
   {
-    "model": "mendel.keyword",
+    "model": "mendel.category",
     "pk": 1,
     "fields": {
-      "name": "Europe",
+      "name": "Delete",
+      "description": "",
       "created": "2016-05-30T13:45:14.472Z",
       "modified": "2016-05-30T13:45:14.472Z"
     }
-  },
-  {
+  }, {
     "model": "mendel.category",
-    "pk": 1,
+    "pk": 2,
+    "fields": {
+      "name": "I don't know",
+      "description": "",
+      "created": "2016-05-30T13:45:14.472Z",
+      "modified": "2016-05-30T13:45:14.472Z"
+    }
+  }, {
+    "model": "mendel.category",
+    "pk": 3,
     "fields": {
       "name": "Aesthetic Concepts",
       "description": "Concepts relating to visual and spatial look and feel",
@@ -179,7 +188,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 2,
+    "pk": 4,
     "fields": {
       "name": "Architect Name",
       "description": "Name of an individual architect",
@@ -188,7 +197,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 3,
+    "pk": 5,
     "fields": {
       "name": "Architectural Element",
       "description": "Parts, components, formal elements, and structures within a whole building structure",
@@ -197,7 +206,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 4,
+    "pk": 6,
     "fields": {
       "name": "Architectural Style",
       "description": "Current and historical architectural and design styles, concepts, and movements",
@@ -206,7 +215,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 5,
+    "pk": 7,
     "fields": {
       "name": "Building Type",
       "description": "Typology of the building; building function and use, nature of the industry or application",
@@ -215,7 +224,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 6,
+    "pk": 8,
     "fields": {
       "name": "City",
       "description": "Name of a city",
@@ -224,7 +233,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 7,
+    "pk": 9,
     "fields": {
       "name": "Color",
       "description": "All the colors of the rainbow and prints",
@@ -233,7 +242,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 8,
+    "pk": 10,
     "fields": {
       "name": "Continent",
       "description": "Name of a continent",
@@ -242,7 +251,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 9,
+    "pk": 11,
     "fields": {
       "name": "Country",
       "description": "Name of a country",
@@ -251,7 +260,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 10,
+    "pk": 12,
     "fields": {
       "name": "Finish",
       "description": "Surface treatments and textures",
@@ -260,7 +269,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 11,
+    "pk": 13,
     "fields": {
       "name": "Firm Name",
       "description": "Name of an architecture or design firm",
@@ -269,7 +278,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 12,
+    "pk": 14,
     "fields": {
       "name": "Manufacturer Name",
       "description": "Name of a building product manufacturer or brand",
@@ -278,7 +287,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 13,
+    "pk": 15,
     "fields": {
       "name": "Material",
       "description": "Construction and building materials",
@@ -287,7 +296,7 @@
     }
   }, {
     "model": "mendel.category",
-    "pk": 14,
+    "pk": 16,
     "fields": {
       "name": "Performance Concepts",
       "description": "Concepts relating to performance and functional aspects",
@@ -297,7 +306,7 @@
   },
   {
     "model": "mendel.category",
-    "pk": 15,
+    "pk": 17,
     "fields": {
       "name": "Price Concepts",
       "description": "Words that describe price or worth",
@@ -307,7 +316,7 @@
   },
   {
     "model": "mendel.category",
-    "pk": 16,
+    "pk": 18,
     "fields": {
       "name": "Product Type",
       "description": "Product type",
@@ -317,7 +326,7 @@
   },
   {
     "model": "mendel.category",
-    "pk": 17,
+    "pk": 19,
     "fields": {
       "name": "Room\/Space Type",
       "description": "Specific rooms, discrete areas, interior or exterior spaces within buildings and projects",
@@ -327,7 +336,7 @@
   },
   {
     "model": "mendel.category",
-    "pk": 18,
+    "pk": 20,
     "fields": {
       "name": "State",
       "description": "Name of a US state",
@@ -337,36 +346,12 @@
   },
   {
     "model": "mendel.category",
-    "pk": 19,
+    "pk": 21,
     "fields": {
       "name": "Unit",
       "description": "Units of measure",
       "created": "2016-05-30T13:45:14.472Z",
       "modified": "2016-05-30T13:45:14.472Z"
-    }
-  },
-  {
-    "model": "mendel.document",
-    "pk": 1,
-    "fields": {
-      "of_type": "TXT",
-      "title": "Sample Document",
-      "description": "This is a sample document,",
-      "created": "2016-05-30T13:45:48.494Z",
-      "modified": "2016-05-30T13:45:48.494Z"
-    }
-  },
-  {
-    "model": "mendel.context",
-    "pk": 1,
-    "fields": {
-      "document": 1,
-      "keyword": 1,
-      "position_from": 33,
-      "position_to": 39,
-      "text": "the westernmost part of Eurasia. Europe is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the",
-      "created": "2016-05-30T13:48:06.391Z",
-      "modified": "2016-05-30T13:48:06.391Z"
     }
   }
 ]

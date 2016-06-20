@@ -4,14 +4,32 @@
 
     <!-- Left Side -->
     <div class="column align-left shrink">
+
+      <!-- "Prev" Link -->
       <a ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
+
     </div>
 
     <!-- Right Side -->
     <div class="column align-right expand text-right">
-      <a ng-href="#" class="not-universal"><i class="material-icons">delete</i>  Delete</a>
-      <a ng-href="#" class="not-universal"><i class="material-icons">help</i>  I don't know</a>
-      <a ng-click="main.getNextContext()">Next <i class="material-icons">arrow_forward</i></a>
+
+      <!-- Special Categories -->
+      <div class="special-categories">
+
+        <!-- "Delete" button -->
+        <a ng-if="main.deleteCategory" ng-click="main.toggleSpecialCategory('delete')" class="delete special-category" ng-class="{ 'selected': main.specialCategorySelected == 'delete' }">
+          <i class="material-icons">delete</i>  Delete
+        </a>
+
+        <!-- "I don't know" button -->
+        <a ng-if="main.idkCategory" ng-click="main.toggleSpecialCategory('idk')" class="idk special-category" ng-class="{ 'selected': main.specialCategorySelected == 'idk' }">
+          <i class="material-icons">help</i>  I don't know
+        </a>
+
+      </div>
+
+      <!-- "Next" Link -->
+      <a class="next-link" ng-click="main.getNextContext()">Next <i class="material-icons">arrow_forward</i></a>
     </div>
 
   </div>
@@ -95,6 +113,10 @@
           </div>
 
         </div>
+
+        <!-- Show overlay mask if a special category is selected ("Delete" / "I don't know") -->
+        <div class="overlay-mask" ng-if="main.specialCategorySelected"></div>
+
       </div>
     </div>
 

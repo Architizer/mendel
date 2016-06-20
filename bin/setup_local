@@ -15,4 +15,4 @@ heroku local:run python manage.py migrate
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '', 'architizer')" | heroku local:run python manage.py shell
 
 # Load fixtures
-heroku local:run python manage.py loaddata fixtures.json
+heroku local:run python manage.py loaddata fixtures-demo.json

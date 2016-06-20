@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($q, $scope, AuthService, Category, Context, Review, Session, toastr) {
+  function MainController($q, $scope, AuthService, Category, Context, hotkeys, Review, Session, toastr) {
     var vm = this;
 
     vm.getNextContext = getNextContext;
@@ -34,6 +34,20 @@
           killSessionWatcher();
         }
       });
+
+      // Set up hotkeys
+      hotkeys.bindTo($scope)
+      .add({
+        combo: 'right',
+        description: 'Get the next context',
+        callback: getNextContext
+      })
+      .add({
+        combo: 'left',
+        description: 'Get the previous context',
+        callback: getPrevContext
+      });
+
     }
 
 

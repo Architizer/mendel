@@ -11,6 +11,8 @@
 
     vm.getNextContext = getNextContext;
     vm.getPrevContext = getPrevContext;
+    vm.toggleSpecialCategory = toggleSpecialCategory;
+
 
     // Initialize
     init();
@@ -65,6 +67,14 @@
           angular.forEach(vm.categories, function(category) {
             if (_prevCategories.indexOf(category.id) !== -1) {
               category.selected = true;
+            }
+
+            // Handle special categories
+            if (_prevCategories.indexOf(vm.deleteCategory.id) !== -1) {
+              vm.toggleSpecialCategory('delete');
+            }
+            else if (_prevCategories.indexOf(vm.idkCategory.id) !== -1) {
+              vm.toggleSpecialCategory('idk');
             }
           });
 
@@ -167,10 +177,13 @@
           toastr.success('Updated categories for ' + vm.context.keyword.name);
         }
 
-        if (_nextContextId) {
+        // Deselect all categories
+        deselectAllCategories();
 
-          // Deselect all categories
-          deselectAllCategories();
+        // Reset special categories
+        resetSpecialCategories();
+
+        if (_nextContextId) {
 
           getContext(_nextContextId);
         }
@@ -200,6 +213,9 @@
   
         // Deselect all categories
         deselectAllCategories();
+
+        // Reset special categories
+        resetSpecialCategories();
 
         getContext(_prevContextId);
       }
@@ -234,6 +250,26 @@
       constructArrays();
 
       function constructArrays () {
+
+        // Handle special categories
+        if (vm.specialCategorySelected) {
+
+          if (vm.specialCategorySelected === 'delete') {
+            currentlySelected.push(vm.deleteCategory.id);
+            currentlyUnselected.push(vm.idkCategory.id);
+          }
+
+          else if (vm.specialCategorySelected === 'idk') {
+            currentlySelected.push(vm.idkCategory.id);
+            currentlyUnselected.push(vm.deleteCategory.id);
+          }
+        }
+
+        // Otherwise, special categories aren't selected
+        else {
+          currentlyUnselected.push(vm.deleteCategory.id);
+          currentlyUnselected.push(vm.idkCategory.id);           
+        }
 
         // Construct currentlySelected and currentlyUnselected arrays
         angular.forEach(vm.categories, function (category) {
@@ -379,6 +415,59 @@
       return deferred.promise;
     }
 
+    // Reset special categories ("Delete" / "I don't know")
+    function resetSpecialCategories () {
+
+      // Unselect special categories
+      vm.deleteCategory.selected = false;
+      vm.idkCategory.selected = false;
+
+      // Unblur regular categories
+      vm.specialCategorySelected = false;
+    }
+
+    // Select a special category ("Delete / "I don't know")
+    function toggleSpecialCategory (modeClicked) {
+
+      // Begin by resetting special category selections
+      vm.deleteCategory.selected = false;
+      vm.idkCategory.selected = false;
+
+      // Next, check if we are unclicking the currently-selected special category
+      if (vm.specialCategorySelected && vm.specialCategorySelected === modeClicked) {
+
+        resetSpecialCategories();
+
+        return;
+      }
+
+      // Otherwise, turn on special category mode
+      else {
+
+        // "Delete" Mode
+        if (modeClicked === 'delete') {
+
+          // Blur regular categories
+          vm.specialCategorySelected = 'delete';
+          vm.deleteCategory.selected = true;
+        }
+
+        // "I don't know" Mode
+        if (modeClicked === 'idk') {
+
+          // Blur regular categories
+          vm.specialCategorySelected = 'idk';
+          vm.idkCategory.selected = true;
+        }
+
+        // Unselect all regular categories when in special category mode
+        angular.forEach(vm.categories, function(category) {
+          if (category.selected) {
+            category.selected = false;
+          }
+        });
+      }
+    }
 
   }
 })();

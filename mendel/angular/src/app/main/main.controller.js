@@ -43,6 +43,11 @@
         callback: getNextContext
       })
       .add({
+        combo: 'shift+enter',
+        description: 'Get the next context',
+        callback: getNextContext
+      })
+      .add({
         combo: 'left',
         description: 'Get the previous context',
         callback: getPrevContext

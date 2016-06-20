@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, $locationProvider, $resourceProvider, $httpProvider, toastrConfig) {
+  function config($logProvider, $locationProvider, $resourceProvider, $httpProvider, hotkeysProvider, toastrConfig) {
 
     // Configure CSRF
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
@@ -22,12 +22,15 @@
     // Don't strip trailing slashes from $resource API calls
     $resourceProvider.defaults.stripTrailingSlashes = false;
 
-    // Set options third-party lib
+    // Set Toastr Default Options
     toastrConfig.allowHtml = true;
     toastrConfig.timeOut = 2000;
     toastrConfig.positionClass = 'toast-bottom-right';
     toastrConfig.preventDuplicates = false;
     toastrConfig.progressBar = true;
+
+    // Set hotkeys options
+    // hotkeysProvider.includeCheatSheet = false;
   }
 
 })();

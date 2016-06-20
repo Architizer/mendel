@@ -3,6 +3,7 @@
 
   angular
     .module('mendel', [
+      'cfp.hotkeys',
       'ngAnimate',
       'ngAria',
       'ngCookies',

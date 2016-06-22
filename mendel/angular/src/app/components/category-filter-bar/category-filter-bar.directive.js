@@ -27,7 +27,7 @@
     function CategoryFilterBarController ($filter, $scope) {
       var vm = this;
 
-      vm.reset = reset;
+      vm.handle = handle;
 
       vm.input = '';
       vm.matches = [];
@@ -67,14 +67,35 @@
         if (!vm.input) { vm.matches = []; }
       }
 
-      // Reset the filter (this is fired from an ng-click on any of the matching category tiles)
-      function reset () {
+      // Event handler for toggling selection on category matches
+      function handle (e) {
 
-        vm.input = '';
-        vm.matches = [];
-        vm.mask = false;
+        // Get the category of the target
+        var category = angular.element(e.target).scope().category;
+        if (!category) { return; }
 
+        // If user uses keyboard to select a category tile
+        if (e.keyCode) {
+
+          // If Enter key or Spacebar
+          if (e.keyCode == 13 || e.keyCode == 32) {
+
+            // Toggle category "selected"
+            category.selected = !category.selected;
+          }
+        }
+
+        // Reset the filter bar and refocus the input
+        reset();
         focusInput();
+        
+        // Reset the filter
+        function reset () {
+
+          vm.input = '';
+          vm.matches = [];
+          vm.mask = false;
+        }
 
         function focusInput () {
 

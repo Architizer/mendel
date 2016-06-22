@@ -11,7 +11,7 @@
         <div ng-repeat="category in categoryFilterBar.matches">
 
           <!-- Category Tile -->
-          <div class="tile" ng-click="categoryFilterBar.reset()">
+          <div class="tile" ng-click="categoryFilterBar.handle($event)">
             <input ng-model="category.selected" type="checkbox" name="category-tile-{{ category.id }}">
             <label ng-mouseover="categoryFilterBar.helpCategory = category" for="category-tile-{{ category.id }}">{{ category.name }}</label>
           </div>

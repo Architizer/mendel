@@ -38,21 +38,46 @@
       // Set up hotkeys
       hotkeys.bindTo($scope)
       .add({
-        combo: 'right',
-        description: 'Get the next context',
-        callback: getNextContext
-      })
-      .add({
-        combo: 'shift+enter',
-        description: 'Get the next context',
-        callback: getNextContext
-      })
-      .add({
-        combo: 'left',
+        combo: [
+          'command+left', 
+          'command+backspace',
+          'ctrl+left',
+          'ctrl+backspace',
+          'shift+left',
+          'shift+backspace',
+        ],
+        allowIn: ['INPUT'],
         description: 'Get the previous context',
         callback: getPrevContext
-      });
-
+      })
+      .add({
+        combo: [
+          'command+right',
+          'command+enter',
+          'ctrl+right',
+          'ctrl+enter',
+          'shift+right',
+          'shift+enter',
+        ],
+        allowIn: ['INPUT'],
+        description: 'Get the next context',
+        callback: getNextContext
+      })
+      .add({
+        combo: [
+          'left',
+        ],
+        description: 'Get the previous context',
+        callback: getPrevContext
+      })
+      .add({
+        combo: [
+          'right',
+        ],
+        description: 'Get the next context',
+        callback: getNextContext
+      })
+      ;
     }
 
 

@@ -1,6 +1,6 @@
 branch-defaults:
   deploy:
-    environment: architizer-mendel
+    environment: architizer-mendel-prod2
     group_suffix: null
   master:
     environment: django-env

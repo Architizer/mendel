@@ -5,11 +5,22 @@
   input {
     height: 3rem;
     border-radius: 0.25rem;
-
-    background-image: url(/assets/images/search.svg);
-    background-repeat: no-repeat;
-    background-position: 0.5rem 0.75rem;
     text-indent: 2rem;
+  }
+
+  // Add Search icon to input
+  #inputWrapper:before {
+    font-family: 'Material Icons';
+    font-size: 1.5rem;
+    display: block;
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    left: 0.5rem;
+    top: 0.5rem;
+    
+    content: 'search';
   }
 
   .matches {

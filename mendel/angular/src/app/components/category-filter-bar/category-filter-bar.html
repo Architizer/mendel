@@ -2,7 +2,7 @@
   <div class="row collapse">
     <div class="small-12 columns">
       <!-- Category Filter Input -->
-      <input ng-model="categoryFilterBar.input" ng-model-options="{ debounce: 200 }" type="text" focus-if="categoryFilterBar.focus" ng-disabled="categoryFilterBar.disabled">
+      <input ng-model="categoryFilterBar.input" ng-model-options="{ debounce: 100 }" type="text" focus-if="categoryFilterBar.focusInput" ng-disabled="categoryFilterBar.disabled">
 
       <!-- Matching Categories -->
       <div class="matches" ng-if="categoryFilterBar.matches">
@@ -13,7 +13,7 @@
           <!-- Category Tile -->
           <div class="tile" ng-click="categoryFilterBar.handle($event)">
             <input ng-model="category.selected" type="checkbox" name="category-tile-{{ category.id }}">
-            <label ng-mouseover="categoryFilterBar.helpCategory = category" for="category-tile-{{ category.id }}">{{ category.name }}</label>
+            <label ng-mouseover="categoryFilterBar.helpCategory = category" id="match-category-tile-{{ $index }}" ng-class="{ 'hovered' : categoryFilterBar.focusIndex == $index }" for="category-tile-{{ category.id }}">{{ category.name }}</label>
           </div>
 
         </div>

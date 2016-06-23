@@ -83,7 +83,8 @@ fieldset {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    &:hover {
+    &:hover,
+    &.hovered {
       background: darken(#F5F8FA, 3%);
       border: 1px solid darken(#F5F8FA, 15%);
     }
@@ -96,7 +97,8 @@ fieldset {
   input:checked ~ label {
     background: #D4F1FC;
     border: 1px solid #A9D6EA;
-    &:hover {
+    &:hover,
+    &.hovered {
       background: darken(#D4F1FC, 5%);
       border: 1px solid darken(#A9D6EA, 10%);
     }

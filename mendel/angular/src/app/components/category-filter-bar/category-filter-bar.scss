@@ -28,7 +28,20 @@
     .tile {
       label {
         margin-bottom: 1rem;
+
+        // Hovered match tiles get darker borders
+        &.hovered {
+          border: 1px solid darken(#F5F8FA, 50%);
+        }
       }
+
+      input:checked ~ label {
+        // Hovered match tiles get darker borders
+        &.hovered {
+          border: 1px solid darken(#A9D6EA, 50%);
+        }
+      }
+
     }
   }
 

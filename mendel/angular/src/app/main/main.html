@@ -99,6 +99,9 @@
       <div class="grid-content collapse categories-column">
         <div class="small-12 columns categories">
 
+        <!-- Category Filter Bar -->
+        <am-category-filter-bar categories="main.categories" mask="main.overlayMask" help-category="main.helpCategory" disabled="main.specialCategorySelected"></am-category-filter-bar>
+
           <!-- Category Tiles -->
           <div class="row collapse small-up-2 medium-up-2 large-up-4">
             <div ng-repeat="category in main.categories" class="category-selector column">
@@ -106,7 +109,7 @@
               <!-- Category Tile -->
               <div class="tile">
                 <input ng-model="category.selected" id="category-tile-{{ category.id }}" type="checkbox" name="category-tile-{{ category.id }}">
-                <label ng-init="main.helpText='Hover a category to see its definition.'" ng-mouseover="main.helpText=category.description; main.categoryName=category.name" for="category-tile-{{ category.id }}">{{ category.name }}</label>
+                <label ng-init="main.helpCategory.description='Hover a category to see its definition.'" ng-mouseover="main.helpCategory = category" for="category-tile-{{ category.id }}">{{ category.name }}</label>
               </div>
 
             </div>
@@ -115,7 +118,7 @@
         </div>
 
         <!-- Show overlay mask if a special category is selected ("Delete" / "I don't know") -->
-        <div class="overlay-mask" ng-if="main.specialCategorySelected"></div>
+        <div class="overlay-mask" ng-if="main.specialCategorySelected || main.overlayMask"></div>
 
       </div>
     </div>
@@ -143,9 +146,9 @@
         <div class="columns medium-12 align-left">
           <!-- Heading: currently-hovered category name -->
           <!-- If Category has a description, show it -->
-          <p><strong ng-if="main.categoryName">{{ main.categoryName }}<br /></strong>{{ main.helpText }}</p>
+          <p><strong ng-if="main.helpCategory.name">{{ main.helpCategory.name }}<br /></strong>{{ main.helpCategory.description }}</p>
           <!-- If Category has no description, show placeholder -->
-          <p ng-if="!main.helpText" class="subheader">No description for {{ main.categoryName }}</p>
+          <p ng-if="!main.helpCategory.description" class="subheader">No description for {{ main.helpCategory.name }}</p>
           <p></p>
         </div>
 

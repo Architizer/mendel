@@ -117,7 +117,7 @@
     }
 
     .overlay-mask {
-      background: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.8);
       position: absolute;
       z-index: 10;
       left: 0;
@@ -158,56 +158,6 @@
         }
       }
 
-
-      // Category Tiles
-      & .tile {
-        input {
-          display: none;
-        }
-
-        label {
-          display: block;
-          width: 100%;
-          margin-left: 0;
-          margin-right: 0;
-          font-size: 0.9rem;
-          margin: 0;
-          background: #F5F8FA;
-          border: 1px solid lighten($gunmetal, 14%);
-          border-radius: 0.25rem;
-          padding: 0.5rem 0.75rem;
-          font-weight: bold;
-          color: #464646;
-          text-align: left;
-          transition: background 0.1s, border 0.1s, box-shadow 0.1s;
-          max-height: 3rem;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          &:hover {
-            background: darken(#F5F8FA, 3%);
-            border: 1px solid darken(#F5F8FA, 15%);
-          }
-          &:active {
-            background: darken(#F5F8FA, 4%);
-            border: 1px solid darken(#F5F8FA, 15%);
-          }
-        }
-
-        input:checked ~ label {
-          background: #D4F1FC;
-         border: 1px solid #A9D6EA;
-         &:hover {
-           background: darken(#D4F1FC, 5%);
-           border: 1px solid darken(#A9D6EA, 10%);
-         }
-         &:active {
-           background: darken(#F5F8FA, 4%);
-           border: 1px solid darken(#F5F8FA, 15%);
-         }
-        }
-
-      }
     }
   }
 

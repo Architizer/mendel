@@ -4,6 +4,7 @@
   angular
     .module('mendel', [
       'cfp.hotkeys',
+      'focus-if',
       'ngAnimate',
       'ngAria',
       'ngCookies',

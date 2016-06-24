@@ -23,12 +23,12 @@ class DocumentAdmin(ImportExportModelAdmin):
 
 
 class ContextAdmin(ImportExportModelAdmin):
-    list_display = ('keyword', 'text', 'document', 'created', 'modified')
+    list_display = ('keyword_given', 'text', 'document', 'created', 'modified')
     pass
 
 
 class ReviewAdmin(ImportExportModelAdmin):
-    list_display = ('keyword', 'category', 'user', 'status', 'created', 'modified')
+    list_display = ('keyword_given', 'keyword_proposed', 'category', 'user', 'status', 'created', 'modified')
     pass
 
 

@@ -1,1 +1,1 @@
-web: pip install -r requirements.txt && cd mendel/angular/ && gulp clean && gulp django; cd ../../ && python manage.py migrate && python manage.py collectstatic --no-input --clear; gunicorn wsgi --reload --log-level DEBUG --log-file -
+web: pip install -r requirements.txt && cd mendel/angular/ && bower install && gulp clean && gulp django; cd ../../ && python manage.py migrate && python manage.py collectstatic --no-input --clear; gunicorn wsgi --reload --log-level DEBUG --log-file -

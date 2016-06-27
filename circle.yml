@@ -2,6 +2,8 @@
 machine:
   python:
     version: 2.7.11
+  node:
+    version: 5.6.0
 
 general:
   branches:
@@ -9,20 +11,29 @@ general:
       - master
 
 dependencies:
-  pre:
+  override:
     - pip install awscli
-    - pip install awsebcli
+    - npm install -g gulp bower
+    - npm install
+    - bower install:
+        pwd: 
+          mendel/angular
+    - gulp clean:
+        pwd:
+          mendel/angular
+    - gulp django:
+        pwd:
+          mendel/angular
 
 test:
  override:
    - echo "No tests yet"
- post:
-   - echo "No tests yet"
-
 
 deployment:
   elasticbeanstalk:
     branch: master
     commands:
-      - bash -x deploy.sh
-      - eb deploy
+      - bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel-prod
+    branch: elastic-beanstalk
+    commands:
+      - bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel-stag

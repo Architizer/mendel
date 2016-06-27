@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='review',
             name='keyword_proposed',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='keyword_proposed', to='mendel.Keyword'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='keyword_proposed', to='mendel.Keyword'),
             preserve_default=False,
         ),
         migrations.AlterUniqueTogether(

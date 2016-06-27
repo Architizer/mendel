@@ -18,11 +18,10 @@ class Migration(migrations.Migration):
             old_name='keyword',
             new_name='keyword_given',
         ),
-        migrations.AddField(
+        migrations.RenameField(
             model_name='review',
-            name='keyword_given',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='keyword_given', to='mendel.Keyword'),
-            preserve_default=False,
+            old_name='keyword',
+            new_name='keyword_given',
         ),
         migrations.AddField(
             model_name='review',

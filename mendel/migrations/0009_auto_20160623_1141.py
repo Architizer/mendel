@@ -30,10 +30,6 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, related_name='keyword_proposed', to='mendel.Keyword'),
             preserve_default=False,
         ),
-        migrations.RemoveField(
-            model_name='review',
-            name='keyword',
-        ),
         migrations.AlterUniqueTogether(
             name='review',
             unique_together=set([('context', 'keyword_proposed', 'category', 'user', 'status')]),

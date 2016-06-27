@@ -20,7 +20,16 @@
         templateUrl: 'app/login/login.html',
         controller: 'LoginController',
         controllerAs: 'login'
-      });
+      })
+
+      .state('about', {
+        url: '/about',
+        templateUrl: 'app/about/about.html',
+        controller: 'AboutController',
+        controllerAs: 'about'
+      })
+
+      ;
 
     $urlRouterProvider.otherwise('/main');
   }

@@ -36,4 +36,4 @@ deployment:
       - bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel-prod
     branch: elastic-beanstalk
     commands:
-      - bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel-stag
+      - bash -x deploy.sh $CIRCLE_SHA1 architizer-mendel-prod

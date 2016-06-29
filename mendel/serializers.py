@@ -54,7 +54,7 @@ class UserSerializer(serializers.ModelSerializer):
         try:
             return Review.objects.filter(user=user.id).latest('created').context.id
         except:
-            return Context.objects.first().id
+            return Context.objects.first().id if Context.objects.first() else None
 
     class Meta:
         model = User

@@ -96,7 +96,7 @@
         vm.context = context;
         vm.context.front = '"...' + vm.context.text.substring(0, vm.context.position_from);
         vm.context.back = vm.context.text.substring(vm.context.position_to, vm.context.text.length) + '..."';
-        vm.keyword = context.keyword;
+        vm.keyword = context.keyword_given;
         vm.context.previouslySelectedCategories = preselect();
 
         function preselect () {
@@ -201,7 +201,7 @@
 
       var _nextContextId = vm.context.next_context_id;
 
-      if (vm.context.keyword) {
+      if (vm.context.keyword_given) {
 
         submitReviews()
         .then(submitReviewsSuccess)
@@ -213,12 +213,12 @@
         if (successCategoryIds) {
 
           // Show Success Toast
-          toastr.success('Added categories to ' + vm.context.keyword.name);
+          toastr.success('Added categories to ' + vm.context.keyword_given.name);
         }
         else {
 
           // Show Success Toast
-          toastr.success('Updated categories for ' + vm.context.keyword.name);
+          toastr.success('Updated categories for ' + vm.context.keyword_given.name);
         }
 
         // Deselect all categories
@@ -361,7 +361,19 @@
         var r = {
           category: categoryId,
           context: vm.context.id,
-          keyword: vm.context.keyword.id,
+          keyword_given: vm.context.keyword_given.id,
+
+          /* 
+            Note re: keyword_proposed field:
+
+            keyword_proposed is hardcoded as the same value as keyword_given
+            until we build the "Edit Keyword" feature
+          */
+
+          keyword_proposed: vm.context.keyword_given.id,
+
+          //
+
           user: Session.user.id
         };
 

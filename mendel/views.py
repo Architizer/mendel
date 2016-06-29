@@ -17,6 +17,7 @@ class PostContext(APIView):
         context = Context.objects.get(id=id)
         counter = 0
         keyword_proposed = context.keyword_given
+        created = False
 
         if request.data.get('keyword_proposed'):
             keyword_proposed, created = Keyword.objects.get_or_create(

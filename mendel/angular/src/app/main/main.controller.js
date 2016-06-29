@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($q, $scope, AuthService, Category, Context, hotkeys, Review, Session, toastr) {
+  function MainController($q, $scope, AuthService, Category, Context, hotkeys, Keyword, Review, Session, toastr) {
     var vm = this;
 
     vm.getNextContext = getNextContext;
@@ -96,7 +96,7 @@
         vm.context = context;
         vm.context.front = '"...' + vm.context.text.substring(0, vm.context.position_from);
         vm.context.back = vm.context.text.substring(vm.context.position_to, vm.context.text.length) + '..."';
-        vm.keyword = context.keyword_given;
+        vm.keyword = angular.copy(context.keyword_given);
         vm.context.previouslySelectedCategories = preselect();
 
         function preselect () {
@@ -237,7 +237,7 @@
       function saveKeywordError (error) {
 
         // Reset Keyword to Context's Original Keyword
-        vm.keyword = vm.context.keyword;
+        vm.keyword = vm.context.keyword_given;
 
         // Show Error Toast
         for (var i in error.data) {
@@ -419,18 +419,7 @@
           category: categoryId,
           context: vm.context.id,
           keyword_given: vm.context.keyword_given.id,
-
-          /* 
-            Note re: keyword_proposed field:
-
-            keyword_proposed is hardcoded as the same value as keyword_given
-            until we build the "Edit Keyword" feature
-          */
-
-          keyword_proposed: vm.context.keyword_given.id,
-
-          //
-
+          keyword_proposed: vm.keyword.id,
           user: Session.user.id
         };
 

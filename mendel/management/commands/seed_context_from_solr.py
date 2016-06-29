@@ -41,10 +41,10 @@ class Command(BaseCommand):
                     position_from = doc_text.index(text)
                     position_to = position_from + len(text)
 
-                    if Context.objects.filter(document=document, text=text, keyword=keyword).count() == 0:
+                    if Context.objects.filter(document=document, text=text, keyword_given=keyword).count() == 0:
                         Context.objects.create(
                             document=document,
-                            keyword=keyword,
+                            keyword_given=keyword,
                             position_from=position_from,
                             position_to=position_to,
                             text=text

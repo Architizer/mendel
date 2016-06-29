@@ -171,8 +171,8 @@ REST_FRAMEWORK = {
 
 # REST Auth
 REST_AUTH_SERIALIZERS = {
-    'TOKEN_SERIALIZER': 'urls.TokenSerializer',
-    'USER_DETAILS_SERIALIZER': 'urls.UserSerializer',
+    'TOKEN_SERIALIZER': 'mendel.api_views.TokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'mendel.api_views.UserSerializer',
 }
 
 # you'll need to register for a Wordnik api key for definitions to work on the keyword

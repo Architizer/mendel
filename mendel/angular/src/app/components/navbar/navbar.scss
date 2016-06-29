@@ -1,7 +1,13 @@
 #am-navbar {
+  background: $topbar-background;
+  color: rgba(0,0,0,.84);
+  border-bottom: 1px solid rgba(189,199,205,.3);
+  padding: 0.2rem;
+
   a,
   .menu-text {
-    color: #ccc;
+    font-weight: normal;
+    color: rgba(0,0,0,.84);
   }
 
   a:hover {
@@ -11,6 +17,18 @@
   // Color of Dropdown Caret
   .is-dropdown-submenu-parent > a:after {
     border-color: #ccc transparent transparent;
+  }
+
+  .top-bar {
+    padding: 0;
+    &, & ul {
+      background: $topbar-background;
+    }
+  }
+
+  .material-icons {
+    font-size: 1.25rem;
+    vertical-align: text-top;
   }
 
 }

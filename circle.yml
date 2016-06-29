@@ -1,0 +1,28 @@
+# circle.yml
+machine:
+  python:
+    version: 2.7.11
+
+general:
+  branches:
+    only:
+      - master
+
+dependencies:
+  pre:
+    - pip install awscli
+    - pip install awsebcli
+
+test:
+ override:
+   - echo "No tests yet"
+ post:
+   - echo "No tests yet"
+
+
+deployment:
+  elasticbeanstalk:
+    branch: master
+    commands:
+      - bash -x deploy.sh
+      - eb deploy

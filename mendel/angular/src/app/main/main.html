@@ -1,106 +1,167 @@
-<div id="main" class="container">
-  <!-- Main -->
-  <!-- Action Bar -->
-  <div class="action-bar">
-    <div class="row large-collapse">
-      <div class="small-12 large-4 columns subject-navigation">
+<!-- Control Bar -->
+<div id="controlbar" class="grid-block shrink">
+  <div class="row expanded">
 
-        <!-- Previous -->
-        <div class="small-6 columns">
-          <p class="text-left"><a>&larr; Prev</a></p>
-        </div>
+    <!-- Left Side -->
+    <div class="column align-left shrink">
 
-        <!-- Next -->
-        <div class="small-6 columns">
-          <p class="text-right"><a ng-click="main.getNextContext(main.context)">Next &rarr;</a></p>
-        </div>
+      <!-- "Prev" Link -->
+      <a ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="column align-right expand text-right">
+
+      <!-- Special Categories -->
+      <div class="special-categories">
+
+        <!-- "Delete" button -->
+        <a ng-if="main.deleteCategory" ng-click="main.toggleSpecialCategory('delete')" class="delete special-category" ng-class="{ 'selected': main.specialCategorySelected == 'delete' }">
+          <i class="material-icons">delete</i>  Delete
+        </a>
+
+        <!-- "I don't know" button -->
+        <a ng-if="main.idkCategory" ng-click="main.toggleSpecialCategory('idk')" class="idk special-category" ng-class="{ 'selected': main.specialCategorySelected == 'idk' }">
+          <i class="material-icons">help</i>  I don't know
+        </a>
 
       </div>
 
-      <div class="large-8 show-for-large columns categories-search">
-        <input type="text" placeholder="start typing to select a category">
+      <!-- "Next" Link -->
+      <a class="next-link" ng-click="main.getNextContext()">Next <i class="material-icons">arrow_forward</i></a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Main -->
+<div id="main" class="grid-block expand">
+
+  <!-- Left Column -->
+  <div class="grid-block large-4 medium-5 small-12">
+
+    <!-- Empty State -->
+    <div class="grid-content subject-column empty-state align-center" ng-show="!main.context.keyword_given">
+      <div class="text-center align-self-middle">
+      <h2 class="subheader"><i class="material-icons">error_outline</i> <br /> Oops! No keywords found.</h2>
+      </div>
+    </div>
+
+    <!-- Nonempty -->
+    <div class="grid-content subject-column" ng-show="main.context.keyword_given">
+
+      <!-- Subject Header -->
+      <h2 class="subheader">Subject</h2>
+
+      <!-- Word Panel -->
+      <div class="callout small-12 columns with-bottom-margin">
+        <h1>{{ main.keyword.name }}</h1>
+        <p class="subheader"><a ng-href="#">Edit keyword</a></p>
+      </div>
+
+      <!-- Metadata Header -->
+      <h2 class="subheader show-for-large">Metadata</h2>
+
+      <!-- Context Panel -->
+      <div class="callout small-12 columns">
+        <h3>Context</h3>
+        <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
+      </div>
+
+      <!-- Definition Panel -->
+      <div ng-if="main.context.keyword_given.definition" class="callout small-12 show-for-large columns">
+        <h3>Definition</h3>
+        <p>{{ main.context.keyword_given.definition}}</p>
       </div>
 
     </div>
   </div>
 
-  <div class="row">
 
-    <!-- Left Column -->
-    <div class="small-12 large-4 columns subject-column">
 
-      <!-- Left Column Content -->
-      <div class="row">
-        <div class="small-12 columns subjects">
+  <!-- Right Column -->
+  <div class="grid-block vertical expand" ng-show="!main.context.keyword_given">
 
-          <!-- Subject Header -->
-          <h2 class="subheader">Subject</h2>
-
-          <!-- Word Panel -->
-          <div class="callout small-12 columns with-bottom-margin">
-            <h3>Word</h3>
-            <h1>{{ main.keyword.name }}</h1>
-            <p class="subheader"><a ng-href="#">Edit keyword &rarr;</a></p>
-          </div>
-
-          <!-- Metadata Header -->
-          <h2 class="subheader show-for-large">Metadata</h2>
-
-          <!-- Context Panel -->
-          <div class="callout small-12 columns">
-            <h3>Context</h3>
-            <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
-            <p class="subheader"><a ng-href="#">Load new context &rarr;</a></p>
-          </div>
-
-          <!-- Definition Panel -->
-          <div class="callout small-12 show-for-large columns">
-            <h3>Definition</h3>
-            <p>{{ main.definition }}</p>
-          </div>
-
-        </div>
+    <!-- Empty State -->
+    <div class="grid-block">
+      <div class="grid-content collapse categories-column empty-state">
       </div>
     </div>
 
-    <!-- Right Column -->
-    <div class="large-8 columns categories-column">
-      <div class="row">
+  </div>
 
-        <div class="large-12 columns categories-system-actions">
+  <!-- Nonempty -->
+  <div class="grid-block vertical expand" ng-show="main.context.keyword_given">
 
-          <!-- Delete -->
-          <div class="small-6 columns system-action">
-            <a class="expanded button delete" ng-href="#">Delete <kbd>,</kbd></a>
-          </div>
-
-          <!-- I don't know -->
-          <div class="small-6 columns system-action">
-            <a class="expanded button idk" ng-href="#">I don't know <kbd>.</kbd></a>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Right Column Content -->
-      <div class="row">
+    <!-- Categories -->
+    <div class="grid-block">
+      <div class="grid-content collapse categories-column">
         <div class="small-12 columns categories">
 
+        <!-- Category Filter Bar -->
+        <am-category-filter-bar categories="main.categories" mask="main.overlayMask" help-category="main.helpCategory" disabled="main.specialCategorySelected"></am-category-filter-bar>
+
           <!-- Category Tiles -->
-          <h2 class="subheader">Categories</h2>
+          <div class="row collapse small-up-2 medium-up-2 large-up-4">
+            <div ng-repeat="category in main.categories" class="category-selector column">
 
-          <div class="row collapse small-up-2 medium-up-4">
-
-            <!-- Main Categories -->
-            <div class="category-selector column" ng-repeat="category in main.categories">
+              <!-- Category Tile -->
               <div class="tile">
                 <input ng-model="category.selected" id="category-tile-{{ category.id }}" type="checkbox" name="category-tile-{{ category.id }}">
-                <label for="category-tile-{{ category.id }}">{{ category.name }}</label>
+                <label ng-init="main.helpCategory.description='Hover a category to see its definition.'" ng-mouseover="main.helpCategory = category" for="category-tile-{{ category.id }}">{{ category.name }}</label>
               </div>
+
             </div>
           </div>
+
         </div>
+
+        <!-- Show overlay mask if a special category is selected ("Delete" / "I don't know") -->
+        <div class="overlay-mask" ng-if="main.specialCategorySelected || main.overlayMask"></div>
+
       </div>
+    </div>
+
+    <!-- Help Area -->
+    <div class="grid-block shrink help-area wrap hide-for-small-only">
+      <div class="row small-12">
+        <div class="columns text-center hide-help-area" ng-click="main.helpAreaHidden = main.helpAreaHidden ? false : true">
+
+          <!-- If Help Area is visible, show "Hide Help" label -->
+          <a ng-show="!main.helpAreaHidden"><i class="material-icons">keyboard_arrow_down</i>  Hide Help</a>
+
+          <!-- If Help Area is hidden, show "Show Help" label -->
+          <a ng-show="main.helpAreaHidden"><i class="material-icons">keyboard_arrow_up</i>  Show Help</a>
+        </div>
+
+      </div>
+
+      <!-- Help Area Panel -->
+      <div ng-hide="main.helpAreaHidden" class="row expanded help-area-panel">
+
+        <!-- Description -->
+        <!-- Line 120 when examples are ready -->
+        <!-- <div class="columns medium-6 align-left"> -->
+        <div class="columns medium-12 align-left">
+          <!-- Heading: currently-hovered category name -->
+          <!-- If Category has a description, show it -->
+          <p><strong ng-if="main.helpCategory.name">{{ main.helpCategory.name }}<br /></strong>{{ main.helpCategory.description }}</p>
+          <!-- If Category has no description, show placeholder -->
+          <p ng-if="!main.helpCategory.description" class="subheader">No description for {{ main.helpCategory.name }}</p>
+          <p></p>
+        </div>
+
+        <!-- Examples -->
+        <!-- <div class="columns medium-6">
+          <h3>Examples</h3>
+          <div class="row medium-up-2 large-up-3 examples">
+              <p ng-repeat="i in [1,2,3,4,5,6]" class="column">{{ i }}</p>
+          </div>
+        </div> -->
+
+      </div>
+
     </div>
   </div>
 </div>

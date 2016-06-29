@@ -1,0 +1,59 @@
+#am-category-filter-bar {
+  position: relative;
+  z-index: 100;
+
+  input {
+    height: 3rem;
+    border-radius: 0.25rem;
+    text-indent: 2rem;
+  }
+
+  // Add Search icon to input
+  #inputWrapper:before {
+    font-family: 'Material Icons';
+    font-size: 1.5rem;
+    display: block;
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    left: 0.5rem;
+    top: 0.5rem;
+    
+    content: 'search';
+  }
+
+  .matches {
+    position: absolute;
+
+    left: 2rem;
+    top: 3.5rem;
+
+    @include breakpoint(medium down) {
+      width: 50%;
+    }
+    @include breakpoint(large) {
+      width: 25%;
+    }
+
+    .tile {
+      label {
+        margin-bottom: 1rem;
+
+        // Hovered match tiles get darker borders
+        &.hovered {
+          border: 1px solid darken(#F5F8FA, 50%);
+        }
+      }
+
+      input:checked ~ label {
+        // Hovered match tiles get darker borders
+        &.hovered {
+          border: 1px solid darken(#A9D6EA, 50%);
+        }
+      }
+
+    }
+  }
+
+}

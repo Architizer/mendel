@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') or 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') or False
 
-SOLR_DOCUMENTS_URL = os.environ.get('SOLR_DOCUMENTS_URL')
+WEBSOLR_URL = os.environ.get('WEBSOLR_URL')
 
 # Application definition
 
@@ -39,15 +39,19 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # models
     'mendel',
+    # 3rd party apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'corsheaders',
+    'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
     'import_export',
+    'wordnik',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -158,7 +162,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',),
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
@@ -167,6 +171,10 @@ REST_FRAMEWORK = {
 
 # REST Auth
 REST_AUTH_SERIALIZERS = {
-    'TOKEN_SERIALIZER': 'urls.TokenSerializer',
-    'USER_DETAILS_SERIALIZER': 'urls.UserSerializer',
+    'TOKEN_SERIALIZER': 'mendel.api_views.TokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'mendel.api_views.UserSerializer',
 }
+
+# you'll need to register for a Wordnik api key for definitions to work on the keyword
+WORDNIK_API_KEY = os.environ.get('WORDNIK_API_KEY','')
+WORDNIK_API_URL = 'http://api.wordnik.com/v4'

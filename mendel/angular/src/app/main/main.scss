@@ -1,4 +1,82 @@
+#controlbar {
+  background: $white;
+  border-bottom: 2px solid $border-color;
+  font-size: 1rem;
+  padding: 0.8rem 0;
+
+  .special-categories {
+    display: inline;
+
+    a:last-child {
+      margin-right: 1.5rem;
+    }
+  }
+
+  a {
+    color: $primary-color;
+
+    &:hover {
+      color: darken($primary-color, 10%);
+    }
+
+    // Special Category links
+    &.special-category {
+      padding: .5rem;
+      border-radius: 6px;
+      color: darken($gunmetal, 15%);
+
+      &:hover {
+        color: darken($gunmetal, 25%);
+      }
+
+
+      // "Delete" is selected
+      &.delete.selected {
+        color: $white;
+        background-color: $delete-color;
+
+        &:hover {
+          background-color: darken($delete-color, 5%);
+          color: $white;
+        }
+      }
+
+      // "I don't know" is selected
+      &.idk.selected {
+        color: $white;
+        background-color: $idk-color;
+
+        &:hover {
+          background-color: darken($idk-color, 5%);
+          color: $white;
+        }
+      }
+    }
+
+  }
+
+  // For whatever reason, .expanded isn't working. I'll troubleshoot later.
+  .row {
+    width: 100%;
+  }
+
+  .material-icons {
+    font-size: 0.9rem;
+    color: inherit;
+    vertical-align: baseline;
+  }
+}
+
 #main {
+
+  @include breakpoint(small only) {
+    flex-flow: column nowrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    -ms-grid-row-align: stretch;
+    align-items: stretch;
+  }
+
   $action-bar-height: 3.5rem;
   $action-bar-system-height: 2.5rem;
 
@@ -14,173 +92,114 @@
     font-size: 0.8rem;
   }
 
-  .action-bar {
-    border-bottom: 1px solid #dfdfdf;
-    & .row {
-      padding: 0;
-      height: $action-bar-height;
-      & .subject-navigation {
-        height: inherit;
-        padding-top: 1rem;
-      }
-      & .categories-search {
-        float: left;
-      }
-    }
-    input {
-      height: $action-bar-height;
-      border: 0;
-      padding: 0px 1rem;
-      outline: none;
-      box-shadow: none;
-      margin: 0;
-    }
-  }
-
+  // Subject Column (Left)
   .subject-column {
-    border-right: 1px solid #dfdfdf;
+    border-right: 2px solid $border-color;
+    padding-top: 0.5rem;
+
+    &.empty-state {
+      .material-icons {
+        margin-top: 3rem;
+        font-size: 5rem;
+        font-weight: 100;
+      }
+    }
   }
 
+  // Categories Column (Right)
   .categories-column {
-    & .categories-system-actions {
-      padding: 0;
-      & .system-action {
-        height: $action-bar-system-height;
-        padding: 0;
-      }
-      & .button {
-        width: 100%;
-        padding: 0.6rem 1rem;
-        text-align: left;
-        height: 100%;
-        font-size: 1rem;
-        opacity: 0.9;
-        font-weight: normal;
-        color: #464646;
-        transition: background 0.1s, border 0.1s, box-shadow 0.1s;
-        &.delete {
-          background: lighten(#FFECEC, 1%);
-          color: #E77F7F;
-          border-bottom: 1px solid lighten(#EEC3AE, 6%);
-          &:hover {
-            background: darken(#FFECEC, 0.04%);
-          }
-          &:active {
-            background: darken(#FFECEC, 1.5%);
-          }
+    &.empty-state {
+      background-color: lighten($border-color,3%);
+    }
+
+    .categories {
+      margin-top: 2.7rem;
+    }
+
+    .overlay-mask {
+      background: rgba(255,255,255,0.8);
+      position: absolute;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    div.category-selector {
+      // Medium & Small Screen Styles
+      @include breakpoint(medium down) {
+        &:nth-child(2n+3),
+        &:first-child {
+          padding-right: 0.25rem;
         }
-        &.idk {
-          background: #E9F7FF;
-          border: 1px solid lighten(#BCD9E8, 5%);
-          color: #62A8D0;
-          border-top: 0px;
-          &:hover {
-            background: darken(#E9F7FF, 1.5%);
-          }
-          &:active {
-            background: darken(#E9F7FF, 5%);
-          }
+        &:nth-child(2n) {
+          padding-left: 0.25rem;
         }
       }
+
+      // Large Screen Styles
+      @include breakpoint(large) {
+        padding: 0 0 1rem;
+        &:nth-child(4n+5),
+        &:first-child {
+          padding-right: 0.75rem;
+        }
+        &:nth-child(4n+2) {
+          padding-left: 0.25rem;
+          padding-right: 0.5rem;
+        }
+        &:nth-child(4n+3) {
+          padding-right: 0.25rem;
+          padding-left: 0.5rem;
+        }
+        &:nth-child(4n) {
+          padding-left: 0.75rem;
+        }
+      }
+
     }
   }
 
-  .categories {
-    margin-top: 2rem;
-  }
+  // Bottom Help Area
+  .help-area {
+    background: #FAFAFA;
 
-  .subjects {
-    margin-top: 2.5rem;
-  }
-
-  div.category-selector {
-
-    @include breakpoint(small) {
-      &:nth-child(2n+3),
-      &:first-child {
-        padding-right: 0.25rem;
-      }
-      &:nth-child(2n) {
-        padding-left: 0.25rem;
-      }
-    }
-
-    @include breakpoint(medium up) {
-      padding: 0 0 1rem;
-      &:nth-child(4n+5),
-      &:first-child {
-        padding-right: 0.75rem;
-      }
-      &:nth-child(4n+2) {
-        padding-left: 0.25rem;
-        padding-right: 0.5rem;
-      }
-      &:nth-child(4n+3) {
-        padding-right: 0.25rem;
-        padding-left: 0.5rem;
-      }
-      &:nth-child(4n) {
-        padding-left: 0.75rem;
-      }
-    }
-
-    & .tile {
-      input {
-        display: none;
-      }
-      label {
-        display: block;
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-        font-size: 0.85rem;
-        margin: 0;
-
-        background: #F5F8FA;
-        border: 1px solid lighten($gunmetal, 14%);
-        border-radius: 0.25rem;
-        padding: 0.75rem;
-        font-weight: bold;
-        color: #464646;
-        text-align: left;
-        transition: background 0.1s, border 0.1s, box-shadow 0.1s;
-        max-height: 3rem;
-        overflow: hidden;
-        white-space: nowrap;
+    .examples {
+      padding-top: 0;
+      .column {
+        padding-bottom: 0;
         text-overflow: ellipsis;
-
-        &:hover {
-          background: #FFF8D0;
-          border: 1px solid #E0D286;
-          box-shadow: 0 2px 3px 0 rgba(0,0,0,0.04);
-        }
-        &:active {
-          background: #FCF0A9;
-          border: 1px solid #C8C3A5;
-          box-shadow: 0 0 3px 0 rgba(0,0,0,0.13);
-        }
-      }
-
-      input:checked ~ label {
-        background: #E2F7C7;
-        border: 1px solid #B2D35F;
-        box-shadow: 0 2px 3px 0 rgba(121,140,78,0.13);
-        &:hover {
-          background: #C6ED95;
-          border: 1px solid #86A43C;
-        }
-        &:active {
-          background: #FCF0A9;
-          border: 1px solid #C8C3A5;
-          box-shadow: 0 0 3px 0 rgba(0,0,0,0.13);
-        }
       }
     }
-  }
 
-  .button {
-    &.category {
-      text-align: left;
+    .hide-help-area {
+      border-top: 1px solid darken($border-color, 5%);
+      border-bottom: 1px solid darken($border-color, 5%);
+      background-color: #F8F8F8;
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      cursor: pointer;
+      outline: 0;
+
+      &:hover {
+        background: darken(#f8f8f8, 1.5%);
+      }
+
+      .material-icons {
+        font-size: 0.75rem;
+      }
+
+      a {
+        color: $dark-gray;
+      }
     }
+
+    .help-area-panel {
+      width: 100%;
+      padding-top: 1rem;
+      padding-bottom: 0.3rem;
+    }
+
   }
 }

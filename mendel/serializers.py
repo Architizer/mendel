@@ -25,7 +25,7 @@ class ContextSerializer(serializers.ModelSerializer):
     user_reviews = serializers.SerializerMethodField('get_reviews')
     
     def get_reviews(self, obj):
-        results = Review.objects.filter(user=self.context['request'].user)
+        results = Review.objects.filter(user=self.context['request'].user, context=obj)
         return ReviewSerializer(results, many=True).data
 
     class Meta:

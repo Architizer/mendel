@@ -42,14 +42,14 @@
   <div class="grid-block large-4 medium-5 small-12">
 
     <!-- Empty State -->
-    <div class="grid-content subject-column empty-state align-center" ng-show="!main.context.keyword">
+    <div class="grid-content subject-column empty-state align-center" ng-show="!main.context.keyword_given">
       <div class="text-center align-self-middle">
       <h2 class="subheader"><i class="material-icons">error_outline</i> <br /> Oops! No keywords found.</h2>
       </div>
     </div>
 
     <!-- Nonempty -->
-    <div class="grid-content subject-column" ng-show="main.context.keyword">
+    <div class="grid-content subject-column" ng-show="main.context.keyword_given">
 
       <!-- Subject Header -->
       <h2 class="subheader">Subject</h2>
@@ -70,9 +70,9 @@
       </div>
 
       <!-- Definition Panel -->
-      <div ng-if="main.context.keyword.definition" class="callout small-12 show-for-large columns">
+      <div ng-if="main.context.keyword_given.definition" class="callout small-12 show-for-large columns">
         <h3>Definition</h3>
-        <p>{{ main.context.keyword.definition}}</p>
+        <p>{{ main.context.keyword_given.definition}}</p>
       </div>
 
     </div>
@@ -81,7 +81,7 @@
 
 
   <!-- Right Column -->
-  <div class="grid-block vertical expand" ng-show="!main.context.keyword">
+  <div class="grid-block vertical expand" ng-show="!main.context.keyword_given">
 
     <!-- Empty State -->
     <div class="grid-block">
@@ -92,7 +92,7 @@
   </div>
 
   <!-- Nonempty -->
-  <div class="grid-block vertical expand" ng-show="main.context.keyword">
+  <div class="grid-block vertical expand" ng-show="main.context.keyword_given">
 
     <!-- Categories -->
     <div class="grid-block">

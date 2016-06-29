@@ -32,7 +32,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
 class ContextSerializer(serializers.ModelSerializer):
-    keyword = KeywordSerializer()
+    keyword_given = KeywordSerializer()
 
     class Meta:
         model = Context

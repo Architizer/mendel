@@ -23,18 +23,16 @@ class CategorySerializer(serializers.ModelSerializer):
 # Context
 class ContextSerializer(serializers.ModelSerializer):
     keyword_given = KeywordSerializer()
+    user_reviews = serializers.SerializerMethodField('get_reviews')
+    
+    def get_reviews(self, obj):
+        results = Review.objects.filter(user=self.context['request'].user)
+        return ReviewSerializer(results, many=True).data
 
     class Meta:
         model = Context
-        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword_given', 'next_context_id', 'prev_context_id', 'reviews')
+        fields = ('id', 'position_from', 'position_to', 'text', 'document', 'keyword_given', 'next_context_id', 'prev_context_id', 'reviews', 'user_reviews')
         depth = 1
-
-    # return the object
-    # def reviews(self, user):
-    #     try:
-    #         return Review.objects.filter(user=request.user.id)
-    #     except:
-    #         return None
 
 # Document
 class DocumentSerializer(serializers.ModelSerializer):

@@ -58,7 +58,11 @@
       <div class="callout small-12 columns with-bottom-margin">
 
         <!-- Keyword -->
-        <h1 ng-hide="main.editingKeyword">{{ main.keyword.name }}</h1>
+        <h1 ng-hide="main.editingKeyword">
+          {{ main.keyword.name }}
+          <!-- "Edited" label -->
+          <small ng-show="main.keyword.name !== main.context.keyword_given.name">(edited)</small>
+        </h1>
 
         <!-- Edit Keyword -->
         <form ng-show="main.editingKeyword" ng-submit="main.saveKeyword()">

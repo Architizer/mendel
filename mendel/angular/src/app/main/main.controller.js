@@ -26,7 +26,11 @@
         if (Session.user) {
 
           // Get Categories
-          getCategories();
+          getCategories()
+          .then(function(categories) {
+            // Put regular categories in view
+            vm.categories = categories;
+          });
 
           // Get the last Context the user reviewed
           getContext(Session.user.last_context_id);
@@ -138,6 +142,10 @@
     // Get Categories
     function getCategories () {
 
+      // Set up deferred object to return
+      var deferred = $q.defer();
+
+      // Get categories
       Category.query()
       .$promise
       .then(getCategoriesSuccess)
@@ -180,8 +188,8 @@
         categories.splice(categories.indexOf(vm.deleteCategory), 1);
         categories.splice(categories.indexOf(vm.idkCategory), 1);
 
-        // Put regular categories in view
-        vm.categories = categories;
+        // Resolve the promise with the categories
+        return deferred.resolve(categories);
 
       }
 
@@ -191,7 +199,13 @@
         for (var i in error.data) {
           toastr.error(error.data[i], 'Error', {timeOut: 5000});
         }
+
+        // Reject the promise
+        return deferred.reject(error);
       }
+
+      // Return the promise
+      return deferred.promise;
     }
 
     // Edit Keyword
@@ -218,50 +232,7 @@
 
       var _nextContextId = vm.context.next_context_id;
 
-      if (vm.context.keyword_given) {
-
-        var categories = [];
-
-        // Check if a special category is selected
-        if (vm.specialCategorySelected) {
-
-          if (vm.deleteCategory.selected) { categories.push(vm.deleteCategory.id); }
-          if (vm.idkCategory.selected) { categories.push(vm.idkCategory.id); }
-        }
-
-        // Otherwise, use the regular categories
-        else {
-
-          // Build array of categories to submit
-          angular.forEach(vm.categories, function (category) {
-            if (category.selected) {
-              categories.push(category.id);
-            }
-          });
-        }
-
-        // Submit Reviews
-        Context.submitReviews({
-          id: vm.context.id,
-          categories: categories
-        })
-        .$promise
-        .then(submitReviewsSuccess)
-        .catch(submitReviewsError);
-      }
-
-      function submitReviewsSuccess (data) {
-
-        if (data.reviews_created) {
-
-          // Show Success Toast
-          toastr.success('Added categories to ' + data.keyword_proposed);
-        }
-        else {
-
-          // Show Success Toast
-          toastr.success('Updated categories for ' + data.keyword_proposed);
-        }
+      if (_nextContextId) {
 
         // Deselect all categories
         deselectAllCategories();
@@ -269,25 +240,7 @@
         // Reset special categories
         resetSpecialCategories();
 
-        if (_nextContextId) {
-
-          getContext(_nextContextId);
-        }
-        else {
-
-          var _prevContextId = angular.copy(vm.context.id);
-
-          // Empty Context
-          vm.context = {};
-          vm.keyword = null;
-          vm.context.prev_context_id = _prevContextId;
-        }
-      }
-
-      function submitReviewsError (error) {
-
-        toastr.error('Could not submit review. Check the browser console for more information.', 'Error');
-        console.error(error);
+        getContext(_nextContextId);
       }
     }
 

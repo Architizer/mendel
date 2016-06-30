@@ -94,16 +94,14 @@
       function getContextSuccess (context) {
 
         vm.context = context;
-        vm.context.front = '"...' + vm.context.text.substring(0, vm.context.position_from);
-        vm.context.back = vm.context.text.substring(vm.context.position_to, vm.context.text.length) + '..."';
-        vm.keyword = context.keyword_given;
+        vm.keyword = angular.copy(context.keyword_given);
         vm.context.previouslySelectedCategories = preselect();
 
         function preselect () {
           var _prevCategories = [];
 
           // Load previously-selected categories
-          angular.forEach(context.reviews, function(review){
+          angular.forEach(context.user_reviews, function(review){
             _prevCategories.push(review.category);
           });
 
@@ -203,22 +201,47 @@
 
       if (vm.context.keyword_given) {
 
-        submitReviews()
+        var categories = [];
+
+        // Check if a special category is selected
+        if (vm.specialCategorySelected) {
+
+          if (vm.deleteCategory.selected) { categories.push(vm.deleteCategory.id); }
+          if (vm.idkCategory.selected) { categories.push(vm.idkCategory.id); }
+        }
+
+        // Otherwise, use the regular categories
+        else {
+
+          // Build array of categories to submit
+          angular.forEach(vm.categories, function (category) {
+            if (category.selected) {
+              categories.push(category.id);
+            }
+          });
+        }
+
+        // Submit Reviews
+        Context.submitReviews({
+          id: vm.context.id,
+          categories: categories
+        })
+        .$promise
         .then(submitReviewsSuccess)
         .catch(submitReviewsError);
       }
 
-      function submitReviewsSuccess (successCategoryIds) {
+      function submitReviewsSuccess (data) {
 
-        if (successCategoryIds) {
+        if (data.reviews_created) {
 
           // Show Success Toast
-          toastr.success('Added categories to ' + vm.context.keyword_given.name);
+          toastr.success('Added categories to ' + data.keyword_proposed);
         }
         else {
 
           // Show Success Toast
-          toastr.success('Updated categories for ' + vm.context.keyword_given.name);
+          toastr.success('Updated categories for ' + data.keyword_proposed);
         }
 
         // Deselect all categories
@@ -242,9 +265,10 @@
         }
       }
 
-      function submitReviewsError (errorCategoryIds) {
+      function submitReviewsError (error) {
 
-        toastr.error('Could not submit reviews for category IDs: ' + errorCategoryIds, 'Error');
+        toastr.error('Could not submit review. Check the browser console for more information.', 'Error');
+        console.error(error);
       }
     }
 
@@ -271,204 +295,6 @@
       angular.forEach(vm.categories, function (category) {
         category.selected = false;
       });
-    }
-
-    // Submit Reviews
-    function submitReviews () {
-
-      // Set up deferred object to return
-      var deferred = $q.defer();
-
-      // Set up promise array
-      var promises = [];
-
-      // Set up arrays of categories
-      var currentlySelected = [],   // (IDs of currently selected categories, raw from the form)
-          currentlyUnselected = [], // (IDs of currently unselected categories, raw from the form)
-          existingReviews = [],     // (IDs of existing reviews for this context)
-          previouslySelected = [],  // OMIT each   (vm.categories[selected] is included in context.reviews)
-          newlySelected = [],       // SAVE each   (vm.categories[selected] is not included in context.reviews)
-          newlyUnselected = [],     // DELETE each (vm.categories[!selected] is included in context.reviews)
-          reviewsToDelete = [];     // (IDs of reviews to be deleted)
-
-      constructArrays();
-
-      function constructArrays () {
-
-        // Handle special categories
-        if (vm.specialCategorySelected) {
-
-          if (vm.specialCategorySelected === 'delete') {
-            currentlySelected.push(vm.deleteCategory.id);
-            currentlyUnselected.push(vm.idkCategory.id);
-          }
-
-          else if (vm.specialCategorySelected === 'idk') {
-            currentlySelected.push(vm.idkCategory.id);
-            currentlyUnselected.push(vm.deleteCategory.id);
-          }
-        }
-
-        // Otherwise, special categories aren't selected
-        else {
-          currentlyUnselected.push(vm.deleteCategory.id);
-          currentlyUnselected.push(vm.idkCategory.id);           
-        }
-
-        // Construct currentlySelected and currentlyUnselected arrays
-        angular.forEach(vm.categories, function (category) {
-          if (category.selected) {
-            currentlySelected.push(category.id);
-          }
-          if (!category.selected) {
-            currentlyUnselected.push(category.id);
-          }
-        });
-
-        // Construct previouslySelected array ()
-        angular.forEach(vm.context.reviews, function(review) {
-          previouslySelected.push(review.category);
-          existingReviews.push(review.id);
-        });
-
-        // Construct newlySelected array
-        angular.forEach(currentlySelected, function(categoryId) {
-          if (previouslySelected.indexOf(categoryId) === -1) {
-            newlySelected.push(categoryId);
-          }
-        });
-
-        // Construct newlyUnselected array
-        angular.forEach(currentlyUnselected, function (categoryId) {
-          if (previouslySelected.indexOf(categoryId) !== -1) {
-            newlyUnselected.push(categoryId);
-          }
-        });
-
-        // Construct reviewsToDelete array
-        angular.forEach(vm.context.reviews, function(review) {
-          if (newlyUnselected.indexOf(review.category) !== -1) {
-            reviewsToDelete.push(review.id);
-          }
-        });
-      }
-
-
-      // Queue a promise to save each newly selected category
-      angular.forEach(newlySelected, function (categoryId) {
-
-        // Construct Review object
-        var r = {
-          category: categoryId,
-          context: vm.context.id,
-          keyword_given: vm.context.keyword_given.id,
-
-          /* 
-            Note re: keyword_proposed field:
-
-            keyword_proposed is hardcoded as the same value as keyword_given
-            until we build the "Edit Keyword" feature
-          */
-
-          keyword_proposed: vm.context.keyword_given.id,
-
-          //
-
-          user: Session.user.id
-        };
-
-        var promise = Review.save(r)
-        .$promise
-        .then(saveReviewSuccess)
-        .catch(saveReviewError);
-
-        // Push promise into array
-        promises.push(promise);
-
-      });
-
-      // Queue a promise to delete each newly unselected category
-      angular.forEach(reviewsToDelete, function (reviewId) {
-
-        var promise = Review.delete({id: reviewId})
-        .$promise
-        .then(deleteReviewSuccess)
-        .catch(deleteReviewError);
-
-        // Push promise into array
-        promises.push(promise);
-
-      });
-
-      // (Callbacks)
-      function saveReviewSuccess (data) { return data; }
-      function saveReviewError (error) { return error; }
-      function deleteReviewSuccess (data) { return data; }
-      function deleteReviewError (error) { return error; }
-
-
-
-      // Run the queue of promises
-      $q.all(promises)
-      .then(promiseQueueSuccess)
-      .catch(promiseQueueError);
-
-      // (Callbacks)
-      function promiseQueueSuccess (items) {
-
-        var successItems = [];
-        var errorItems = [];
-
-        angular.forEach(items, function (item) {
-
-          // If the item is a Review item, push to success array
-          if (item instanceof Review) {
-            successItems.push(item);
-          }
-          // Otherwise, it is an Error item, push to error array
-          else {
-            errorItems.push(item);
-          }
-        });
-
-        // If there are any review errors, return IDs of categories that failed, and reject promise
-        if (errorItems.length) {
-          var errorCategoryIds = [];
-
-          // Get Category IDs for each success:
-          angular.forEach(errorItems, function (errorItem) {
-            errorCategoryIds.push(errorItem.config.data.category);
-          });
-
-          errorCategoryIds = errorCategoryIds.join(', ');
-
-          deferred.reject(errorCategoryIds);
-        }
-
-        // Otherwise, return IDs of successful categories, and resolve promise
-        else {
-          var successCategoryIds = [];
-
-          // Get Category IDs for each success:
-          angular.forEach(successItems, function (successItem) {
-            successCategoryIds.push(successItem.category);
-          });
-
-          successCategoryIds = successCategoryIds.join(', ');
-
-          deferred.resolve(successCategoryIds);
-        }
-
-      }
-
-      // If there are other errors with the $q.all(), return error and reject promise
-      function promiseQueueError (error) {
-        console.error('promiseQueueError:', error);
-
-        deferred.reject('Error Submitting Reviews');
-      }
-
-      return deferred.promise;
     }
 
     // Reset special categories ("Delete" / "I don't know")

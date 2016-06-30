@@ -7,12 +7,19 @@ import settings
 
 
 class Keyword(models.Model):
-    name = models.CharField(max_length=200, unique=True)
+    name = models.CharField(max_length=200, unique=True) # case sensitive - lowercased on save()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.name
+
+    def clean(self):
+        self.name = self.name.lower()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super(Keyword, self).save(*args, **kwargs)
 
     def definition(self):
         try:

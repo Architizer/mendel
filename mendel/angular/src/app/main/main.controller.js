@@ -210,38 +210,7 @@
 
       vm.editingKeyword = false;
 
-      // If we haven't changed the keyword, don't bother saving
-      if (vm.newKeyword.name === vm.keyword.name) {
-        return;
-      }
-
-      // POST to the Keywords endpoint to get_or_create the Keyword
-      Keyword.save({
-        name: vm.newKeyword.name
-      })
-      .$promise
-      .then(saveKeywordSuccess)
-      .catch(saveKeywordError);
-
-      function saveKeywordSuccess (data) {
-
-        // Set flag for when user goes to next context
-        vm.updatedKeyword = true;
-
-        // Reset vm.keyword
-        vm.keyword = data;
-      }
-
-      function saveKeywordError (error) {
-
-        // Reset Keyword to Context's Original Keyword
-        vm.keyword = vm.context.keyword_given;
-
-        // Show Error Toast
-        for (var i in error.data) {
-          toastr.error(JSON.stringify(error.data[i]), 'Error', {timeOut: 5000});
-        }
-      }
+      vm.keyword = vm.newKeyword;
     }
 
     // Get Next Context

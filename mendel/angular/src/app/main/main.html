@@ -6,12 +6,12 @@
     <div class="column align-left shrink">
 
       <!-- "Prev" Link -->
-      <a ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
+      <a ng-show="main.context.prev_context_id" ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
 
     </div>
 
     <!-- Right Side -->
-    <div class="column align-right expand text-right">
+    <div ng-show="main.context.id" class="column align-right expand text-right">
 
       <!-- Special Categories -->
       <div class="special-categories">
@@ -54,10 +54,27 @@
       <!-- Subject Header -->
       <h2 class="subheader">Subject</h2>
 
-      <!-- Word Panel -->
+      <!-- Keyword Panel -->
       <div class="callout small-12 columns with-bottom-margin">
-        <h1>{{ main.keyword.name }}</h1>
-        <p class="subheader"><a ng-href="#">Edit keyword</a></p>
+
+        <!-- Keyword -->
+        <h1 ng-hide="main.editingKeyword">
+          {{ main.keyword.name }}
+          <!-- "Edited" label -->
+          <small ng-show="main.keyword.name !== main.context.keyword_given.name">(edited)</small>
+        </h1>
+
+        <!-- Edit Keyword -->
+        <form ng-show="main.editingKeyword" ng-submit="main.saveKeyword()">
+          <input class="edit-keyword" focus-if="main.editingKeyword" ng-model="main.newKeyword.name" ng-blur="main.saveKeyword()"></input>
+        </form>
+
+        <!-- Edit Keyword Link -->
+        <p class="subheader">
+          <a ng-hide="main.editingKeyword" ng-click="main.editKeyword()">Edit keyword</a>
+          <a ng-show="main.editingKeyword" ng-click="main.saveKeyword()">Save keyword</a>
+        </p>
+
       </div>
 
       <!-- Metadata Header -->

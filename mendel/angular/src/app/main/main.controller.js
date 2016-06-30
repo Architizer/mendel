@@ -94,8 +94,6 @@
       function getContextSuccess (context) {
 
         vm.context = context;
-        vm.context.front = '"...' + vm.context.text.substring(0, vm.context.position_from);
-        vm.context.back = vm.context.text.substring(vm.context.position_to, vm.context.text.length) + '..."';
         vm.keyword = context.keyword_given;
         vm.context.previouslySelectedCategories = preselect();
 

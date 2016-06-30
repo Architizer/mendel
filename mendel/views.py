@@ -24,7 +24,15 @@ class PostContext(APIView):
                 name=request.data.get('keyword_proposed')['name']
             )
 
-        existing_review_count = Review.objects.filter(context=context).count()
+        existing_review_count = Review.objects.filter(user=request.user, context=context).count()
+
+        # If there are existing reviews, delete them first
+        if existing_review_count:
+            for review in Review.objects.filter(user=request.user, context=context):
+                review.delete()
+                # TODO: Don't delete reviews for categories that are both in existing_reviews and in the request's categories
+
+        # Create a review for each category in the request
         if not existing_review_count:
             for category in request.data.get('categories'):
                 Review.objects.create(

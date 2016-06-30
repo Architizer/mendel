@@ -6,12 +6,12 @@
     <div class="column align-left shrink">
 
       <!-- "Prev" Link -->
-      <a ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
+      <a ng-show="main.context.prev_context_id" ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
 
     </div>
 
     <!-- Right Side -->
-    <div class="column align-right expand text-right">
+    <div ng-show="main.context.keyword_given" class="column align-right expand text-right">
 
       <!-- Special Categories -->
       <div class="special-categories">

@@ -2,7 +2,9 @@
   <nav class="top-bar">
   <div class="top-bar-title">
     <ul class="menu">
-      <li class="menu-text">Architizer Mendel</li>
+      <li class="menu-text">
+        <a ui-sref="main">Architizer Mendel</a>
+      </li>
     </ul>
   </div>
   <div>
@@ -10,7 +12,7 @@
     </div>
     <div class="top-bar-right">
       <ul class="dropdown menu" data-dropdown-menu data-disable-hover="true" data-click-open="true">
-        <li><a ng-href="#"><i class="material-icons">info_outline</i></a></li>
+        <li><a ui-sref="about"><i class="material-icons">info_outline</i></a></li>
         <li ng-show="navbar.user">
           <a>{{ navbar.user.username || 'User' }} </a>
           <ul class="menu vertical">

@@ -234,13 +234,30 @@
 
       if (_nextContextId) {
 
-        // Deselect all categories
-        deselectAllCategories();
+        submitReviews()
+        .then(function (success) {
 
-        // Reset special categories
-        resetSpecialCategories();
+          // Deselect all categories
+          deselectAllCategories();
 
-        getContext(_nextContextId);
+          // Reset special categories
+          resetSpecialCategories();
+
+          // Get next context
+          getContext(_nextContextId);
+        });
+      }
+
+      else {
+
+        /*
+          This case should never actually happen.
+          The "Next" button is hidden when there is no "next context."
+          But to be extra safe, we will show an error toast if this happens somehow.
+        */
+
+        // Show Error Toast
+        toastr.error('Could not get the next context.', 'Error');
       }
     }
 
@@ -254,11 +271,77 @@
         // Deselect all categories
         deselectAllCategories();
 
-        // Reset special categories
-        resetSpecialCategories();
+        submitReviews()
+        .then(function (success) {
 
+          // Deselect all categories
+          deselectAllCategories();
+
+          // Reset special categories
+          resetSpecialCategories();
+
+          // Get previous context
+          getContext(_prevContextId);
+        });
+      }
+
+      // Otherwise, just get the previous context
+      else {
+
+        // Get previous context
         getContext(_prevContextId);
       }
+    }
+
+    // Submit Reviews
+    function submitReviews() {
+
+      // Set up deferred object to return
+      var deferred = $q.defer();
+
+      var categories = [];
+
+      // Check if a special category is selected
+      if (vm.deleteCategory.selected) { categories.push(vm.deleteCategory.id); }
+      if (vm.idkCategory.selected) { categories.push(vm.idkCategory.id); }
+
+      // Build array of categories to submit
+      angular.forEach(vm.categories, function (category) {
+        if (category.selected) {
+          categories.push(category.id);
+        }
+      });
+
+      // Submit Reviews
+      Context.submitReviews({
+        id: vm.context.id,
+        categories: categories,
+        keyword_proposed: vm.keyword
+      })
+      .$promise
+      .then(submitReviewsSuccess)
+      .catch(submitReviewsError);
+
+      function submitReviewsSuccess (data) {
+
+        // Show Success Toast
+        toastr.success('Saved categories for ' + data.keyword_proposed);
+
+        // Resolve the promise
+        return deferred.resolve(data);
+      }
+
+      function submitReviewsError (error) {
+
+        toastr.error('Could not submit review. Check the browser console for more information.', 'Error');
+        console.error(error);
+
+        // Reject the promise
+        return deferred.reject(error);
+      }
+
+      // Return the promise
+      return deferred.promise;
     }
 
     // Deselect All Categories

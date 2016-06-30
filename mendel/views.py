@@ -33,16 +33,15 @@ class PostContext(APIView):
                 # TODO: Don't delete reviews for categories that are both in existing_reviews and in the request's categories
 
         # Create a review for each category in the request
-        if not existing_review_count:
-            for category in request.data.get('categories'):
-                Review.objects.create(
-                    context=context, 
-                    category=Category.objects.get(id=category), 
-                    keyword_given=context.keyword_given, 
-                    keyword_proposed=keyword_proposed,
-                    user=request.user,
-                    status=Review.PENDING)
-                counter += 1
+        for category in request.data.get('categories'):
+            Review.objects.create(
+                context=context, 
+                category=Category.objects.get(id=category), 
+                keyword_given=context.keyword_given, 
+                keyword_proposed=keyword_proposed,
+                user=request.user,
+                status=Review.PENDING)
+            counter += 1
 
         return Response({
             "keyword_created": created, 

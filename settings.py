@@ -139,6 +139,19 @@ USE_TZ = True
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
+# If deployed to Elastic Beanstalk, use RDS database configuration
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
+
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -171,8 +184,8 @@ REST_FRAMEWORK = {
 
 # REST Auth
 REST_AUTH_SERIALIZERS = {
-    'TOKEN_SERIALIZER': 'urls.TokenSerializer',
-    'USER_DETAILS_SERIALIZER': 'urls.UserSerializer',
+    'TOKEN_SERIALIZER': 'mendel.api_views.TokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'mendel.api_views.UserSerializer',
 }
 
 # you'll need to register for a Wordnik api key for definitions to work on the keyword

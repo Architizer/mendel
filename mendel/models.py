@@ -7,12 +7,19 @@ import settings
 
 
 class Keyword(models.Model):
-    name = models.CharField(max_length=200, unique=True)
+    name = models.CharField(max_length=200, unique=True) # case sensitive - lowercased on save()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.name
+
+    def clean(self):
+        self.name = self.name.lower()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super(Keyword, self).save(*args, **kwargs)
 
     def definition(self):
         try:
@@ -57,12 +64,15 @@ class Document(models.Model):
 
 class Context(models.Model):
     document = models.ForeignKey(Document)
-    keyword = models.ForeignKey(Keyword)
+    keyword_given = models.ForeignKey(Keyword)
     position_from = models.IntegerField()
     position_to = models.IntegerField()
     text = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    # post to context with an array of categories maybe keyword...
+    #create review objects that do not exist (if there is a category in the array)
+    #delete Review objects that do not happen ( )
 
     def __unicode__(self):
         return self.text
@@ -91,15 +101,24 @@ class Review(models.Model):
     )
 
     context = models.ForeignKey(Context, related_name="reviews")
-    keyword = models.ForeignKey(Keyword)
+    keyword_proposed = models.ForeignKey(Keyword, related_name="keyword_proposed")
+    keyword_given = models.ForeignKey(Keyword, related_name="keyword_given")
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)
     status = models.CharField(max_length=20, choices=STATUS_TYPES, default=PENDING)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+
     class Meta:
-        unique_together = ('context', 'keyword', 'category', 'user', 'status')
+        unique_together = ('context', 'keyword_proposed', 'category', 'user', 'status')
 
     def __unicode__(self):
         return self.status
+
+    # def save(self):
+    #     #get keyword given from database
+    #     if self.keyword_proposed:
+    #         exists: 
+    #         if Keyword.objects.filter(name=self.keyword_proposed).exists()
+

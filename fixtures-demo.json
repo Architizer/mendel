@@ -379,7 +379,7 @@
     "pk": 1,
     "fields": {
       "document": 1,
-      "keyword": 1,
+      "keyword_given": 1,
       "position_from": 33,
       "position_to": 39,
       "text": "the westernmost part of Eurasia. Europe is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the",

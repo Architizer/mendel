@@ -6,12 +6,12 @@
     <div class="column align-left shrink">
 
       <!-- "Prev" Link -->
-      <a ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
+      <a ng-show="main.context.prev_context_id" ng-click="main.getPrevContext()"><i class="material-icons">arrow_back</i> Prev</a>
 
     </div>
 
     <!-- Right Side -->
-    <div class="column align-right expand text-right">
+    <div ng-show="main.context.id" class="column align-right expand text-right">
 
       <!-- Special Categories -->
       <div class="special-categories">
@@ -42,22 +42,39 @@
   <div class="grid-block large-4 medium-5 small-12">
 
     <!-- Empty State -->
-    <div class="grid-content subject-column empty-state align-center" ng-show="!main.context.keyword">
+    <div class="grid-content subject-column empty-state align-center" ng-show="!main.context.keyword_given">
       <div class="text-center align-self-middle">
       <h2 class="subheader"><i class="material-icons">error_outline</i> <br /> Oops! No keywords found.</h2>
       </div>
     </div>
 
     <!-- Nonempty -->
-    <div class="grid-content subject-column" ng-show="main.context.keyword">
+    <div class="grid-content subject-column" ng-show="main.context.keyword_given">
 
       <!-- Subject Header -->
       <h2 class="subheader">Subject</h2>
 
-      <!-- Word Panel -->
+      <!-- Keyword Panel -->
       <div class="callout small-12 columns with-bottom-margin">
-        <h1>{{ main.keyword.name }}</h1>
-        <p class="subheader"><a ng-href="#">Edit keyword</a></p>
+
+        <!-- Keyword -->
+        <h1 ng-hide="main.editingKeyword">
+          {{ main.keyword.name }}
+          <!-- "Edited" label -->
+          <small ng-show="main.keyword.name !== main.context.keyword_given.name">(edited)</small>
+        </h1>
+
+        <!-- Edit Keyword -->
+        <form ng-show="main.editingKeyword" ng-submit="main.saveKeyword()">
+          <input class="edit-keyword" focus-if="main.editingKeyword" ng-model="main.newKeyword.name" ng-blur="main.saveKeyword()"></input>
+        </form>
+
+        <!-- Edit Keyword Link -->
+        <p class="subheader">
+          <a ng-hide="main.editingKeyword" ng-click="main.editKeyword()">Edit keyword</a>
+          <a ng-show="main.editingKeyword" ng-click="main.saveKeyword()">Save keyword</a>
+        </p>
+
       </div>
 
       <!-- Metadata Header -->
@@ -66,13 +83,13 @@
       <!-- Context Panel -->
       <div class="callout small-12 columns">
         <h3>Context</h3>
-        <p>{{ main.context.front }} <strong>{{ main.keyword.name }}</strong> {{ main.context.back }}</p>
+        <p>{{ main.context.text }}</p>
       </div>
 
       <!-- Definition Panel -->
-      <div ng-if="main.context.keyword.definition" class="callout small-12 show-for-large columns">
+      <div ng-if="main.context.keyword_given.definition" class="callout small-12 show-for-large columns">
         <h3>Definition</h3>
-        <p>{{ main.context.keyword.definition}}</p>
+        <p>{{ main.context.keyword_given.definition}}</p>
       </div>
 
     </div>
@@ -81,7 +98,7 @@
 
 
   <!-- Right Column -->
-  <div class="grid-block vertical expand" ng-show="!main.context.keyword">
+  <div class="grid-block vertical expand" ng-show="!main.context.keyword_given">
 
     <!-- Empty State -->
     <div class="grid-block">
@@ -92,7 +109,7 @@
   </div>
 
   <!-- Nonempty -->
-  <div class="grid-block vertical expand" ng-show="main.context.keyword">
+  <div class="grid-block vertical expand" ng-show="main.context.keyword_given">
 
     <!-- Categories -->
     <div class="grid-block">

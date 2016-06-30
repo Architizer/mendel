@@ -90,6 +90,21 @@
     // Get Context
     function getContext (id) {
 
+      // If no ID is passed in, create an "empty" context
+      if (!id) {
+
+        // Set previous context ID from last context
+        var _prevContextId = angular.copy(vm.context.id);
+
+        // Empty Context
+        vm.context = {};
+        vm.keyword = null;
+        vm.context.prev_context_id = _prevContextId;
+
+        return;
+      }
+
+      // Get context
       Context.get({id: id})
       .$promise
       .then(getContextSuccess)
@@ -190,7 +205,6 @@
 
         // Resolve the promise with the categories
         return deferred.resolve(categories);
-
       }
 
       function getCategoriesError (error) {
@@ -232,7 +246,8 @@
 
       var _nextContextId = vm.context.next_context_id;
 
-      if (_nextContextId) {
+      // Check if the current context is not empty
+      if (vm.context.id) {
 
         submitReviews()
         .then(function (success) {
@@ -266,10 +281,8 @@
 
       var _prevContextId = vm.context.prev_context_id;
 
-      if (_prevContextId) {
-  
-        // Deselect all categories
-        deselectAllCategories();
+      // Check if the current context is not empty
+      if (vm.context.id) {
 
         submitReviews()
         .then(function (success) {

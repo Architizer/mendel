@@ -347,6 +347,11 @@
         }
       });
 
+      // Save keyword (in case user is editing keyword when they go to next context)
+      if (vm.editingKeyword) {
+        saveKeyword();
+      }
+
       // Submit Reviews
       Context.submitReviews({
         id: vm.context.id,

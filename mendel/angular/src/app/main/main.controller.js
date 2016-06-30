@@ -120,9 +120,31 @@
           var _prevCategories = [];
 
           // Load previously-selected categories
-          angular.forEach(context.user_reviews, function(review){
+          angular.forEach(context.user_reviews, function(review) {
+
+            // Check if this context has reviews with a different keyword_proposed
+            if (review.keyword_given !== review.keyword_proposed) {
+
+              // Get the proposed keyword from API
+              Keyword.get({id: review.keyword_proposed})
+              .$promise
+              .then(setUpdatedKeywordSuccess)
+              .catch(setUpdatedKeywordError);
+            }
+
+            // Push this category to previously-selected categories
             _prevCategories.push(review.category);
           });
+
+          // Callbacks for setting updated keyword from keyword_proposed
+          function setUpdatedKeywordSuccess (keyword_proposed) {
+            vm.keyword = keyword_proposed;
+          }
+
+          function setUpdatedKeywordError (error) {
+            toastr.error('Could not get this context. Check the browser console for more information.', 'Error');
+            console.error(error);
+          }
 
           // Loop through categories, set "selected" if in prevously selected categories for context
           angular.forEach(vm.categories, function(category) {

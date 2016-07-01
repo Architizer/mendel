@@ -1,0 +1,55 @@
+<div id="account" class="grid-block expand">
+  <!-- Account -->
+  <div class="grid-block align-center wrap">
+    <div class="grid-content small-12 large-6">
+
+      <!-- Callout -->
+      <div class="callout">
+        <h3>Account Settings</h3>
+        <p>Change your account settings here.</p>
+      </div>
+
+      <!-- Change Password Form -->
+      <fieldset class="fieldset">
+        <legend>Change Password</legend>
+        <form>
+
+          <!-- Old Password -->
+          <div class="row">
+            <div class="small-12 columns">
+              <label>Old Password
+                <input type="password" ng-model="account.changePassword.oldPassword" placeholder="•••••••••" ng-required="true">
+              </label>
+            </div>
+          </div>
+
+          <!-- New Password -->
+          <div class="row">
+            <div class="small-12 columns">
+              <label>New Password
+                <input type="password" ng-model="account.changePassword.newPassword" placeholder="••••••••" ng-required="true">
+              </label>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="row">
+            <div class="small-12 columns">
+            <label>Confirm New Password
+              <input type="password" ng-model="account.changePassword.confirmNewPassword" placeholder="••••••••" ng-required="true">
+            </label>
+            </div>
+          </div>
+
+          <!-- Submit / Enter -->
+          <div class="row">
+            <div class="small-12 columns">
+              <a class="button" ng-click="account.changePassword.submit()">Change Password</a>
+            </div>
+          </div>
+        </form>
+      </fieldset>
+
+    </div>
+  </div>
+</div>

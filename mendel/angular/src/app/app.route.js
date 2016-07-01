@@ -30,6 +30,14 @@
         controllerAs: 'about'
       })
 
+      .state('account', {
+        url: '/account',
+        templateUrl: 'app/account/account.html',
+        controller: 'AccountController',
+        controllerAs: 'account',
+        authenticationRequired: true
+      })
+
       ;
 
     $urlRouterProvider.otherwise('/main');

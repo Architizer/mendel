@@ -12,7 +12,8 @@
         url: '/main',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        authenticationRequired: true
       })
 
       .state('login', {

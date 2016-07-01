@@ -187,6 +187,7 @@ REST_AUTH_SERIALIZERS = {
     'TOKEN_SERIALIZER': 'mendel.api_views.TokenSerializer',
     'USER_DETAILS_SERIALIZER': 'mendel.api_views.UserSerializer',
 }
+OLD_PASSWORD_FIELD_ENABLED = True
 
 # you'll need to register for a Wordnik api key for definitions to work on the keyword
 WORDNIK_API_KEY = os.environ.get('WORDNIK_API_KEY','')

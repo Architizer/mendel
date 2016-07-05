@@ -28,7 +28,13 @@ class ContextAdmin(ImportExportModelAdmin):
 
 
 class ReviewAdmin(ImportExportModelAdmin):
-    list_display = ('keyword_given', 'keyword_proposed', 'category', 'user', 'status', 'created', 'modified')
+    list_display = ('id', 'keyword_given', 'keyword_proposed', 'category', 'get_context_id', 'user', 'status', 'created', 'modified')
+
+    def get_context_id(self, obj):
+        return obj.context.id
+    get_context_id.admin_order_field = 'id'
+    get_context_id.short_description = 'Context ID'
+
     pass
 
 

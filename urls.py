@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin', RedirectView.as_view(url='/admin/')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^api/v1/context/(?P<id>[0-9]+)/reviews/$', mendel.views.PostContext.as_view()),
     url(r'^api/v1/', include(router.urls)),
     url(r'^api$', RedirectView.as_view(url='/api/v1/')),
     url(r'^api/v1/', include('rest_auth.urls')),

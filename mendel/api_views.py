@@ -4,7 +4,7 @@ from .serializers import CategorySerializer, ContextSerializer, DocumentSerializ
 from rest_framework import permissions, serializers, viewsets
 
 
-# API Views
+
 class KeywordViewSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()
     serializer_class = KeywordSerializer

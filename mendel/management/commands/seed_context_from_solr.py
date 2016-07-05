@@ -1,4 +1,5 @@
 import pysolr
+import random
 
 from django.core.management.base import BaseCommand, CommandError
 
@@ -25,27 +26,27 @@ class Command(BaseCommand):
                 docs = results.docs
                 highlighting = results.highlighting
 
-                for doc in docs:
-                    doc_id = doc['id']
-                    doc_text = doc['text']
+                doc = random.choice(docs)
+                doc_id = doc['id']
+                doc_text = doc['text']
 
-                    if doc['django_ct'] == 'architizer.productrequest':
-                        doc_type = "S"
-                    if doc['django_ct'] == 'architizer.productresponse':
-                        doc_type = "R"
+                if doc['django_ct'] == 'architizer.productrequest':
+                    doc_type = "S"
+                if doc['django_ct'] == 'architizer.productresponse':
+                    doc_type = "R"
 
-                    document = Document.objects.get(of_type=doc_type,
-                                                    architizer_id=doc['object_id'])
+                document = Document.objects.get(of_type=doc_type,
+                                                architizer_id=doc['object_id'])
 
-                    text = highlighting[doc_id]['text'][0]
-                    position_from = doc_text.index(text)
-                    position_to = position_from + len(text)
+                text = highlighting[doc_id]['text'][0]
+                position_from = doc_text.index(text)
+                position_to = position_from + len(text)
 
-                    if Context.objects.filter(document=document, text=text, keyword_given=keyword).count() == 0:
-                        Context.objects.create(
-                            document=document,
-                            keyword_given=keyword,
-                            position_from=position_from,
-                            position_to=position_to,
-                            text=text
-                        )
+                if Context.objects.filter(document=document, text=text, keyword_given=keyword).count() == 0:
+                    Context.objects.create(
+                        document=document,
+                        keyword_given=keyword,
+                        position_from=position_from,
+                        position_to=position_to,
+                        text=text
+                    )

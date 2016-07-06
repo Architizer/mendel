@@ -17,8 +17,9 @@
           <!-- Old Password -->
           <div class="row">
             <div class="small-12 columns">
-              <label>Old Password
-                <input type="password" ng-model="account.changePassword.oldPassword" placeholder="•••••••••" ng-required="true">
+              <label ng-class="{'is-invalid-label': account.changePassword.formErrors.old_password.error }">Old Password
+                <input type="password" ng-model="account.changePassword.oldPassword" placeholder="•••••••••" ng-required="true" ng-class="{'is-invalid-input': account.changePassword.formErrors.old_password.error }">
+                <span class="form-error" ng-if="account.changePassword.formErrors.old_password.error">{{ account.changePassword.formErrors.old_password.message }}</span>
               </label>
             </div>
           </div>
@@ -26,8 +27,9 @@
           <!-- New Password -->
           <div class="row">
             <div class="small-12 columns">
-              <label>New Password
-                <input type="password" ng-model="account.changePassword.newPassword" placeholder="••••••••" ng-required="true">
+              <label ng-class="{'is-invalid-label': account.changePassword.formErrors.new_password2.error }">New Password
+                <input type="password" ng-model="account.changePassword.newPassword" placeholder="••••••••" ng-required="true" ng-class="{'is-invalid-input': account.changePassword.formErrors.new_password2.error }">
+                <span class="form-error" ng-if="account.changePassword.formErrors.new_password2.error">{{ account.changePassword.formErrors.new_password1.message }}</span>
               </label>
             </div>
           </div>
@@ -35,8 +37,9 @@
           <!-- Confirm Password -->
           <div class="row">
             <div class="small-12 columns">
-            <label>Confirm New Password
-              <input type="password" ng-model="account.changePassword.confirmNewPassword" placeholder="••••••••" ng-required="true">
+            <label ng-class="{'is-invalid-label': account.changePassword.formErrors.new_password2.error }">Confirm New Password
+              <input type="password" ng-model="account.changePassword.confirmNewPassword" placeholder="••••••••" ng-required="true" ng-class="{'is-invalid-input': account.changePassword.formErrors.new_password2.error }">
+              <span class="form-error" ng-if="account.changePassword.formErrors.new_password2.error">{{ account.changePassword.formErrors.new_password2.message }}</span>
             </label>
             </div>
           </div>
@@ -49,7 +52,7 @@
           </div>
           <div class="row">
             <div class="small-12 columns">
-              {{account.changePassword.response.data}}
+              {{account.changePassword.response}}
             </div>
           </div>
         </form>

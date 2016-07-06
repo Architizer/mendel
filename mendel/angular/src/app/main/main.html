@@ -58,7 +58,7 @@
       <div class="callout small-12 columns with-bottom-margin">
 
         <!-- Keyword -->
-        <h1 ng-hide="main.editingKeyword" ng-click="main.editKeyword()">
+        <h1 class="keyword" ng-hide="main.editingKeyword" ng-click="main.editKeyword()">
           {{ main.keyword.name }}
           <!-- "Edited" label -->
           <small ng-show="main.keyword.name !== main.context.keyword_given.name">(edited)</small>
@@ -68,6 +68,12 @@
         <form ng-show="main.editingKeyword" ng-submit="main.saveKeyword()">
           <input class="edit-keyword" focus-if="main.editingKeyword" ng-model="main.newKeyword.name" ng-blur="main.saveKeyword()"></input>
         </form>
+
+        <!-- Edit Keyword Link -->
+        <p class="subheader">
+          <a ng-hide="main.editingKeyword" ng-click="main.editKeyword()">Edit keyword</a>
+          <a ng-show="main.editingKeyword" ng-click="main.saveKeyword()">Save keyword</a>
+        </p>
 
       </div>
 

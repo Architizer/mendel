@@ -353,5 +353,25 @@
       "created": "2016-05-30T13:45:14.472Z",
       "modified": "2016-05-30T13:45:14.472Z"
     }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 22,
+    "fields": {
+      "name": "Certification",
+      "description": "LEED-Certified, ADA, other professional and institutional product certifications",
+      "created": "2016-05-30T13:45:14.472Z",
+      "modified": "2016-05-30T13:45:14.472Z"
+    }
+  },
+  {
+    "model": "mendel.category",
+    "pk": 23,
+    "fields": {
+      "name": "Product Element",
+      "description": "Notable parts and pieces of individual products. Burners (range), buttons, doorstops, etc.",
+      "created": "2016-05-30T13:45:14.472Z",
+      "modified": "2016-05-30T13:45:14.472Z"
+    }
   }
 ]

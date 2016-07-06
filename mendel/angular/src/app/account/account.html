@@ -12,7 +12,7 @@
       <!-- Change Password Form -->
       <fieldset class="fieldset">
         <legend>Change Password</legend>
-        <form>
+        <form ng-submit="account.changePassword.submit()">
 
           <!-- Old Password -->
           <div class="row">
@@ -44,7 +44,12 @@
           <!-- Submit / Enter -->
           <div class="row">
             <div class="small-12 columns">
-              <a class="button" ng-click="account.changePassword.submit()">Change Password</a>
+              <button class="button">Change Password</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-12 columns">
+              {{account.changePassword.response.data}}
             </div>
           </div>
         </form>

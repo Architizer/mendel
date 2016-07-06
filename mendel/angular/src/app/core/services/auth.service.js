@@ -13,6 +13,7 @@
         logout: logout,
         getCurrentUser: getCurrentUser,
         isAuthenticated: isAuthenticated,
+        changePassword: changePassword,
       };
 
       function isAuthenticated () {
@@ -115,6 +116,17 @@
 
           return null;
         }
+      }
+
+      function changePassword (data) {
+
+        return $http({
+          method: 'POST',
+          url: apiHost + '/password/change/',
+          data: $httpParamSerializerJQLike(data),
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
+
       }
     }
   })();

@@ -50,40 +50,20 @@
       hotkeys.bindTo($scope)
       .add({
         combo: [
-          'command+left', 
-          'command+backspace',
-          'ctrl+left',
-          'ctrl+backspace',
+          'mod+left',
+          // 'mod+backspace', // Don't allow mod+backspace because this natively deletes the whole line in the OS
           'shift+left',
           'shift+backspace',
         ],
-        allowIn: ['INPUT'],
         description: 'Get the previous context',
         callback: getPrevContext
       })
       .add({
         combo: [
-          'command+right',
-          'command+enter',
-          'ctrl+right',
-          'ctrl+enter',
+          'mod+right',
+          'mod+enter',
           'shift+right',
           'shift+enter',
-        ],
-        allowIn: ['INPUT'],
-        description: 'Get the next context',
-        callback: getNextContext
-      })
-      .add({
-        combo: [
-          'left',
-        ],
-        description: 'Get the previous context',
-        callback: getPrevContext
-      })
-      .add({
-        combo: [
-          'right',
         ],
         description: 'Get the next context',
         callback: getNextContext

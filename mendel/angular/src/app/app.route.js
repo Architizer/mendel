@@ -9,8 +9,9 @@
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('main', {
-        url: '/main',
+        url: '/main/?context',
         templateUrl: 'app/main/main.html',
+        reloadOnSearch : false,
         controller: 'MainController',
         controllerAs: 'main'
       })

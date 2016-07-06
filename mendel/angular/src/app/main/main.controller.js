@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($q, $scope, AuthService, Category, Context, hotkeys, Keyword, Review, Session, toastr) {
+  function MainController($location, $q, $scope, AuthService, Category, Context, hotkeys, Keyword, Review, Session, toastr) {
     var vm = this;
 
     vm.getNextContext = getNextContext;
@@ -32,8 +32,14 @@
             vm.categories = categories;
           });
 
-          // Get the last Context the user reviewed
-          getContext(Session.user.last_context_id);
+          // Get Context from ?context= parameter in URL
+          if ($location.search().context) {
+            getContext($location.search().context);
+          }
+          // Otherwise, get the last Context the user reviewed
+          else {
+            getContext(Session.user.last_context_id);
+          }
 
           // Kill this watch when we have a Session
           killSessionWatcher();
@@ -115,6 +121,9 @@
         vm.context = context;
         vm.keyword = angular.copy(context.keyword_given);
         vm.context.previouslySelectedCategories = preselect();
+
+        // Update ?context= parameter in URL
+        $location.search('context', context.id);
 
         function preselect () {
           var _prevCategories = [];

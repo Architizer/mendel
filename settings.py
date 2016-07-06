@@ -43,8 +43,6 @@ INSTALLED_APPS = (
     'mendel',
     # 3rd party apps
     'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'corsheaders',
     'django_extensions',
     'rest_framework',

@@ -23,6 +23,10 @@
     border-color: #ccc transparent transparent;
   }
 
+  .is-dropdown-submenu {
+    z-index: 1000;
+  }
+
   .top-bar {
     padding: 0;
     &, & ul {

@@ -20,9 +20,6 @@
 
     function init () {
 
-      // Get current user (confirms that the user is signed in)
-      AuthService.getCurrentUser();
-
       // Wait for Session to be created
       var killSessionWatcher = $scope.$watch(AuthService.isAuthenticated, function () {
 

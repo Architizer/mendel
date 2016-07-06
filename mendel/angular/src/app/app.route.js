@@ -13,7 +13,8 @@
         templateUrl: 'app/main/main.html',
         reloadOnSearch : false,
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        authenticationRequired: true
       })
 
       .state('login', {
@@ -28,6 +29,14 @@
         templateUrl: 'app/about/about.html',
         controller: 'AboutController',
         controllerAs: 'about'
+      })
+
+      .state('account', {
+        url: '/account',
+        templateUrl: 'app/account/account.html',
+        controller: 'AccountController',
+        controllerAs: 'account',
+        authenticationRequired: true
       })
 
       ;

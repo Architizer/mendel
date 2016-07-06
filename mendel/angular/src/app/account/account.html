@@ -1,0 +1,63 @@
+<div id="account" class="grid-block expand">
+  <!-- Account -->
+  <div class="grid-block align-center wrap">
+    <div class="grid-content small-12 large-6">
+
+      <!-- Callout -->
+      <div class="callout">
+        <h3>Account Settings</h3>
+        <p>Change your account settings here.</p>
+      </div>
+
+      <!-- Change Password Form -->
+      <fieldset class="fieldset">
+        <legend>Change Password</legend>
+        <form ng-submit="account.changePassword.submit()">
+
+          <!-- Old Password -->
+          <div class="row">
+            <div class="small-12 columns">
+              <label ng-class="{'is-invalid-label': account.changePassword.formErrors.old_password.error }">Old Password
+                <input type="password" ng-model="account.changePassword.oldPassword" placeholder="•••••••••" ng-required="true" ng-class="{'is-invalid-input': account.changePassword.formErrors.old_password.error }">
+                <span class="form-error" ng-if="account.changePassword.formErrors.old_password.error">{{ account.changePassword.formErrors.old_password.message }}</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- New Password -->
+          <div class="row">
+            <div class="small-12 columns">
+              <label ng-class="{'is-invalid-label': account.changePassword.formErrors.new_password2.error }">New Password
+                <input type="password" ng-model="account.changePassword.newPassword" placeholder="••••••••" ng-required="true" ng-class="{'is-invalid-input': account.changePassword.formErrors.new_password2.error }">
+                <span class="form-error" ng-if="account.changePassword.formErrors.new_password2.error">{{ account.changePassword.formErrors.new_password1.message }}</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="row">
+            <div class="small-12 columns">
+            <label ng-class="{'is-invalid-label': account.changePassword.formErrors.new_password2.error }">Confirm New Password
+              <input type="password" ng-model="account.changePassword.confirmNewPassword" placeholder="••••••••" ng-required="true" ng-class="{'is-invalid-input': account.changePassword.formErrors.new_password2.error }">
+              <span class="form-error" ng-if="account.changePassword.formErrors.new_password2.error">{{ account.changePassword.formErrors.new_password2.message }}</span>
+            </label>
+            </div>
+          </div>
+
+          <!-- Submit / Enter -->
+          <div class="row">
+            <div class="small-12 columns">
+              <button class="button">Change Password</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-12 columns">
+              {{account.changePassword.response}}
+            </div>
+          </div>
+        </form>
+      </fieldset>
+
+    </div>
+  </div>
+</div>

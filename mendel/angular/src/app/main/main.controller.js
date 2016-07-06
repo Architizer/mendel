@@ -68,6 +68,42 @@
         description: 'Get the next context',
         callback: getNextContext
       })
+      .add({
+        combo: [
+          'mod+d',
+        ],
+        description: 'Select "Delete"',
+        callback: function (e) {
+          if (e.preventDefault) {
+            e.preventDefault();
+            toggleSpecialCategory('delete');
+          }
+        }
+      })
+      .add({
+        combo: [
+          'mod+i',
+        ],
+        description: 'Select "I don\'t know"',
+        callback: function (e) {
+          if (e.preventDefault) {
+            e.preventDefault();
+            toggleSpecialCategory('idk');
+          }
+        }
+      })
+      .add({
+        combo: [
+          'mod+e',
+        ],
+        description: 'Edit Keyword',
+        callback: function (e) {
+          if (e.preventDefault) {
+            e.preventDefault();
+            editKeyword();
+          }
+        }
+      })
       ;
     }
 

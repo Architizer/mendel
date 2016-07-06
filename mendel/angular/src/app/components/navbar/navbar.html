@@ -16,6 +16,7 @@
         <li ng-show="navbar.user">
           <a>{{ navbar.user.username || 'User' }} </a>
           <ul class="menu vertical">
+            <li ng-if="navbar.user.is_staff"><a href="/admin" target="_self">Administration</a></li>
             <li><a ui-sref="account">Account Settings</a></li>
             <li><a ng-click="navbar.logout()">Log Out</a></li>
           </ul>

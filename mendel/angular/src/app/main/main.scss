@@ -105,6 +105,13 @@
       }
     }
 
+    h1.keyword {
+
+      &:focus {
+        outline: none;
+      }
+    }
+
     // Input field when editing keyword
     input.edit-keyword {
       border: 0;

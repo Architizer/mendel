@@ -267,9 +267,16 @@
     // Save New Keyword
     function saveKeyword () {
 
-      vm.editingKeyword = false;
+      // Check if the keyword has a value
+      if (vm.newKeyword.name) {
+        vm.keyword = vm.newKeyword;
+      }
+      // Otherwise reset to other keyword
+      else {
+        vm.keyword = vm.keyword;
+      }
 
-      vm.keyword = vm.newKeyword;
+      vm.editingKeyword = false;
     }
 
     // Get Next Context

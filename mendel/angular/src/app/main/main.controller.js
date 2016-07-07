@@ -15,6 +15,9 @@
     vm.editKeyword = editKeyword;
     vm.saveKeyword = saveKeyword;
 
+    // Set up API for talking to category filter bar
+    vm.categoryFilterBar = null;
+
     // Initialize
     init();
 
@@ -105,6 +108,23 @@
         }
       })
       ;
+
+      // Handle Escape keypress on Edit Keyword input
+      $('input#editKeyword').keyup(function (e) {
+        if (e.keyCode == 27) {
+          if (vm.categoryFilterBar && vm.categoryFilterBar.focusInput) {
+
+            // Save keyword
+            saveKeyword();
+
+            // Tell category filter bar to refocus
+            vm.categoryFilterBar.focusInput();
+
+            // $scope.$apply() because Angular, mreh
+            $scope.$apply();
+          }
+        }
+      });
     }
 
     // Controller Functions

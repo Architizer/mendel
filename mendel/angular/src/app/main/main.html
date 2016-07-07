@@ -66,7 +66,7 @@
 
         <!-- Edit Keyword -->
         <form ng-show="main.editingKeyword" ng-submit="main.saveKeyword()">
-          <input class="edit-keyword" focus-if="main.editingKeyword" ng-model="main.newKeyword.name" ng-blur="main.saveKeyword()"></input>
+          <input id="editKeyword" class="edit-keyword" focus-if="main.editingKeyword" ng-model="main.newKeyword.name" ng-blur="main.saveKeyword()"></input>
         </form>
 
         <!-- Edit Keyword Link -->

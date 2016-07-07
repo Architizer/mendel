@@ -162,6 +162,11 @@
         // Update ?context= parameter in URL
         $location.search('context', context.id);
 
+        // Focus on filter bar
+        if (vm.categoryFilterBar && vm.categoryFilterBar.focusInput) {
+          vm.categoryFilterBar.focusInput();
+        }
+
         function emboldenKeyword () {
 
           /**

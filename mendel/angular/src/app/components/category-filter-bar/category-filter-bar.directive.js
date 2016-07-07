@@ -119,7 +119,7 @@
       }
 
       // Handle Up Arrow/Down Arrow/Enter key inputs while the text input is focused
-      $('input').keyup(function (e) {
+      $('input#categoryFilterBar').keyup(function (e) {
 
         //
         // Set up category targeting

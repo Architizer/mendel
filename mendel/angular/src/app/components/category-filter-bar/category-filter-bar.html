@@ -2,7 +2,7 @@
   <div class="row collapse">
     <div id="inputWrapper" class="small-12 columns">
       <!-- Category Filter Input (Class "mousetrap" tells hotkeys directive to allow hotkey input on this ) -->
-      <input class="mousetrap" ng-model="categoryFilterBar.input" ng-model-options="{ debounce: 100 }" type="text" focus-if="categoryFilterBar.focusInput" ng-disabled="categoryFilterBar.disabled">
+      <input id="categoryFilterBar" class="mousetrap" ng-model="categoryFilterBar.input" ng-model-options="{ debounce: 100 }" type="text" focus-if="categoryFilterBar.focusInput" ng-disabled="categoryFilterBar.disabled">
       <!-- Matching Categories -->
       <div class="matches" ng-if="categoryFilterBar.matches">
 

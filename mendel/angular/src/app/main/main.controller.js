@@ -134,12 +134,39 @@
 
       function getContextSuccess (context) {
 
-        vm.context = context;
+        vm.context = angular.copy(context);
         vm.keyword = angular.copy(context.keyword_given);
         vm.context.previouslySelectedCategories = preselect();
+        vm.context.text = emboldenKeyword();
 
         // Update ?context= parameter in URL
         $location.search('context', context.id);
+
+        function emboldenKeyword () {
+
+          /**
+           * Use downcased copies of keyword name and context text for searching
+           * because the keyword won't be found if the cases don't match
+           */
+          context.downcasedText = context.text.toLowerCase();
+          context.keyword_given.downcasedName = context.keyword_given.name.toLowerCase();
+
+          // Get indexes of keyword start and end in the context text
+          var keywordStart = context.downcasedText.indexOf(context.keyword_given.downcasedName);
+          var keywordEnd = keywordStart + context.keyword_given.downcasedName.length;
+
+          // If keyword can be found, insert span tags around it
+          if (keywordStart > 0 && keywordEnd > 0) {
+            var emboldenedText = context.text.slice(0, keywordStart) + '<span class="keyword-highlight">' + context.text.slice(keywordStart, keywordEnd) + "</span>" + context.text.slice(keywordEnd);
+            return emboldenedText;
+          }
+
+          // Otherwise just return the context with no bolding
+          else {
+            return context.text;
+          }
+
+        }
 
         function preselect () {
           var _prevCategories = [];

@@ -345,6 +345,11 @@
       }
 
       vm.editingKeyword = false;
+
+      // Tell category filter bar to refocus
+      if (vm.categoryFilterBar && vm.categoryFilterBar.focusInput) {
+        vm.categoryFilterBar.focusInput();
+      }
     }
 
     // Get Next Context

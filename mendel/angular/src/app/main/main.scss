@@ -105,6 +105,13 @@
       }
     }
 
+    span.keyword-highlight {
+      font-weight: 800;
+      background-color: #FFF8D0;
+      padding: 3px 6px;
+      border-radius: 3px;
+    }
+
     h1.keyword {
 
       &:focus {

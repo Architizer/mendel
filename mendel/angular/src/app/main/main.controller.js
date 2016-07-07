@@ -50,43 +50,59 @@
       hotkeys.bindTo($scope)
       .add({
         combo: [
-          'command+left', 
-          'command+backspace',
-          'ctrl+left',
-          'ctrl+backspace',
+          'mod+left',
+          // 'mod+backspace', // Don't allow mod+backspace because this natively deletes the whole line in the OS
           'shift+left',
           'shift+backspace',
         ],
-        allowIn: ['INPUT'],
         description: 'Get the previous context',
         callback: getPrevContext
       })
       .add({
         combo: [
-          'command+right',
-          'command+enter',
-          'ctrl+right',
-          'ctrl+enter',
+          'mod+right',
+          'mod+enter',
           'shift+right',
           'shift+enter',
         ],
-        allowIn: ['INPUT'],
         description: 'Get the next context',
         callback: getNextContext
       })
       .add({
         combo: [
-          'left',
+          'mod+d',
         ],
-        description: 'Get the previous context',
-        callback: getPrevContext
+        description: 'Select "Delete"',
+        callback: function (e) {
+          if (e.preventDefault) {
+            e.preventDefault();
+            toggleSpecialCategory('delete');
+          }
+        }
       })
       .add({
         combo: [
-          'right',
+          'mod+i',
         ],
-        description: 'Get the next context',
-        callback: getNextContext
+        description: 'Select "I don\'t know"',
+        callback: function (e) {
+          if (e.preventDefault) {
+            e.preventDefault();
+            toggleSpecialCategory('idk');
+          }
+        }
+      })
+      .add({
+        combo: [
+          'mod+e',
+        ],
+        description: 'Edit Keyword',
+        callback: function (e) {
+          if (e.preventDefault) {
+            e.preventDefault();
+            editKeyword();
+          }
+        }
       })
       ;
     }

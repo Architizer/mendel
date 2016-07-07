@@ -18,7 +18,9 @@
       },
       controller: CategoryFilterBarController,
       controllerAs: 'categoryFilterBar',
-      bindToController: true
+      bindToController: {
+        api: '='
+      }
     };
 
     return directive;
@@ -34,6 +36,10 @@
       vm.mask = false;
       vm.focusInput = 1; // This is a counter - see note below in focusInput()
       vm.focusIndex = 0;
+
+      vm.api = {
+        focusInput: focusInput
+      };
 
 
       //

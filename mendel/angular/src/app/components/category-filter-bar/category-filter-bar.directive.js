@@ -14,13 +14,12 @@
         categories: '=',
         disabled: '=',
         helpCategory: '=',
-        mask: '='
+        mask: '=',
+        api: '=',
       },
       controller: CategoryFilterBarController,
       controllerAs: 'categoryFilterBar',
-      bindToController: {
-        api: '='
-      }
+      bindToController: true
     };
 
     return directive;

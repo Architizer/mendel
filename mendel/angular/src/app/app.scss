@@ -20,6 +20,7 @@ $topbar-background: #F5F6F7;
 $border-color: #f2f2f2;
 $delete-color: #EC5840;
 $idk-color: #FFAE00;
+$fieldset-border: 1px solid lighten($gunmetal, 10%);
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
@@ -44,7 +45,7 @@ $idk-color: #FFAE00;
 
 .callout,
 fieldset {
-  border: 1px solid lighten($gunmetal, 10%);
+  border: $fieldset-border;
   box-shadow: 0 2px 1px 0 #F3F5F6;
   border-radius: 6px;
 

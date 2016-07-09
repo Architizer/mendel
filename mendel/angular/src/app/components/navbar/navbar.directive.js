@@ -36,7 +36,7 @@
         .then(logoutSuccess)
         .catch(logoutError);
 
-        function logoutSuccess (data) {
+        function logoutSuccess () {
 
           // Destroy Session
           Session.destroy();
@@ -52,7 +52,7 @@
         function logoutError (error) {
 
           // Show Error Toast
-          toastr.error(JSON.stringify(error));
+          toastr.error(angular.toJson(error));
         }
       }
 

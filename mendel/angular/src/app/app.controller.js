@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function AppController(AuthService, $scope, $state, AUTH_EVENTS) {
-    var vm = this;
+    // var vm = this;
 
     // Watch for state changes
     $scope.$on('$stateChangeSuccess', function (event, toState) {

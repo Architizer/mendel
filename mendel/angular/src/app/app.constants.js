@@ -5,6 +5,13 @@
   // Base configuration object (default to DEBUG = true for development)
   var mendelConfig = { 'DEBUG': true };
 
+  /** 
+   * TODO: Use Angular $window service instead of regular window object
+   */
+
+  // (turning off the ESLint error for angular/window-service for now)
+  /* eslint angular/window-service: 0 */
+
   // Get Configuration from window (passed in from Django)
   if (window && window.djangoEnv) {
     Object.assign(mendelConfig, window.djangoEnv);

@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($location, $q, $scope, AuthService, Category, Context, hotkeys, Keyword, Review, Session, toastr) {
+  function MainController($location, $log, $q, $scope, AuthService, Category, Context, hotkeys, Keyword, Review, Session, toastr) {
     var vm = this;
 
     vm.getNextContext = getNextContext;
@@ -110,7 +110,7 @@
       ;
 
       // Handle Escape keypress on Edit Keyword input
-      $('input#editKeyword').keyup(function (e) {
+      angular.element('input#editKeyword').keyup(function (e) {
         if (e.keyCode == 27) {
           if (vm.categoryFilterBar && vm.categoryFilterBar.focusInput) {
 
@@ -220,7 +220,7 @@
 
           function setUpdatedKeywordError (error) {
             toastr.error('Could not get this context. Check the browser console for more information.', 'Error');
-            console.error(error);
+            $log.error(error);
           }
 
           // Loop through categories, set "selected" if in prevously selected categories for context
@@ -361,7 +361,7 @@
       if (vm.context.id) {
 
         submitReviews()
-        .then(function (success) {
+        .then(function getNextContextSuccess() {
 
           // Deselect all categories
           deselectAllCategories();
@@ -396,7 +396,7 @@
       if (vm.context.id) {
 
         submitReviews()
-        .then(function (success) {
+        .then(function getPrevContextSuccess () {
 
           // Deselect all categories
           deselectAllCategories();
@@ -463,7 +463,7 @@
       function submitReviewsError (error) {
 
         toastr.error('Could not submit review. Check the browser console for more information.', 'Error');
-        console.error(error);
+        $log.error(error);
 
         // Reject the promise
         return deferred.reject(error);

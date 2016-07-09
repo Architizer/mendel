@@ -32,6 +32,6 @@
         }
 
         return $q.reject(response);
-      };
+      }
     }
   })();

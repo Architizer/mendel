@@ -124,7 +124,7 @@
       }
 
       // Handle Up Arrow/Down Arrow/Enter key inputs while the text input is focused
-      $('input#categoryFilterBar').keyup(function (e) {
+      angular.element('input#categoryFilterBar').keyup(function (e) {
 
         //
         // Set up category targeting

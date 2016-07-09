@@ -49,7 +49,7 @@
       function getCurrentUser () {
 
         // First, check if there's an existing Session
-        if (!!Session.user) {
+        if (Session.user) {
 
           // Broadcast Event
           $rootScope.$broadcast(AUTH_EVENTS.getCurrentUserSuccess);
@@ -59,7 +59,7 @@
         }
 
         // If no, check if there's a token to retrieve the user
-        else if (!!$localStorage._mendelToken) {
+        else if ($localStorage._mendelToken) {
 
           // Set Authorization Header with Token
           $http.defaults.headers.common['Authorization'] = 'Token ' + $localStorage._mendelToken;

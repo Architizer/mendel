@@ -6,7 +6,7 @@
   var mendelConfig = { 'DEBUG': true };
 
   // Get Configuration from window (passed in from Django)
-  if (window) {
+  if (window && window.djangoEnv) {
     Object.assign(mendelConfig, window.djangoEnv);
   }
 

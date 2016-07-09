@@ -10,7 +10,7 @@
         'submitReviews': {
           method: 'POST',
           params: { id: '@id' },
-          url: apiHost + '/context/:id/reviews/'}
+          url: apiHost + '/context/:id/reviews/'},
       });
   });
 })();

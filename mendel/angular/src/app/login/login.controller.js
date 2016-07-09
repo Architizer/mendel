@@ -13,7 +13,7 @@
 
     vm.credentials = {
       username: '',
-      password: ''
+      password: '',
     };
 
     function submitLogin(credentials) {

@@ -19,7 +19,7 @@
       },
       controller: CategoryFilterBarController,
       controllerAs: 'categoryFilterBar',
-      bindToController: true
+      bindToController: true,
     };
 
     return directive;
@@ -37,7 +37,7 @@
       vm.focusIndex = 0;
 
       vm.api = {
-        focusInput: focusInput
+        focusInput: focusInput,
       };
 
 

@@ -10,7 +10,7 @@
 
       return {
         request: request,
-        responseError: responseError
+        responseError: responseError,
       };
 
       function request (config) {

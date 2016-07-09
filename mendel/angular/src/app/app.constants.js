@@ -34,7 +34,7 @@
       getCurrentUserFailed: 'auth-get-current-user-failed',
       sessionTimeout: 'auth-session-timeout',
       notAuthenticated: 'auth-not-authenticated',
-      notAuthorized: 'auth-not-authorized'
+      notAuthorized: 'auth-not-authorized',
     })
     .constant('apiHost', apiHost)
     .value('csrfToken', csrfToken);

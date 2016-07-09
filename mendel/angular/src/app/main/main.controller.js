@@ -59,7 +59,7 @@
           'shift+backspace',
         ],
         description: 'Get the previous context',
-        callback: getPrevContext
+        callback: getPrevContext,
       })
       .add({
         combo: [
@@ -69,7 +69,7 @@
           'shift+enter',
         ],
         description: 'Get the next context',
-        callback: getNextContext
+        callback: getNextContext,
       })
       .add({
         combo: [
@@ -81,7 +81,7 @@
             e.preventDefault();
             toggleSpecialCategory('delete');
           }
-        }
+        },
       })
       .add({
         combo: [
@@ -93,7 +93,7 @@
             e.preventDefault();
             toggleSpecialCategory('idk');
           }
-        }
+        },
       })
       .add({
         combo: [
@@ -105,7 +105,7 @@
             e.preventDefault();
             editKeyword();
           }
-        }
+        },
       })
       ;
 
@@ -327,7 +327,7 @@
       vm.editingKeyword = true;
 
       vm.newKeyword = {
-        name: vm.keyword.name
+        name: vm.keyword.name,
       };
 
     }
@@ -445,7 +445,7 @@
       Context.submitReviews({
         id: vm.context.id,
         categories: categories,
-        keyword_proposed: vm.keyword
+        keyword_proposed: vm.keyword,
       })
       .$promise
       .then(submitReviewsSuccess)

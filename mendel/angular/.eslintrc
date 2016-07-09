@@ -9,5 +9,8 @@
     "angular": true,
     "module": true,
     "inject": true
+  },
+  "rules": {
+    comma-dangle: [2, "always-multiline"]
   }
 }

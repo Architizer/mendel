@@ -14,21 +14,21 @@
         reloadOnSearch : false,
         controller: 'MainController',
         controllerAs: 'main',
-        authenticationRequired: true
+        authenticationRequired: true,
       })
 
       .state('login', {
         url: '/login',
         templateUrl: 'app/login/login.html',
         controller: 'LoginController',
-        controllerAs: 'login'
+        controllerAs: 'login',
       })
 
       .state('about', {
         url: '/about',
         templateUrl: 'app/about/about.html',
         controller: 'AboutController',
-        controllerAs: 'about'
+        controllerAs: 'about',
       })
 
       .state('account', {
@@ -36,7 +36,7 @@
         templateUrl: 'app/account/account.html',
         controller: 'AccountController',
         controllerAs: 'account',
-        authenticationRequired: true
+        authenticationRequired: true,
       })
 
       ;

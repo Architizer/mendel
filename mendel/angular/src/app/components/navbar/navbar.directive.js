@@ -13,7 +13,7 @@
       scope: {},
       controller: NavbarController,
       controllerAs: 'navbar',
-      bindToController: true
+      bindToController: true,
     };
 
     return directive;

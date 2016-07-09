@@ -27,8 +27,8 @@
         new_password2: {
           error: false,
           message: null,
-        }
-      }
+        },
+      },
     };
 
     // Initialize Foundation on navbar
@@ -50,7 +50,7 @@
         new_password2: {
           error: false,
           message: null,
-        }
+        },
       };
 
       // Clear success response
@@ -60,7 +60,7 @@
       AuthService.changePassword({
         old_password: vm.changePassword.oldPassword,
         new_password1: vm.changePassword.newPassword,
-        new_password2: vm.changePassword.confirmNewPassword
+        new_password2: vm.changePassword.confirmNewPassword,
       })
       .then(changePasswordSuccess)
       .catch(changePasswordError);

@@ -27,7 +27,7 @@
           method: 'POST',
           url: apiHost + '/login/',
           data: $httpParamSerializerJQLike(credentials),
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         });
       }
 
@@ -35,14 +35,14 @@
 
         // Construct payload for sending token back with logout
         var payload = {
-          token: Session.token
+          token: Session.token,
         };
 
         return $http({
           method: 'POST',
           url: apiHost + '/logout/',
           data: $httpParamSerializerJQLike(payload),
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         });
       }
 
@@ -67,7 +67,7 @@
           // Get User info from endpoint
           $http({
             method: 'GET',
-            url: apiHost + '/user/'
+            url: apiHost + '/user/',
           })
           .then(getCurrentUserSuccess)
           .catch(getCurrentUserError);
@@ -124,7 +124,7 @@
           method: 'POST',
           url: apiHost + '/password/change/',
           data: $httpParamSerializerJQLike(data),
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         });
 
       }

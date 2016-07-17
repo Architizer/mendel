@@ -22,7 +22,7 @@ $ git clone git@github.com:Architizer/mendel.git
 $ cd mendel
 ```
 
-Next, run our setup script:
+Next, ensure Postgres is running and run our setup script:
 
 ```sh
 $ ./bin/setup_local
